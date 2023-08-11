@@ -12,35 +12,44 @@
       <button>로그인</button>
       <button>로그아웃</button>
     </div>
-    <div>
-      <h1>special pet</h1>
-      <nav>
-        <ul>
-          <li>펫</li>
-          <li>정보나눔</li>
-          <li>정보안내</li>
-        </ul>
-      </nav>
-      <form action="">
-        <input type="text" placeholder="검색상자" />
-        <button>검색</button>
-      </form>
-    </div>
+    <header>
+      <div>
+        <h1>special pet</h1>
+        <nav>
+          <ul>
+            <li><a href="/index.html">펫</a></li>
+            <li><a href="petPost/write.html">포스트작성</a></li>
+            <li><a href="">정보나눔</a></li>
+          </ul>
+        </nav>
+        <form action="">
+          <input type="text" placeholder="검색상자" />
+          <button>검색</button>
+        </form>
+      </div>
+    </header>
     <section></section>
+    <div>
+      <button>이전</button>
+      <button>다음</button>
+    </div>
     <div id="modify-layer" hidden>
       <div id="modify-box">
-        <div>
-          <h1>&lt;memo&gt;</h1>
-        </div>
         <div>
           <input type="text" placeholder="수정할 제목" />
         </div>
         <div>
           <textarea
             placeholder="작성자의 이름을 입력해주세요."
-            cols="47"
-            rows="20"
+            cols="45"
+            rows="15"
           ></textarea>
+        </div>
+        <div>
+          <label for="">
+            <div>파일 선택</div>
+            <input type="file" />
+          </label>
         </div>
         <div>
           <button>확인</button>

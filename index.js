@@ -1,7 +1,24 @@
-let currentPage = 0;// 현재 페이지 번호
-let isLastPage = false; // 마지막 페이지인지 여부
-const MAX_MEMO = 5; //고정된 메모 갯수
-let currentQuery = ""; //현재 검색 키워드
+let currentPage = 0; //현재 페이지 번호
+let isLastPage = false; //마지막 페이지 인지 여부 
+const MAX_MEMO = 4;// 고정된 메모 갯수
+let currentQuery = ""; // 현재 검색 키워드
+
+
+(()=> {
+  const div = document.querySelector("div");
+  const buttons = div.querySelectorAll("button");
+
+  buttons[0].addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.replace("http://localhost:5500/login.html");
+  })
+  buttons[1].addEventListener("click", (e) => {
+    e.preventDefault();
+    //토큰 만료 시킨 후
+    //메인페이지 보여줌
+    window.location.reload;
+  })
+})();
 
 //메모 형태
 function cardTemplate(item){
@@ -25,6 +42,7 @@ function cardTemplate(item){
     <div>
     <h3>${item.petname}</h3>
     <h3>${item.nickname}</h3>
+    </div>
     </article>`;
     return template;
 }
@@ -45,7 +63,7 @@ async function getPagedMemo(page, query){
   //목록 초기화
   section.innerHTML = "";
   results.content.forEach(item => {
-    section.insertAdjacentHTML("afterbegin", cardTemplate(item));
+    section.insertAdjacentHTML("beforeend", cardTemplate(item));
   });
 
 }
@@ -62,6 +80,9 @@ async function getPagedMemo(page, query){
   const textQuery = document.forms[0].querySelector("input");
   const btnSearch = document.forms[0].querySelector("button");
 
+  console.log(textQuery);
+  console.log(btnSearch);
+
   btnSearch.addEventListener("click", (e) => {
     e.preventDefault();
     currentQuery = textQuery.value;
@@ -70,7 +91,7 @@ async function getPagedMemo(page, query){
 
   textQuery.addEventListener("keyup", (e) => {
     e.preventDefault();
-    if(e.key.toLocaleLowerCase() === "enter"){
+    if(e.key.toLowerCase() === "enter"){
       currentQuery = textQuery.value;
       getPagedMemo(0, currentQuery);
     }
@@ -82,25 +103,20 @@ async function getPagedMemo(page, query){
   const btnReset = document.forms[0].querySelectorAll("button")[0];
   btnReset.addEventListener("click", (e) => {
     e.preventDefault();
-    //검색 박스 초기화
-    document.forms[1].reset();
-    //검색 조건 값 초기화
+    document.forms[0].reset();
     currentQuery = "";
-    //검색 조건이 초기화 되면 0번 페이지에서 다시 조회
     getPagedMemo(0, currentQuery);
   });
 })();
 
 //삭제
 (() => {
-  
   const section = document.querySelector("section");
 
   section.addEventListener("click", async(e) => {
     e.preventDefault();
     console.log(e.target);
 
-    //e.target !== buttons[0] &&
     if(e.target.classList.contains("remove")){
 
       const removeArticle = e.target.closest("article");
@@ -121,7 +137,6 @@ async function getPagedMemo(page, query){
       
     }
     
-    
   })
 
 })();
@@ -134,24 +149,20 @@ async function getPagedMemo(page, query){
     if(e.target.classList.contains("btn-modify")){
       const modifyArticle = e.target.closest("article");
       console.log(modifyArticle);
-      console.log(modifyArticle.querySelector("h3").innerHTML);
      
       //레이어 띄우기
       /** @type {HTMLDivElement} */
       const layer = document.querySelector("#modify-layer");
       layer.hidden = false;
 
-      //레이어 내부에 선택값을 채워넣음
-      const title = modifyArticle.querySelector("h3");
+      const title = modifyArticle.querySelector("h4");
       layer.querySelector("input").value = title.innerHTML;
 
       const textbox = modifyArticle.querySelector("p");
       layer.querySelector("textarea").value = textbox.innerHTML;
 
-      // 확인 / 취소 버튼에 이벤트 핸들러 추가
-
       const buttons = layer.querySelectorAll("button");
-      //취소 버튼
+
       buttons[1].addEventListener("click", (e) => {
         e.preventDefault();
         layer.hidden = true;
@@ -163,33 +174,50 @@ async function getPagedMemo(page, query){
 
         const modifyNum = modifyArticle.dataset.no;
         
-        const modifyTitle = layer.querySelector("input").value;
+        const inputs = layer.querySelectorAll("input");
+        const modifyTitle = inputs[0].value;
         const modifyTextbox = layer.querySelector("textarea").value;
+        const modifyFile = inputs[1];
 
-        //서버연동
-        const response = await fetch(
-          `http://localhost:8080/posts/${modifyNum}` , {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-            "Authorization": `Bearer ${getCookie(
-              "token"
-            )}`,
-          },
-          body: JSON.stringify ({
-            title: modifyTitle,
-            content: modifyTextbox,
-          }),
+      
+        async function modifyPost(image) {
+          await fetch (
+            `http://localhost:8080/posts/${modifyNum}` , {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              // "Authorization": `Bearer ${getCookie(
+              //   "token"
+              // )}`,
+            },
+            body: JSON.stringify ({
+              title: modifyTitle,
+              content: modifyTextbox,
+              image: image ? modifyFile : null,
+            }),
+          });
+        }
+        
+        if(modifyFile.files[0]){
+          const reader = new FileReader();
+          
+          reader.addEventListener("load", 
+          async(e) => {
+          console.log(e);
+          const image = e.target.result;
+          modifyPost(image);
         });
-        console.log(response.status);
+        reader.readAsDataURL(file.files[0]);
+        }else {modifyPost();}
 
-        //데이터 셀의 값을 수정입력으로 바꿈.
         title.innerHTML = layer.querySelector("input").value;
         textbox.innerHTML = layer.querySelector("textarea").value;
+        const image = modifyArticle.querySelector("image")
+        
+
+        
         layer.hidden = true;
       })
-
-
 
     }
 

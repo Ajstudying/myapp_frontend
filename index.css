@@ -20,19 +20,19 @@ div:nth-of-type(1) > button{
   color: rgb(255, 255, 255);
   border-radius: 5px;
 }
-div:nth-of-type(2) {
+header> div:nth-of-type(1) {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-div:nth-of-type(2) > h1 {
+header > div:nth-of-type(1) > h1 {
   display: flex;
   justify-content: center;
   margin: 0;
   margin-top: 2rem;
   color: rgb(96, 108, 56);
 }
-div:nth-of-type(2) > nav > ul {
+header > div:nth-of-type(1) > nav > ul {
   display: flex;
   justify-content: space-evenly;
   list-style: none;
@@ -40,24 +40,28 @@ div:nth-of-type(2) > nav > ul {
   margin-left: 2rem;
   margin-right: 2rem;
 }
-div:nth-of-type(2) > nav > ul > li {
+header > div:nth-of-type(1) > nav > ul > li {
   background-color: rgb(141, 112, 83);
-  color: white;
   text-align: center;
   width: 20%;
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
   border-radius: 5px;
+  box-shadow: 5px 5px 10px hsl(19, 15%, 65%);
 }
-div:nth-of-type(2) > form {
+header > div:nth-of-type(1) > nav > ul > li > a {
+  color: white;
+  text-decoration: none;
+}
+header > div:nth-of-type(1) > form {
   display: flex;
   justify-content: center;
   gap: 15px;
 }
-div:nth-of-type(2) > form > input {
+header > div:nth-of-type(1) > form > input {
   width: 60%;
 }
-div:nth-of-type(2) > form > button {
+header > div:nth-of-type(1) > form > button {
   background-color: rgb(40, 54, 24);
   color: white;
   border-radius: 5px;
@@ -87,6 +91,7 @@ article > h5 {
   display: flex;
   justify-content: flex-end;
   margin: 0;
+  margin-bottom: 10px;
 }
 article > div:nth-of-type(3) {
   display: flex;
@@ -100,14 +105,36 @@ article > div:nth-of-type(4) {
   display: flex;
   justify-content: space-between;
 }
+article > div:nth-of-type(2) > img {
+  width: 100%;
+}
+div:nth-of-type(2){
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+div:nth-of-type(2) > button {
+  padding: 10px 32px;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 24px;
+  display: block;
+  outline: none;
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: .5px;
+  background:  rgb(96, 108, 56);
+  color: #fff;
+  box-shadow: 0 2px 8px -1px rgb(96, 108, 56);;
+}
 #modify-layer {
   position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 2;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 #modify-box {
   display: flex;
@@ -115,30 +142,77 @@ article > div:nth-of-type(4) {
   gap: 10px;
   position: absolute;
   justify-content: center;
-  /* 부모요소의 크기의 절반만큼을 오른쪽/아래쪽으로 이동시킴 */
   left: 50%;
   top: 50%;
-  /* 자기 자신 크기의 절반만큼을 왼쪽/위쪽으로 이동시킴 */
   transform: translateX(-50%) translateY(-50%);
   background-color: white;
   width: 500px;
   padding: 2rem;
   align-items: center;
 }
-#modify-box > div > input{
+#modify-box > div:nth-of-type(1) > input{
   border: 1px solid black;
   border-radius: 5px;
   text-align: center;
 }
-#modify-box > div > textarea{
+#modify-box > div:nth-of-type(2) > textarea{
   border: 1px solid black;
   border-radius: 5px;
   text-align: center;
 }
-#modify-box > div:last-child {
-  /* border: 1px #000 solid; */
+#modify-box > div:nth-of-type(3){
+  width: 75%;
+}
+#modify-box > div:nth-of-type(3) > label > div {
+  justify-content: center;
+  width: 23%;
+  background-color: #f8f9fa;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: #3c4043;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: pre;
+}
+#modify-box > div:nth-of-type(3) > label > input {
+  display: none;
+}
+#modify-box > div:nth-of-type(4){
   display: flex;
-  width: 22rem;
-  gap: 10px;
+  width: 75%;
+  gap: 40px;
   justify-content: flex-end;
+}
+.btn-modify {
+  background-color: rgb(40, 54, 24);
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+@media (min-width: 67rem) {
+  header {
+    width: 40%;
+  }
+  section {
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 2rem;
+  }
+  article {
+    margin: 0;
+  }
+  header> div:nth-of-type(2){
+    width: 60%;
+  }
+  article > div:nth-of-type(2) > img {
+    height: 22rem;
+  }
+  header > div:nth-of-type(1) > h1 {
+    margin: 0;
+  }
+
 }
