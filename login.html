@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: absolute;
+        /* 부모요소의 크기의 절반만큼을 오른쪽/아래쪽으로 이동시킴 */
+        left: 50%;
+        top: 50%;
+        /* 자기 자신 크기의 절반만큼을 왼쪽/위쪽으로 이동시킴 */
+        transform: translateX(-50%) translateY(-50%);
+        background-color: rgb(255, 250, 240);
+        border-radius: 20px;
+        width: 500px;
+        padding: 2rem;
+      }
+      form > h1 {
+        text-align: center;
+      }
+      form > div:nth-of-type(1) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      form > div:nth-of-type(1) label input {
+        width: 200px;
+        height: 35px;
+      }
+      form > div:nth-of-type(2) {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        text-align: center;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="http://localhost:8080/auth/signin" method="post">
+      <h1>special pet</h1>
+      <div>
+        <label for=""
+          ><input type="text" name="userid" placeholder="아이디"
+        /></label>
+        <label for=""
+          ><input type="password" name="password" placeholder="비밀번호"
+        /></label>
+      </div>
+      <div>
+        <button>로그인</button>
+        <button>회원가입</button>
+      </div>
+    </form>
+  </body>
+</html>
