@@ -9,30 +9,51 @@ body {
   font: inherit;
   vertical-align: baseline;
   box-sizing: border-box;
+  background-color: rgba(100, 200, 150, 0.2);
 }
-div:nth-of-type(1) {
+aside {
+  display: flex;
+  justify-content: space-between;
+}
+aside > div:nth-of-type(1){
+  display: flex;
+  gap: 15px
+}
+aside > div:nth-of-type(1) > button a {
+  text-decoration: none;
+  color: white;
+}
+aside > div:nth-of-type(1) > button:nth-of-type(2) a:visited {
+  color: white;
+}
+aside > div:nth-of-type(1) > button {
+  background-color: rgb(173, 193, 120);
+  color: white;
+  border-radius: 5px;
+}
+aside > div:nth-of-type(2) {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
 }
-div:nth-of-type(1) > button{
+aside > div:nth-of-type(2) > button{
   background-color: rgb(173, 193, 120);
-  color: rgb(255, 255, 255);
+  color: white;
   border-radius: 5px;
 }
-header> div:nth-of-type(1) {
+header> div {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-header > div:nth-of-type(1) > h1 {
+header > div > h1 {
   display: flex;
   justify-content: center;
   margin: 0;
   margin-top: 2rem;
   color: rgb(96, 108, 56);
 }
-header > div:nth-of-type(1) > nav > ul {
+header > div > nav > ul {
   display: flex;
   justify-content: space-evenly;
   list-style: none;
@@ -40,28 +61,30 @@ header > div:nth-of-type(1) > nav > ul {
   margin-left: 2rem;
   margin-right: 2rem;
 }
-header > div:nth-of-type(1) > nav > ul > li {
+header > div> nav > ul > li {
   background-color: rgb(141, 112, 83);
   text-align: center;
   width: 20%;
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
   border-radius: 5px;
-  box-shadow: 5px 5px 10px hsl(19, 15%, 65%);
+  line-height: 20px;
+  font-size: 14px;
+  box-shadow: 0 0 #87a86f;
 }
-header > div:nth-of-type(1) > nav > ul > li > a {
+header > div > nav > ul > li > a {
   color: white;
   text-decoration: none;
 }
-header > div:nth-of-type(1) > form {
+header > div > form {
   display: flex;
   justify-content: center;
   gap: 15px;
 }
-header > div:nth-of-type(1) > form > input {
+header > div > form > input {
   width: 60%;
 }
-header > div:nth-of-type(1) > form > button {
+header > div > form > button {
   background-color: rgb(40, 54, 24);
   color: white;
   border-radius: 5px;
@@ -76,9 +99,13 @@ article {
   width: 22rem;
   padding: 1.5rem;
   margin: 1.5rem 0.8rem;
-  background-color: rgb(254, 250, 224);
+  background-color:rgb(255, 250, 240);
   box-shadow: 5px 5px 10px hsl(19, 28%, 33%);
   border-radius: 10px;
+}
+article >div > h4:hover{
+  cursor: pointer;
+  color: crimson;
 }
 article > div:nth-of-type(1) {
   display: flex;
@@ -86,6 +113,9 @@ article > div:nth-of-type(1) {
 }
 article > div:nth-of-type(1) > button {
   height: 25px;
+  background-color: rgb(173, 193, 120);
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
 }
 article > h5 {
   display: flex;
@@ -108,20 +138,20 @@ article > div:nth-of-type(4) {
 article > div:nth-of-type(2) > img {
   width: 100%;
 }
-div:nth-of-type(2){
+#paging{
   display: flex;
   justify-content: center;
   gap: 30px;
 }
-div:nth-of-type(2) > button {
-  padding: 10px 32px;
+#paging > button {
+  padding: 10px 30px;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 12px;
   border-radius: 24px;
   display: block;
   outline: none;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: .5px;
   background:  rgb(96, 108, 56);
   color: #fff;
@@ -213,6 +243,11 @@ div:nth-of-type(2) > button {
   }
   header > div:nth-of-type(1) > h1 {
     margin: 0;
+  }
+  #paging > button {
+    font-size: 16px;
+    line-height: 16px;
+    padding: 10px 32px;
   }
 
 }

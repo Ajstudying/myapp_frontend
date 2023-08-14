@@ -1,7 +1,4 @@
-let currentPage = 0; //현재 페이지 번호
-let isLastPage = false; //마지막 페이지 인지 여부 
-const MAX_MEMO = 5;// 고정된 메모 갯수
-let query = ""; // 현재 검색 키워드
+
 
 function createOption(item){
   const option =  /*html*/
@@ -13,8 +10,14 @@ function createOption(item){
 
 //   const select = document.forms[0].querySelector("select");
 
-//   const response = await fetch("http://localhost:8080/");
+//   const response = await fetch("http://localhost:8080/Auth", 
+//   {
+//     method: "GET",
+//     headers: {
+//       "content-type": "application/json",
+//     },});
 //   const result = await response.json();
+//   console.log(result);
 
 //   result.forEach(item => {
 //     select.insertAdjacentHTML("afterbegin", createOption(item));
@@ -89,11 +92,22 @@ function createOption(item){
         }
       );
       reader.readAsDataURL(file.files[0]);
+      const writebox = document.getElementById("writebox");
+      const form = writebox.querySelector("form");
+      form.hidden = true;
+      writebox.innerHTML = /*html*/
+      `<p> 작성이 완료되었습니다. </p>`;
     }else {
       //파일이 없을 때
       createPost();
+      const writebox = document.getElementById("writebox");
+      const form = writebox.querySelector("form");
+      form.hidden = true;
+      writebox.innerHTML = /*html*/
+      `<p> 작성이 완료되었습니다. </p>`;
+      
     }
-    window.location.replace("http://192.168.100.36:5500/index.html");
+    
     
 
   });

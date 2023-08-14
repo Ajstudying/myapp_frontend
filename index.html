@@ -8,28 +8,34 @@
   </head>
   <body>
     <!-- <script src="/login.html"></script> -->
-    <div>
-      <button>로그인</button>
-      <button>로그아웃</button>
-    </div>
+    <aside>
+      <div>
+        <button><a href="mypage/mypage.html">마이페이지</a></button>
+        <button><a href="pet/write.html">포스트 작성</a></button>
+      </div>
+      <div>
+        <button>로그인</button>
+        <button>로그아웃</button>
+      </div>
+    </aside>
     <header>
       <div>
         <h1>special pet</h1>
         <nav>
           <ul>
             <li><a href="/index.html">펫</a></li>
-            <li><a href="petPost/write.html">포스트작성</a></li>
             <li><a href="">정보나눔</a></li>
+            <li><a href="">정보안내</a></li>
           </ul>
         </nav>
-        <form action="">
+        <form>
           <input type="text" placeholder="검색상자" />
           <button>검색</button>
         </form>
       </div>
     </header>
     <section></section>
-    <div>
+    <div id="paging">
       <button>이전</button>
       <button>다음</button>
     </div>
@@ -46,7 +52,7 @@
           ></textarea>
         </div>
         <div>
-          <label for="">
+          <label>
             <div>파일 선택</div>
             <input type="file" />
           </label>

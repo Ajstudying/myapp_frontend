@@ -5,8 +5,8 @@ let currentQuery = ""; // 현재 검색 키워드
 
 
 (()=> {
-  const div = document.querySelector("div");
-  const buttons = div.querySelectorAll("button");
+  const divs = document.querySelectorAll("div");
+  const buttons = divs[1].querySelectorAll("button");
 
   buttons[0].addEventListener("click", (e) => {
     e.preventDefault();
@@ -22,11 +22,11 @@ let currentQuery = ""; // 현재 검색 키워드
 
 //메모 형태
 function cardTemplate(item){
-  const imageElement = item.image ? `<img src="${item.image}" alt="${item.no}">` : "";
+  const imageElement = item.image ? `<img src="${item.image}" alt="반려동물사진">` : "";
   const template =  /*html*/
     `<article data-no="${item.no}">
     <div>
-    <h4>${item.title}</h4>
+    <h4 title="제목을 누르면 상세페이지로 이동합니다.">${item.title}</h4>
     <button class="remove">X</button>
     </div>
     <hr>
@@ -66,6 +66,10 @@ async function getPagedMemo(page, query){
     section.insertAdjacentHTML("beforeend", cardTemplate(item));
   });
 
+  currentPage = results.number;
+  isLastPage = results.last;
+  //페이징 버튼
+  setBtnActive();
 }
 
 //화면을 처음 켰을 때 첫번째 페이지 조회
@@ -115,7 +119,6 @@ async function getPagedMemo(page, query){
 
   section.addEventListener("click", async(e) => {
     e.preventDefault();
-    console.log(e.target);
 
     if(e.target.classList.contains("remove")){
 
@@ -168,6 +171,7 @@ async function getPagedMemo(page, query){
         layer.hidden = true;
       });
 
+
       //수정
       buttons[0].addEventListener("click", async(e) => {
         e.preventDefault();
@@ -177,7 +181,7 @@ async function getPagedMemo(page, query){
         const inputs = layer.querySelectorAll("input");
         const modifyTitle = inputs[0].value;
         const modifyTextbox = layer.querySelector("textarea").value;
-        const modifyFile = inputs[1];
+        const file = inputs[1];
 
       
         async function modifyPost(image) {
@@ -186,19 +190,17 @@ async function getPagedMemo(page, query){
             method: "PUT",
             headers: {
               "content-type": "application/json",
-              // "Authorization": `Bearer ${getCookie(
-              //   "token"
-              // )}`,
             },
             body: JSON.stringify ({
               title: modifyTitle,
               content: modifyTextbox,
-              image: image ? modifyFile : null,
+              image: image ? image : null,
             }),
           });
         }
         
-        if(modifyFile.files[0]){
+        console.log(file.files[0]);
+        if(file.files[0]){
           const reader = new FileReader();
           
           reader.addEventListener("load", 
@@ -206,20 +208,79 @@ async function getPagedMemo(page, query){
           console.log(e);
           const image = e.target.result;
           modifyPost(image);
+          const imageElement = modifyArticle.querySelector("img");
+          imageElement.src = image;
         });
         reader.readAsDataURL(file.files[0]);
         }else {modifyPost();}
 
+        console.log(file.files[0]);
+        
         title.innerHTML = layer.querySelector("input").value;
         textbox.innerHTML = layer.querySelector("textarea").value;
-        const image = modifyArticle.querySelector("image")
         
-
         
         layer.hidden = true;
       })
 
+      
     }
 
   });
+})();
+
+//페이징 버튼
+function setBtnActive() {
+  //버튼 선택
+  const paging = document.getElementById("paging");
+  const buttons = paging.querySelectorAll("button");
+
+  const btnPrev = buttons[0];
+  const btnNext = buttons[1];
+
+  if(currentPage === 0){
+    btnPrev.disabled = true;
+  }else{
+    btnPrev.disabled = false;
+  }
+ 
+  if(isLastPage) {
+    btnNext.disabled = true;
+  }else{
+    btnNext.disabled = false;
+  }
+}
+
+//페이징
+(() => {
+  const paging = document.getElementById("paging");
+  const buttons = paging.querySelectorAll("button");
+
+  const btnPrev = buttons[0];
+  const btnNext = buttons[1];
+  console.log(btnPrev);
+  console.log(btnNext);
+
+  //이전 버튼
+  btnPrev.addEventListener("click", (e) => {
+    e.preventDefault();
+    currentPage > 0 && getPagedMemo(currentPage -1, currentQuery);
+  });
+  //다음 버튼
+  btnNext.addEventListener("click", (e) => {
+    e.preventDefault();
+    !isLastPage && getPagedMemo(currentPage + 1, currentQuery);
+  });
+})();
+
+//상세페이지 이동
+(() => {
+  const section = document.querySelector("section");
+  section.addEventListener("click", (e) => {
+    e.preventDefault();
+    
+    if(e.target.tagName.toLowerCase() === "h4"){
+      window.location.href ="pet/details.html";
+    }
+  })
 })();

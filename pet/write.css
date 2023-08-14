@@ -11,30 +11,42 @@ body {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  background-color: rgba(100, 200, 150, 0.2);
 }
-header > div:nth-of-type(1) {
+aside {
+  display: flex;
+  justify-content: space-between;
+}
+aside > div{
   display: flex;
   justify-content: flex-end;
   gap: 15px;
 }
-header > div:nth-of-type(1) > button{
+aside > div> button {
   background-color: rgb(173, 193, 120);
   color: rgb(255, 255, 255);
   border-radius: 5px;
 }
-header> div:nth-of-type(2) {
+aside > div> button a {
+  text-decoration: none;
+  color: white;
+}
+aside > div> button a:visited {
+  color: white;
+}
+header> div {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-header > div:nth-of-type(2) > h1 {
+header > div > h1 {
   display: flex;
   justify-content: center;
   margin: 0;
   margin-top: 2rem;
   color: rgb(96, 108, 56);
 }
-header > div:nth-of-type(2) > nav > ul {
+header > div> nav > ul {
   display: flex;
   justify-content: space-evenly;
   list-style: none;
@@ -42,7 +54,7 @@ header > div:nth-of-type(2) > nav > ul {
   margin-left: 2rem;
   margin-right: 2rem;
 }
-header > div:nth-of-type(2) > nav > ul > li {
+header > div > nav > ul > li {
   background-color: rgb(141, 112, 83);
   text-align: center;
   width: 20%;
@@ -50,9 +62,12 @@ header > div:nth-of-type(2) > nav > ul > li {
   padding-bottom: 0.1rem;
   border-radius: 5px;
 }
-header > div:nth-of-type(2) > nav > ul > li > a {
+header > div > nav > ul > li > a {
   color: white;
   text-decoration: none;
+}
+#writebox > p{
+  text-align: center;
 }
 #writebox > form{
   display: flex;
