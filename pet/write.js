@@ -2,28 +2,27 @@
 
 function createOption(item){
   const option =  /*html*/
-  `<option value="${item.petname}">${item.petname}</option>`
+  `<option value="${item[0]}">${item[0]}</option>`
   return option;
 }
 
-// (async() => {
+(async() => {
 
-//   const select = document.forms[0].querySelector("select");
+  const select = document.forms[0].querySelector("select");
 
-//   const response = await fetch("http://localhost:8080/Auth", 
-//   {
-//     method: "GET",
-//     headers: {
-//       "content-type": "application/json",
-//     },});
-//   const result = await response.json();
-//   console.log(result);
+  const response = await fetch("http://localhost:8080/profile", 
+  {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },});
+  const result = await response.json();
 
-//   result.forEach(item => {
-//     select.insertAdjacentHTML("afterbegin", createOption(item));
-//   });
+  result.data.forEach(item => {
+    select.insertAdjacentHTML("beforeend", createOption(item));
+  });
 
-// })();
+})();
 
 //추가
 (() => {
@@ -36,7 +35,7 @@ function createOption(item){
   const title = inputs[0];
   const content = textbox;
   const file = inputs[1];
-  const petname = select.value;
+  const petname = select;
   
 
   const add = document.forms[0].querySelector("button");
@@ -57,24 +56,25 @@ function createOption(item){
     //데이터를 서버에 전송하고, UI 요소 생성
     async function createPost(image) {
       //서버에 전송하면 UI를 생성한다.
-      await fetch(
+      const response = await fetch(
         "http://localhost:8080/posts",
         {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            // "Authorization": `Bearer ${getCookie(
-            //   "token"
-            // )}`,
+            "Authorization": `Bearer ${getCookie(
+              "token"
+            )}`,
           },
           body: JSON.stringify({
             title: title.value,
             content: content.value,
             image: image ? image : null,
-            petname: petname,
+            petname: petname.value,
           }),
         }
       );
+      console.log(response);
 
     }
 
