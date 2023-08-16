@@ -3,7 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>메인</title>
+    <link rel="stylesheet" href="index.css" />
   </head>
-  <body></body>
+  <body>
+    <!-- <script src="/login.html"></script> -->
+    <aside>
+      <div>
+        <button><a href="../mypage/mypage.html">마이페이지</a></button>
+        <button><a href="write.html">포스트 작성</a></button>
+      </div>
+      <div>
+        <button>로그인</button>
+        <button>로그아웃</button>
+      </div>
+    </aside>
+    <header>
+      <div>
+        <h1>special pet</h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">펫</a></li>
+            <li><a href="">정보나눔</a></li>
+            <li><a href="">정보안내</a></li>
+          </ul>
+        </nav>
+        <form>
+          <input type="text" placeholder="검색상자" />
+          <button>검색</button>
+        </form>
+      </div>
+    </header>
+    <section></section>
+    <div id="paging">
+      <button>이전</button>
+      <button>다음</button>
+    </div>
+    <div id="modify-layer" hidden>
+      <div id="modify-box">
+        <div>
+          <input type="text" placeholder="수정할 제목" />
+        </div>
+        <div>
+          <textarea
+            placeholder="작성자의 이름을 입력해주세요."
+            cols="45"
+            rows="15"
+          ></textarea>
+        </div>
+        <div>
+          <label>
+            <div>파일 선택</div>
+            <input type="file" />
+          </label>
+        </div>
+        <div>
+          <button>확인</button>
+          <button>취소</button>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
 </html>
