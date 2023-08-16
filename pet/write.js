@@ -2,7 +2,7 @@
 
 function createOption(item){
   const option =  /*html*/
-  `<option value="${item[0]}">${item[0]}</option>`
+  `<option value="${item[2]}">${item[2]}</option>`
   return option;
 }
 

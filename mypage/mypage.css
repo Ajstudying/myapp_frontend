@@ -66,3 +66,83 @@ header > div > nav > ul > li > a {
   color: white;
   text-decoration: none;
 }
+main {
+  margin: 10px;
+  border-radius: 10px;
+}
+main > section {
+  background-color: beige;
+  padding: 15px;
+  border-radius: 20px;
+  margin: 0.5rem;
+}
+main > section > h3 {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+main > section > div{
+  display: flex;
+  gap: 2rem;
+}
+main > footer{
+  margin: 0.5rem;
+  background-color: beige;
+  padding: 15px;
+  border-radius: 20px;
+}
+main > footer > h3 {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+main > footer > article > div {
+  display: flex;
+  justify-content: space-between;
+}
+main > footer > article > div  > div {
+  display: flex;
+  gap: 2rem;
+}
+main > footer > article > div > button {
+  margin-top: 1em;
+  height: 1.7rem;
+}
+
+#modify-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#modify-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: white;
+  width: 500px;
+  padding: 2rem;
+  align-items: center;
+}
+@media (min-width: 67rem) {
+
+  header {
+    width: 40%;
+  }
+  header> div:nth-of-type(2){
+    width: 60%;
+  }
+  header > div:nth-of-type(1) > h1 {
+    margin: 0;
+  }
+  main {
+    width: 60%;
+    margin: auto;
+  }
+}
