@@ -129,11 +129,11 @@ async function getPagedMemo(page, query){
       await fetch(`http://localhost:8080/posts/${removeNumber}`,
       {
         method: "DELETE",
-        // headers: {
-        //   Authorization: `Bearer ${getCookie(
-        //     "token"
-        //   )}`,
-        // },
+        headers: {
+          Authorization: `Bearer ${getCookie(
+            "token"
+          )}`,
+        },
       });
       removeArticle.remove();
       window.location.reload();
@@ -146,14 +146,26 @@ async function getPagedMemo(page, query){
 
 //수정
 (() => {
-  document.querySelector("section").addEventListener("click", (e) => {
+  document.querySelector("section").addEventListener("click", async(e) => {
     e.preventDefault();
     console.log(e.target);
     if(e.target.classList.contains("btn-modify")){
       const modifyArticle = e.target.closest("article");
       console.log(modifyArticle);
      
-      //레이어 띄우기
+      // const url = "http://localhost:8080/posts";
+      // const response = await fetch(url, {
+      //   method: "PUT",
+      //   headers: {
+      //     "Authorization": `Bearer ${getCookie(
+      //       "token"
+      //       )}`,
+      //     },
+      //   });
+      //   if ([401, 403, 404, 405].includes(response.status)) {
+      //     alert("해당 포스트의 작성자가 아닙니다.");
+      //   } else{
+          //레이어 띄우기
       /** @type {HTMLDivElement} */
       const layer = document.querySelector("#modify-layer");
       layer.hidden = false;
@@ -170,7 +182,7 @@ async function getPagedMemo(page, query){
         e.preventDefault();
         layer.hidden = true;
       });
-
+      // }
 
       //수정
       buttons[0].addEventListener("click", async(e) => {
@@ -190,6 +202,9 @@ async function getPagedMemo(page, query){
             method: "PUT",
             headers: {
               "content-type": "application/json",
+              "Authorization": `Bearer ${getCookie(
+                "token"
+              )}`,
             },
             body: JSON.stringify ({
               title: modifyTitle,
@@ -199,7 +214,6 @@ async function getPagedMemo(page, query){
           });
         }
         
-        console.log(file.files[0]);
         if(file.files[0]){
           const reader = new FileReader();
           
@@ -213,8 +227,6 @@ async function getPagedMemo(page, query){
         });
         reader.readAsDataURL(file.files[0]);
         }else {modifyPost();}
-
-        console.log(file.files[0]);
         
         title.innerHTML = layer.querySelector("input").value;
         textbox.innerHTML = layer.querySelector("textarea").value;

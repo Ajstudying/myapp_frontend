@@ -23,12 +23,20 @@ function myTemplate(item){
 //조회
 (async() => {
   const main = document.querySelector("main");
-  const response = await fetch("http://localhost:8080/profile", 
-  {
-    method: "GET",
+  const url = "http://localhost:8080/profile";
+  const response = await fetch(url, {
     headers: {
-      "content-type": "application/json",
-    },});
+      Authorization: `Bearer ${getCookie(
+        "token"
+      )}`,
+    },
+  });
+  // 401: 미인증, 403: 미인가(허가없는)
+  if ([401, 403].includes(response.status)) {
+    // 로그인 페이지로 튕김
+    alert("인증처리가 되지 않았습니다.");
+    window.location.href = "/login.html";
+  }
   const results = await response.json();
 
   const divs = main.querySelectorAll("div");

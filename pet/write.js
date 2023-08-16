@@ -10,12 +10,18 @@ function createOption(item){
 
   const select = document.forms[0].querySelector("select");
 
-  const response = await fetch("http://localhost:8080/profile", 
-  {
-    method: "GET",
+  const url = "http://localhost:8080/profile";
+  const response = await fetch(url, {
     headers: {
-      "content-type": "application/json",
-    },});
+      Authorization: `Bearer ${getCookie(
+        "token"
+      )}`,
+    },
+  });
+  if ([401, 403].includes(response.status)) {
+    alert("인증처리가 되지 않았습니다.");
+    window.location.href = "/login.html";
+  }
   const result = await response.json();
 
   result.data.forEach(item => {

@@ -46,7 +46,8 @@ header> div {
   flex-direction: column;
   gap: 15px;
 }
-header > div > h1 {
+header > div > h1 > a {
+  text-decoration: none;
   display: flex;
   justify-content: center;
   margin: 0;
@@ -241,7 +242,7 @@ article > div:nth-of-type(2) > img {
   article > div:nth-of-type(2) > img {
     height: 22rem;
   }
-  header > div:nth-of-type(1) > h1 {
+  header > div:nth-of-type(1) > h1 > a {
     margin: 0;
   }
   #paging > button {
