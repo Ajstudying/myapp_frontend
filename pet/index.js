@@ -166,7 +166,7 @@ async function getPagedMemo(page, query){
       console.log(modifyArticle);
       const modifyNum = modifyArticle.dataset.no;
      
-      const response = await fetch(`http://localhost:8080/posts/${modifyNum}`, {
+      const response = await fetch(`http://localhost:8080/posts/verify/${modifyNum}`, {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${getCookie(
@@ -176,10 +176,8 @@ async function getPagedMemo(page, query){
         });
         if ([403].includes(response.status)) {
           alert("해당 포스트의 작성자가 아닙니다.");
-          layer.hidden = true;
         } else if([404].includes(response.status)){
           alert("해당 포스트를 찾을 수 없습니다.");
-          layer.hidden = true;
         }else{
           //레이어 띄우기
       /** @type {HTMLDivElement} */
@@ -307,7 +305,9 @@ function setBtnActive() {
     e.preventDefault();
     
     if(e.target.tagName.toLowerCase() === "h4"){
-      window.location.href ="pet/details.html";
+      const postNo = e.target.parentElement.dataset.no;
+
+      window.location.href = `http://localhost:5500/pet/details.html?postNo=${postNo}`;
     }
   })
 })();
