@@ -40,22 +40,24 @@
         text-align: center;
         margin: 10px;
       }
+      form > div:nth-of-type(2) > button:nth-of-type(2) > a {
+        text-decoration: none;
+        color: black;
+      }
     </style>
   </head>
   <body>
     <form action="http://localhost:8080/auth/signin" method="post">
       <h1>special pet</h1>
       <div>
-        <label for=""
-          ><input type="text" name="userid" placeholder="아이디"
-        /></label>
-        <label for=""
+        <label><input type="text" name="userid" placeholder="아이디" /></label>
+        <label
           ><input type="password" name="password" placeholder="비밀번호"
         /></label>
       </div>
       <div>
         <button>로그인</button>
-        <button>회원가입</button>
+        <button><a href="signup.html">회원가입</a></button>
       </div>
     </form>
   </body>

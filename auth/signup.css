@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  background-color: rgba(100, 200, 150, 0.2);
+}
+aside {
+  display: flex;
+  justify-content: space-between;
+}
+aside > div:nth-of-type(1){
+  display: flex;
+  gap: 15px
+}
+aside > div:nth-of-type(1) > button a {
+  text-decoration: none;
+  color: white;
+}
+aside > div:nth-of-type(1) > button:nth-of-type(2) a:visited {
+  color: white;
+}
+aside > div:nth-of-type(1) > button {
+  background-color: rgb(173, 193, 120);
+  color: white;
+  border-radius: 5px;
+}
+aside > div:nth-of-type(2) {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+aside > div:nth-of-type(2) > button{
+  background-color: rgb(173, 193, 120);
+  color: white;
+  border-radius: 5px;
+}
+header> div {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+header > div > h1 > a{
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  margin-top: 2rem;
+  color: rgb(96, 108, 56);
+}
+header > div > nav > ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  padding: 0;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+header > div> nav > ul > li {
+  background-color: rgb(141, 112, 83);
+  text-align: center;
+  width: 20%;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-radius: 5px;
+  line-height: 20px;
+  font-size: 14px;
+  box-shadow: 0 0 #87a86f;
+}
+header > div > nav > ul > li > a {
+  color: white;
+  text-decoration: none;
+}
+section{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+section form {
+  background-color: beige;
+  padding: 15px;
+  padding-bottom: 40px;
+}
+section > form:nth-of-type(2)> div:nth-of-type(1){
+  display: flex;
+  justify-content: space-between;
+}
+section > form:nth-of-type(2)> div:nth-of-type(1) > button {
+  margin-top: 15px;
+  height: 1.5rem;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+}
+.inputbox{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  width: 80%;
+}
+.inputbox > h4 {
+  margin: 0;
+}
+.inputbox > label {
+  margin: 0;
+}
+section > div {
+  background-color: beige;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+@media (min-width: 61rem){
+  aside > div > button {
+    font-size: 15px;
+  }
+  header {
+    width: 40%;
+  }
+  header> div:nth-of-type(2){
+    width: 60%;
+  }
+  header > div:nth-of-type(1) > h1 > a {
+    margin: 0;
+    font-size: 40px;
+  }
+  header > div:nth-of-type(1) > nav > ul li {
+    font-size: 18px;
+  }
+  section{
+    margin: 3rem;
+  }
+  section form {
+    width: 60%;
+    margin: auto;
+    padding: 1.5rem;
+    padding-bottom: 3.5rem;
+  }
+  section form h3 {
+    font-size: 22px;
+  }
+  .inputbox{
+    gap: 30px;
+    font-size: 18px;
+    width: 65%;
+  }
+  .inputbox input {
+    height: 1.5rem;
+  }
+  section > div {
+    width: 60%;
+    margin: auto;
+  }
+  section > div > button {
+    font-size: 14px;
+  }
+}

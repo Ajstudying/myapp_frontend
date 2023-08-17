@@ -18,10 +18,6 @@ function createOption(item){
       )}`,
     },
   });
-  if ([401, 403].includes(response.status)) {
-    alert("인증처리가 되지 않았습니다.");
-    window.location.href = "/login.html";
-  }
   const result = await response.json();
 
   result.data.forEach(item => {

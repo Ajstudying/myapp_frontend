@@ -132,7 +132,9 @@ main > footer > article > div > button {
   align-items: center;
 }
 @media (min-width: 67rem) {
-
+  aside > div > button {
+    font-size: 15px;
+  }
   header {
     width: 40%;
   }
@@ -141,6 +143,10 @@ main > footer > article > div > button {
   }
   header > div:nth-of-type(1) > h1 > a {
     margin: 0;
+    font-size: 40px;
+  }
+  header > div:nth-of-type(1) > nav > ul li {
+    font-size: 18px;
   }
   main {
     width: 60%;

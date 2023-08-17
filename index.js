@@ -4,7 +4,7 @@
 
   buttons[0].addEventListener("click", (e) => {
     e.preventDefault();
-    window.location.replace("http://localhost:5500/login.html");
+    window.location.replace("http://localhost:5500/auth/login.html");
   })
   buttons[1].addEventListener("click", async(e) => {
     e.preventDefault();
