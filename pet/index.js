@@ -3,6 +3,22 @@ let isLastPage = false; //마지막 페이지 인지 여부
 const MAX_MEMO = 4;// 고정된 메모 갯수
 let currentQuery = ""; // 현재 검색 키워드
 
+function getCookie(name) {
+  let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+
+(() => {
+  const token = getCookie("token");
+  console.log(token);
+  if(!token){
+    window.location.href = "/login.html"
+  }
+
+})();
 
 (()=> {
   const divs = document.querySelectorAll("div");
@@ -23,11 +39,12 @@ let currentQuery = ""; // 현재 검색 키워드
 //메모 형태
 function cardTemplate(item){
   const imageElement = item.image ? `<img src="${item.image}" alt="반려동물사진">` : "";
+  
+  const buttons = token ? `<button class="btn-modify">수정</button><button class="remove">삭제</button>`:"";
   const template =  /*html*/
     `<article data-no="${item.no}">
     <div>
     <h4 title="제목을 누르면 상세페이지로 이동합니다.">${item.title}</h4>
-    <button class="remove">X</button>
     </div>
     <hr>
     <h5><sub>생성시간: ${new Date(item.createdTime).toLocaleString()}</sub></h5>
@@ -36,7 +53,7 @@ function cardTemplate(item){
     </div>
     <div>
     <p>${item.content}</p>
-    <button class="btn-modify">:</button>
+    ${buttons}
     </div>
     <hr>
     <div>
@@ -63,7 +80,20 @@ async function getPagedMemo(page, query){
   //목록 초기화
   section.innerHTML = "";
   results.content.forEach(item => {
-    section.insertAdjacentHTML("beforeend", cardTemplate(item));
+    const token = getCookie("token");
+    if (token) {
+      try {
+        const decodedToken = jwt_decode(token); // jwt_decode 라이브러리 사용
+        const nickname = decodedToken.nickname;
+        if(nickname === item.nickname){
+          section.insertAdjacentHTML("beforeend", cardTemplate(item, token));
+        }else{
+          section.insertAdjacentHTML("beforeend", cardTemplate(item));
+        }
+      }catch (error) {
+        console.error("Error decoding token:", error.message);
+      }
+    }
   });
 
   currentPage = results.number;
@@ -121,7 +151,22 @@ async function getPagedMemo(page, query){
     e.preventDefault();
 
     if(e.target.classList.contains("remove")){
+      const modifyArticle = e.target.closest("article");
+      const modifyNum = modifyArticle.dataset.no;  
 
+      const response = await fetch(
+        `http://localhost:8080/posts/verify/${modifyNum}`, 
+        {
+          method: "PUT",
+          headers: {
+            "Authorization": `Bearer ${getCookie("token")}`,
+          },
+        });
+      
+      if ([403].includes(response.status)) {
+        alert("해당 포스트의 작성자가 아닙니다.");
+        layer.hidden = true;
+      }else{
       const removeArticle = e.target.closest("article");
       const removeNumber = removeArticle.dataset.no;
       
@@ -137,10 +182,9 @@ async function getPagedMemo(page, query){
       });
       removeArticle.remove();
       window.location.reload();
-      
+      }
     }
-    
-  })
+  });
 
 })();
 
@@ -152,19 +196,20 @@ async function getPagedMemo(page, query){
     if(e.target.classList.contains("btn-modify")){
       const modifyArticle = e.target.closest("article");
       console.log(modifyArticle);
+      const modifyNum = modifyArticle.dataset.no;
      
-      // const url = "http://localhost:8080/posts";
-      // const response = await fetch(url, {
-      //   method: "PUT",
-      //   headers: {
-      //     "Authorization": `Bearer ${getCookie(
-      //       "token"
-      //       )}`,
-      //     },
-      //   });
-      //   if ([401, 403, 404, 405].includes(response.status)) {
-      //     alert("해당 포스트의 작성자가 아닙니다.");
-      //   } else{
+      const response = await fetch(`http://localhost:8080/posts/verify/${modifyNum}`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${getCookie(
+            "token"
+            )}`,
+          },
+        });
+        if ([403].includes(response.status)) {
+          alert("해당 포스트의 작성자가 아닙니다.");
+          layer.hidden = true;
+        } else{
           //레이어 띄우기
       /** @type {HTMLDivElement} */
       const layer = document.querySelector("#modify-layer");
@@ -178,18 +223,16 @@ async function getPagedMemo(page, query){
 
       const buttons = layer.querySelectorAll("button");
 
+      //취소버튼
       buttons[1].addEventListener("click", (e) => {
         e.preventDefault();
         layer.hidden = true;
       });
-      // }
-
-      //수정
+      
+      //확인버튼
       buttons[0].addEventListener("click", async(e) => {
         e.preventDefault();
 
-        const modifyNum = modifyArticle.dataset.no;
-        
         const inputs = layer.querySelectorAll("input");
         const modifyTitle = inputs[0].value;
         const modifyTextbox = layer.querySelector("textarea").value;
@@ -234,6 +277,7 @@ async function getPagedMemo(page, query){
         
         layer.hidden = true;
       })
+    }
 
       
     }
