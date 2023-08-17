@@ -1,5 +1,11 @@
+// (() => {
+//   const token = getCookie("token");
+//   console.log(token);
+//   if(!token){
+//     window.location.href = "http://localhost:8080/auth/login.html"
+//   }
 
-
+// })();
 function createOption(item){
   const option =  /*html*/
   `<option value="${item[2]}">${item[2]}</option>`
@@ -7,7 +13,7 @@ function createOption(item){
 }
 
 (async() => {
-
+  hiddenButton();
   const select = document.forms[0].querySelector("select");
 
   const url = "http://localhost:8080/profile";

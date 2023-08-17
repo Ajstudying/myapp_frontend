@@ -3,23 +3,6 @@ let isLastPage = false; //마지막 페이지 인지 여부
 const MAX_MEMO = 4;// 고정된 메모 갯수
 let currentQuery = ""; // 현재 검색 키워드
 
-function getCookie(name) {
-  let matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-  ));
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
-
-
-(() => {
-  const token = getCookie("token");
-  console.log(token);
-  if(!token){
-    window.location.href = "/login.html"
-  }
-
-})();
-
 (()=> {
   const divs = document.querySelectorAll("div");
   const buttons = divs[1].querySelectorAll("button");
@@ -37,15 +20,13 @@ function getCookie(name) {
 })();
 
 //메모 형태
-function cardTemplate(item){
+function cardTemplate(item, token){
   const imageElement = item.image ? `<img src="${item.image}" alt="반려동물사진">` : "";
   
   const buttons = token ? `<button class="btn-modify">수정</button><button class="remove">삭제</button>`:"";
   const template =  /*html*/
     `<article data-no="${item.no}">
-    <div>
     <h4 title="제목을 누르면 상세페이지로 이동합니다.">${item.title}</h4>
-    </div>
     <hr>
     <h5><sub>생성시간: ${new Date(item.createdTime).toLocaleString()}</sub></h5>
     <div>
@@ -53,7 +34,9 @@ function cardTemplate(item){
     </div>
     <div>
     <p>${item.content}</p>
+    <div>
     ${buttons}
+    </div>
     </div>
     <hr>
     <div>
@@ -80,20 +63,14 @@ async function getPagedMemo(page, query){
   //목록 초기화
   section.innerHTML = "";
   results.content.forEach(item => {
+    
     const token = getCookie("token");
-    if (token) {
-      try {
-        const decodedToken = jwt_decode(token); // jwt_decode 라이브러리 사용
-        const nickname = decodedToken.nickname;
-        if(nickname === item.nickname){
-          section.insertAdjacentHTML("beforeend", cardTemplate(item, token));
-        }else{
-          section.insertAdjacentHTML("beforeend", cardTemplate(item));
-        }
-      }catch (error) {
-        console.error("Error decoding token:", error.message);
-      }
+    if(!token){
+      section.insertAdjacentHTML("beforeend", cardTemplate(item));
+    }else{
+      section.insertAdjacentHTML("beforeend", cardTemplate(item, token));
     }
+          
   });
 
   currentPage = results.number;
@@ -104,6 +81,7 @@ async function getPagedMemo(page, query){
 
 //화면을 처음 켰을 때 첫번째 페이지 조회
 (async() => {
+  hiddenButton();
   window.addEventListener("DOMContentLoaded", () => {
     getPagedMemo(0);
   });
@@ -166,6 +144,9 @@ async function getPagedMemo(page, query){
       if ([403].includes(response.status)) {
         alert("해당 포스트의 작성자가 아닙니다.");
         layer.hidden = true;
+      }else if([404].includes(response.status)){
+        alert("해당 포스트를 찾을 수 없습니다.");
+        layer.hidden = true;
       }else{
       const removeArticle = e.target.closest("article");
       const removeNumber = removeArticle.dataset.no;
@@ -209,7 +190,10 @@ async function getPagedMemo(page, query){
         if ([403].includes(response.status)) {
           alert("해당 포스트의 작성자가 아닙니다.");
           layer.hidden = true;
-        } else{
+        } else if([404].includes(response.status)){
+          alert("해당 포스트를 찾을 수 없습니다.");
+          layer.hidden = true;
+        }else{
           //레이어 띄우기
       /** @type {HTMLDivElement} */
       const layer = document.querySelector("#modify-layer");

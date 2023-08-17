@@ -1,3 +1,7 @@
+(() => {
+  hiddenButton();
+})();
+
 (()=> {
   const divs = document.querySelectorAll("div");
   const buttons = divs[1].querySelectorAll("button");

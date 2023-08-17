@@ -5,11 +5,15 @@ function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-(() => {
+function hiddenButton(){
   const token = getCookie("token");
-  console.log(token);
-  if(!token){
-    window.location.href = "/login.html"
+  const aside = document.querySelector("aside");
+  const buttons = aside.querySelectorAll("button");
+  if(!token){ 
+    buttons[0].hidden = true;
+    buttons[1].hidden = true;
+    buttons[3].hidden = true;
+  } else{
+    buttons[2].hidden = true;
   }
-
-})();
+}

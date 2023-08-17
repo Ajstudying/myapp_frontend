@@ -104,39 +104,42 @@ article {
   box-shadow: 5px 5px 10px hsl(19, 28%, 33%);
   border-radius: 10px;
 }
-article >div > h4:hover{
+article > h4:hover{
   cursor: pointer;
   color: crimson;
 }
-article > div:nth-of-type(1) {
-  display: flex;
-  justify-content: space-between;
-}
-article > div:nth-of-type(1) > button {
+/* article > div:nth-of-type(1) > button {
   height: 25px;
   background-color: rgb(173, 193, 120);
   color: rgb(255, 255, 255);
   border-radius: 5px;
-}
+} */
 article > h5 {
   display: flex;
   justify-content: flex-end;
   margin: 0;
   margin-bottom: 10px;
 }
+article > div:nth-of-type(2) {
+  display: flex;
+  justify-content: space-between;
+}
+article > div:nth-of-type(2) > div{
+  display: flex;
+  gap: 10px;
+}
+article > div:nth-of-type(2) > div > button {
+  height: 25px;
+  margin-top: 20px;
+  background-color: rgba(23, 94, 9, 0.7);
+  color: white;
+  border-radius: 5px;
+}
 article > div:nth-of-type(3) {
   display: flex;
   justify-content: space-between;
 }
-article > div:nth-of-type(3) > button {
-  height: 25px;
-  margin-top: 20px;
-}
-article > div:nth-of-type(4) {
-  display: flex;
-  justify-content: space-between;
-}
-article > div:nth-of-type(2) > img {
+article > div:nth-of-type(1) > img {
   width: 100%;
 }
 #paging{
