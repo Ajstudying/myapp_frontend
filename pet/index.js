@@ -6,16 +6,16 @@ let currentQuery = ""; // 현재 검색 키워드
 (()=> {
   const divs = document.querySelectorAll("div");
   const buttons = divs[1].querySelectorAll("button");
-
+  console.log(buttons);
   buttons[0].addEventListener("click", (e) => {
     e.preventDefault();
     window.location.replace("http://localhost:5500/auth/login.html");
   })
   buttons[1].addEventListener("click", (e) => {
     e.preventDefault();
-    //토큰 만료 시킨 후
-    //메인페이지 보여줌
-    window.location.reload;
+    const token = getCookie("token");
+    
+    window.location.replace("http://localhost:5500/index.html");
   })
 })();
 
@@ -129,30 +129,12 @@ async function getPagedMemo(page, query){
     e.preventDefault();
 
     if(e.target.classList.contains("remove")){
-      const modifyArticle = e.target.closest("article");
-      const modifyNum = modifyArticle.dataset.no;  
-
-      const response = await fetch(
-        `http://localhost:8080/posts/verify/${modifyNum}`, 
-        {
-          method: "PUT",
-          headers: {
-            "Authorization": `Bearer ${getCookie("token")}`,
-          },
-        });
       
-      if ([403].includes(response.status)) {
-        alert("해당 포스트의 작성자가 아닙니다.");
-        layer.hidden = true;
-      }else if([404].includes(response.status)){
-        alert("해당 포스트를 찾을 수 없습니다.");
-        layer.hidden = true;
-      }else{
       const removeArticle = e.target.closest("article");
       const removeNumber = removeArticle.dataset.no;
       
       //서버연결
-      await fetch(`http://localhost:8080/posts/${removeNumber}`,
+      const response = await fetch(`http://localhost:8080/posts/${removeNumber}`,
       {
         method: "DELETE",
         headers: {
@@ -161,6 +143,11 @@ async function getPagedMemo(page, query){
           )}`,
         },
       });
+      if ([403].includes(response.status)) {
+        alert("해당 포스트의 작성자가 아닙니다.");
+      }else if([404].includes(response.status)){
+        alert("해당 포스트를 찾을 수 없습니다.");
+      }else{
       removeArticle.remove();
       window.location.reload();
       }
@@ -179,7 +166,7 @@ async function getPagedMemo(page, query){
       console.log(modifyArticle);
       const modifyNum = modifyArticle.dataset.no;
      
-      const response = await fetch(`http://localhost:8080/posts/verify/${modifyNum}`, {
+      const response = await fetch(`http://localhost:8080/posts/${modifyNum}`, {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${getCookie(
