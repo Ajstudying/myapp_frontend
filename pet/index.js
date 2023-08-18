@@ -14,7 +14,7 @@ let currentQuery = ""; // 현재 검색 키워드
   buttons[1].addEventListener("click", (e) => {
     e.preventDefault();
     const token = getCookie("token");
-    
+    //토큰 삭제
     window.location.replace("http://localhost:5500/index.html");
   })
 })();

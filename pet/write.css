@@ -67,6 +67,12 @@ header > div > nav > ul > li > a {
   color: white;
   text-decoration: none;
 }
+header > div > h1 > a:hover {
+  color: palevioletred;
+}
+header > div > nav > ul > li > a:hover{
+  color:  palevioletred;
+}
 #writebox > p{
   text-align: center;
 }

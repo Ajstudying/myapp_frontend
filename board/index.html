@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>정보나눔 게시판</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <script src="../auth/auth.js"></script>
+    <aside>
+      <div>
+        <button><a href="../mypage/mypage.html">마이페이지</a></button>
+        <button><a href="write.html">포스트 작성</a></button>
+      </div>
+      <div>
+        <button>로그인</button>
+        <button>로그아웃</button>
+      </div>
+    </aside>
+    <header>
+      <div>
+        <h1><a href="../index.html">special pet</a></h1>
+        <nav>
+          <ul>
+            <li><a href="../pet/index.html">펫</a></li>
+            <li><a href="index.html">정보나눔</a></li>
+            <li><a href="">정보안내</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <hr />
+    <section></section>
+    <section>
+      <div>
+        <button>이전</button>
+        <button>다음</button>
+      </div>
+      <form>
+        <select>
+          <option>검색어 종류</option>
+          <option value="nickname">작성자</option>
+          <option value="species">펫 종류</option>
+          <option value="title">제목</option>
+          <option value="content">내용</option>
+        </select>
+        <div>
+          <input type="text" />
+          <button>검색</button>
+          <button>초기화</button>
+        </div>
+        <div>
+          <button><a href="write.html">게시글 작성</a></button>
+        </div>
+      </form>
+    </section>
+    <script src="index.js"></script>
+  </body>
+</html>
