@@ -73,3 +73,39 @@ header > div > h1 > a:hover {
 header > div > nav > ul > li > a:hover{
   color:  palevioletred;
 }
+section {
+  margin: 20px;
+}
+section > form > div:nth-of-type(1) div {
+  display: flex;
+  gap: 30px;
+}
+label {
+  width: 70%;
+}
+input {
+  width: 100%;
+}
+h3 {
+  margin: 0;
+  font-size: 18px;
+}
+section > form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+section > form > div:nth-of-type(2) {
+  display: flex;
+  gap: 30px;
+}
+section > form > div:nth-of-type(2) > textarea {
+  width: 70%;
+}
+section > form > div:nth-of-type(3) {
+  display: flex;
+  justify-content: space-between;
+}
+select {
+  width: 70%;
+}

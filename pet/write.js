@@ -61,6 +61,11 @@ function createOption(item){
       return;
     }
 
+    if(select.value === "반려동물의 이름을 선택해주세요"){
+      alert("반려동물을 선택해주세요.")
+      return;
+    }
+
     //데이터를 서버에 전송하고, UI 요소 생성
     async function createPost(image) {
       //서버에 전송하면 UI를 생성한다.
@@ -100,18 +105,18 @@ function createOption(item){
         }
       );
       reader.readAsDataURL(file.files[0]);
-      const writebox = document.getElementById("writebox");
-      const form = writebox.querySelector("form");
+      const section = document.querySelector("section");
+      const form = section.querySelector("form");
       form.hidden = true;
-      writebox.innerHTML = /*html*/
+      section.innerHTML = /*html*/
       `<p> 작성이 완료되었습니다. </p>`;
     }else {
       //파일이 없을 때
       createPost();
-      const writebox = document.getElementById("writebox");
-      const form = writebox.querySelector("form");
+      const section = document.querySelector("section");
+      const form = section.querySelector("form");
       form.hidden = true;
-      writebox.innerHTML = /*html*/
+      section.innerHTML = /*html*/
       `<p> 작성이 완료되었습니다. </p>`;
       
     }

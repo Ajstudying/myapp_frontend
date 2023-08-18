@@ -41,13 +41,18 @@ async function getPagedBoard(page, option, query){
     section.innerHTML = "";
     const result = results.content;
     const ul = document.createElement("ul");
+    section.append(ul);
     result.forEach(item => {
       const li = document.createElement("li");
       const template = /*html*/
-      `<div>item.species</div>
-      <div>item.nickname</div>
-      <div>item.title</div>
-      <div>item.createdTime</div>`;
+      `<div><sub>${item.species}</sub></div>
+      <div>
+      <span>${item.title}</span>
+      <span>${item.nickname}</span>
+      <span>${new Date(item.createdTime).toLocaleString()}</span>
+      </div>`;
+      li.dataset.no = item.no;
+      console.log(item.no);
       li.insertAdjacentHTML("afterbegin", template);
       ul.append(li);
     });
@@ -138,3 +143,17 @@ function setBtnActive() {
     getPagedBoard(0, currentQuery);
   });
 })();
+
+// //상세페이지 이동
+// (() => {
+//   const ul = document.querySelector("ul");
+//   ul.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     console.log(e.target);
+//     if(e.target.tagName.toLowerCase() === "li"){
+//       const boardNo = e.target.parentElement.dataset.no;
+
+//       window.location.href = `http://localhost:5500/boards/details.html?boardNo=${boardNo}`;
+//     }
+//   })
+// })();
