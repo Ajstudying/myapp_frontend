@@ -1,5 +1,6 @@
 (() => {
   hiddenButton();
+  loginLogout();
   const forms = document.querySelectorAll("form");
   const section = document.querySelector("section");
   const buttons = section.querySelectorAll("button");

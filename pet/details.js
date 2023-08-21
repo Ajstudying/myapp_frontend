@@ -23,6 +23,7 @@ function cardTemplate(item){
 
 (async() => {
   hiddenButton();
+  loginLogout();
   // URL에서 쿼리 파라미터 가져오기
   const urlParams = new URLSearchParams(window.location.search);
   const postNo = urlParams.get('postNo'); // 쿼리 파라미터에서 postNo 값을 가져옴

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reservation</title>
+    <link rel="stylesheet" href="reserve.css" />
+  </head>
+  <body>
+    <script src="../auth/auth.js"></script>
+    <aside>
+      <div>
+        <button><a href="../mypage/mypage.html">마이페이지</a></button>
+        <button><a href="write.html">포스트 작성</a></button>
+      </div>
+      <div>
+        <button>로그인</button>
+        <button>로그아웃</button>
+      </div>
+    </aside>
+    <header>
+      <div>
+        <h1><a href="../index.html">special pet</a></h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">펫</a></li>
+            <li><a href="reserve.html">일정관리</a></li>
+            <li><a href="../board/index.html">정보나눔</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <hr />
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <td>&#60;</td>
+            <td><span></span>년 <span></span>월</td>
+            <td>&#62;</td>
+          </tr>
+          <tr>
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+    <article>
+      <form hidden>
+        <select>
+          <option>반려동물의 이름을 선택해주세요</option>
+        </select>
+        <label>
+          <input type="text" placeholder="간단한 메모입력" />
+        </label>
+        <button>입력</button>
+      </form>
+    </article>
+    <script src="reserve.js"></script>
+  </body>
+</html>

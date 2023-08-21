@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(100, 200, 150, 0.2);
+}
+aside {
+  display: flex;
+  justify-content: space-between;
+}
+aside > div{
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+aside > div> button {
+  background-color: rgb(173, 193, 120);
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+}
+aside > div> button a {
+  text-decoration: none;
+  color: white;
+}
+aside > div> button a:visited {
+  color: white;
+}
+header> div {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+header > div > h1 > a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  margin-top: 2rem;
+  color: rgb(96, 108, 56);
+}
+header > div> nav > ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  padding: 0;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+header > div > nav > ul > li {
+  background-color: rgb(141, 112, 83);
+  text-align: center;
+  width: 20%;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-radius: 5px;
+}
+header > div > nav > ul > li > a {
+  color: white;
+  text-decoration: none;
+}
+header > div > h1 > a:hover {
+  color: palevioletred;
+}
+header > div > nav > ul > li > a:hover{
+  color:  palevioletred;
+}
+section{
+  background-color : white;
+  height: auto;
+  width: 400px;
+  margin: 0px;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius:5px;
+  box-shadow:0px 40px 30px -20px rgba(0,0,0,0.3);
+}
+table {
+  text-align: center;
+  margin: 0 auto; 
+}
+td {
+  width: 50px;
+  height: 50px;
+}
+table > thead > tr:first-child > td {
+  font-size: 1.1em;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+}
+table > thead > tr:last-child > td {
+  font-weight: 600;  
+}
+.pastDay {
+  color: lightgray;
+}
+
+.today {
+  background-color: #F5D042;            
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.futureDay {
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+.futureDay:hover{
+  background:#eee;
+}
+
+.futureDay.choiceDay,
+.today.choiceDay {
+  background: #0A174E;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}

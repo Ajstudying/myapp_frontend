@@ -3,22 +3,6 @@ let isLastPage = false; //마지막 페이지 인지 여부
 const MAX_MEMO = 4;// 고정된 메모 갯수
 let currentQuery = ""; // 현재 검색 키워드
 
-(()=> {
-  const divs = document.querySelectorAll("div");
-  const buttons = divs[1].querySelectorAll("button");
-  console.log(buttons);
-  buttons[0].addEventListener("click", (e) => {
-    e.preventDefault();
-    window.location.replace("http://localhost:5500/auth/login.html");
-  })
-  buttons[1].addEventListener("click", (e) => {
-    e.preventDefault();
-    const token = getCookie("token");
-    //토큰 삭제
-    window.location.replace("http://localhost:5500/index.html");
-  })
-})();
-
 //메모 형태
 function cardTemplate(item, token){
   const imageElement = item.image ? `<img src="${item.image}" alt="반려동물사진">` : "";
@@ -82,6 +66,7 @@ async function getPagedMemo(page, query){
 //화면을 처음 켰을 때 첫번째 페이지 조회
 (async() => {
   hiddenButton();
+  loginLogout();
   window.addEventListener("DOMContentLoaded", () => {
     getPagedMemo(0);
   });

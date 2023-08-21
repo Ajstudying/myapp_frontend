@@ -1,11 +1,4 @@
-// (() => {
-//   const token = getCookie("token");
-//   console.log(token);
-//   if(!token){
-//     window.location.href = "http://localhost:8080/auth/login.html"
-//   }
 
-// })();
 function createOption(item){
   const option =  /*html*/
   `<option value="${item[2]}">${item[2]}</option>`
@@ -14,6 +7,7 @@ function createOption(item){
 
 (async() => {
   hiddenButton();
+  loginLogout();
   const select = document.forms[0].querySelector("select");
 
   const url = "http://localhost:8080/profile";
@@ -37,11 +31,10 @@ function createOption(item){
 
   //데이터를 추가하기 위해 엘레멘트 찾기
   const inputs = document.forms[0].querySelectorAll("input");
-  const textbox = document.forms[0].querySelector("textarea");
+  const content = document.forms[0].querySelector("textarea");
   const select = document.forms[0].querySelector("select");
 
   const title = inputs[0];
-  const content = textbox;
   const file = inputs[1];
   const petname = select;
   

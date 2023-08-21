@@ -23,6 +23,7 @@ function myTemplate(item){
 //조회
 (async() => {
   hiddenButton();
+  loginLogout();
   const main = document.querySelector("main");
   const url = "http://localhost:8080/profile";
   const response = await fetch(url, {
