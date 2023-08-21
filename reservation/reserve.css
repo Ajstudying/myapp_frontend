@@ -90,6 +90,7 @@ table {
 td {
   width: 50px;
   height: 50px;
+  cursor: pointer;
 }
 table > thead > tr:first-child > td {
   font-size: 1.1em;
@@ -102,25 +103,16 @@ table > thead > tr:last-child > td {
 }
 .pastDay {
   color: lightgray;
+  cursor: initial !important;
 }
 
 .today {
   background-color: #F5D042;            
   color: #fff;
   font-weight: 600;
-  cursor: pointer;
 }
 
-.futureDay {
-  background-color: #FFFFFF;
-  cursor: pointer;
-}
-.futureDay:hover{
-  background:#eee;
-}
-
-.futureDay.choiceDay,
-.today.choiceDay {
+.choiceDay {
   background: #0A174E;
   color: #fff;
   font-weight: 600;

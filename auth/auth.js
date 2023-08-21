@@ -36,3 +36,5 @@ function loginLogout() {
     window.location.replace("http://localhost:5500/index.html")
   })
 }
+
+

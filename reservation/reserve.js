@@ -9,6 +9,19 @@ let today = new Date();
     today.setHours(0, 0, 0, 0);
     buildCalendar(now);
   });
+
+})();
+//날짜 선택
+(() => {
+  const section = document.querySelector("section");
+  section.addEventListener("click", (e)=> {
+    e.preventDefault();
+    console.log(e.target);
+    const td = e.target.closest("td");
+    if(td && !td.classList.contains("pastDay")){
+      td.classList.toggle("choiceDay");
+    }
+  });
 })();
 
 
@@ -63,34 +76,76 @@ function buildCalendar(now) {
       // 오늘인 경우  
       else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) {          
         nowColumn.className = "today";
-        choiceDate();
       }
       // 미래인 경우
       else {                                      
         nowColumn.className = "futureDay";
-        choiceDate();
       }
     }
 }
 
-//날짜 선택
-function choiceDate() {
-  const section = document.querySelector("section");
-  section.addEventListener("click", (e)=> {
+
+//추가
+(() => {
+  const form = document.querySelector("form");
+  const button = form.querySelector("button");
+  button.addEventListener("click", async(e) => {
     e.preventDefault();
+    const petname = form.querySelector("select");
+    const input = form.querySelector("input");
+    const choiceYear = parseInt(document.querySelectorAll("span")[0].innerHTML);
+    const choiceMonth = parseInt(document.querySelectorAll("span")[1].innerHTML);
+    const choiceArray = Array.from(document.getElementsByClassName("choiceDay"));
+    let choiceDay = 0;
+    choiceArray.forEach((item) => {
+      choiceDay = parseInt(item.innerHTML);
+    });
+    console.log(choiceYear);
+    console.log(choiceMonth);
+    console.log(choiceDay);
+    const reservationTime = new Date(choiceYear, choiceMonth, choiceDay);
+    console.log(reservationTime.getTime());
 
-    if(e.target.tagName.toLowerCase() == "td"){
-      if(!e.target.classList.contains("choiceDay")){
-        e.target.classList.remove("choiceDay");
-      }
-      e.target.classList.add("choiceDay");
-      const form = document.querySelector("form");
-      form.hidden = false;
-      form.addEventListener("")
+    if(!choiceDay){
+      alert("날짜를 선택해주세요.");
+      return;
     }
- 
+    if(petname.value === "반려동물의 이름을 선택해주세요"){
+      alert("반려동물을 선택해주세요.");
+      return;
+    }
+    if(input.value === ""){
+      alert("일정 내용을 입력해주세요.");
+      return;
+    }
+
+    const response = await fetch(
+      "http://localhost:8080/reserve",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "Authorization": `Bearer ${getCookie(
+            "token"
+          )}`,
+        },
+        body: JSON.stringify({
+          petname: petname.value,
+          reservationTime: reservationTime.getTime(),
+        }),
+      }
+    );
+
+    if([201].includes(response.status)){
+      form.hidden = true;
+      const article = document.querySelector("article");
+      article.innerHTML = /*html*/
+      `<p> 등록이 완료되었습니다. </p>`;
+    }
   });
-}
+})();
+
+
 //달력 페이징
 (() => {
   
@@ -114,13 +169,13 @@ function choiceDate() {
   });
 
 })();
-
+//펫 셀렉트 옵션 형태
 function createOption(item){
   const option =  /*html*/
   `<option value="${item[2]}">${item[2]}</option>`
   return option;
 }
-
+//펫 셀렉트 옵션 추가
 (async() => {
   hiddenButton();
   const select = document.forms[0].querySelector("select");

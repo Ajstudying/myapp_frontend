@@ -1,10 +1,10 @@
-
+//펫 셀렉트 옵션 형태
 function createOption(item){
   const option =  /*html*/
   `<option value="${item[2]}">${item[2]}</option>`
   return option;
 }
-
+//펫 셀렉트 옵션 추가
 (async() => {
   hiddenButton();
   loginLogout();
