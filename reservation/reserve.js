@@ -82,10 +82,11 @@ let today = new Date();
       const layer = document.querySelector("footer");
       layer.hidden = false;
       const inputs = layer.querySelectorAll("input");
+      const select = layer.querySelector("select");
       const petname = article.querySelectorAll("p")[0];
-      inputs[1].value = petname.innerHTML;
+      select.value = petname.innerHTML;
       const content = article.querySelectorAll("p")[1];
-      inputs[2].value = content.innerHTML;
+      inputs[1].value = content.innerHTML;
 
       const btns = layer.querySelectorAll("button");
       //취소 버튼
@@ -104,8 +105,8 @@ let today = new Date();
         //변경된 예약 날짜
         const modifyReserve = new Date(modifyYear, modifyMonth, modifyDay);
         console.log(modifyReserve.getTime());
-        const modifyPet = inputs[1].value;
-        const modifyContent = inputs[2].value;
+        const modifyPet = select.value;
+        const modifyContent = inputs[1].value;
         const modifyNum = article.dataset.no;
         //서버연결
         const response = await fetch(`http://localhost:8080/reserve/${modifyNum}`,
@@ -302,7 +303,8 @@ function createOption(item){
 //펫 셀렉트 옵션 추가
 (async() => {
   const select = document.forms[0].querySelector("select");
-
+  const layer = document.querySelector("footer");
+  const modifySelect = layer.querySelector("select");
   const url = "http://localhost:8080/profile";
   const response = await fetch(url, {
     headers: {
@@ -315,6 +317,7 @@ function createOption(item){
 
   result.data.forEach(item => {
     select.insertAdjacentHTML("beforeend", createOption(item));
+    modifySelect.insertAdjacentHTML("beforeend", createOption(item));
   });
 
 })();

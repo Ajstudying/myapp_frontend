@@ -7,7 +7,7 @@ function myTemplate(item){
   <p>${item[2]}</p>
   </div>
   <div>
-  <button class="btn-modify">수정</button>
+  <button>수정</button>
   </div>
   </div>
   <div>
@@ -16,7 +16,7 @@ function myTemplate(item){
   <p>${item[3]}</p>
   </div>
   <div>
-  <button class="btn-remove">삭제</button>
+  <button>삭제</button>
   </div>
   </div>
   </article>
@@ -57,13 +57,16 @@ function myTemplate(item){
 
 })();
 
-//삭제
+//삭제 수정 기능
 (() => {
   const profile = document.querySelectorAll("section")[1];
   profile.addEventListener("click", async(e) => {
     e.preventDefault();
-    const removeArticle = e.target.closest("article");
-    if(e.target.classList.contains("btn-remove")){
+    const article = e.target.closest("article");
+    const buttons = article.querySelectorAll("button");
+    const modifyButton = buttons[0];
+    const removeButton = buttons[1]
+    if(e.target == removeButton){
       const removeBtn = removeArticle.querySelectorAll("button")[1];
       console.log(removeBtn);
       const removeNum = removeArticle.dataset.no;
@@ -83,17 +86,7 @@ function myTemplate(item){
         }
         removeArticle.remove();
         window.location.reload();
-    }
-  });
-})();
-
-//수정
-(() => {
-  const profile = document.querySelectorAll("section")[1];
-  profile.addEventListener("click", (e) => {
-    e.preventDefault();
-    const article = e.target.closest("article");
-    if(e.target.classList.contains("btn-modify")){
+    }else if(e.target == modifyButton){
       const layer = document.querySelector("#modify-layer");
       const modifybox = document.querySelector("#modify-box");
       const h5 = document.createElement("h5");
@@ -148,7 +141,6 @@ function myTemplate(item){
       });
     }
   });
-  
 })();
 
 //추가
