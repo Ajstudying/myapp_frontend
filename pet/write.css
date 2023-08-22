@@ -92,6 +92,7 @@ section > form > div:nth-of-type(1) > label{
   justify-content: center;
 }
 section > form > div:nth-of-type(1) > label > input{
+  width: 100%;
   border-radius: 5px;
 }
 section > form > div:nth-of-type(2){
@@ -117,25 +118,9 @@ section > form > div:nth-of-type(2) > label > div{
   white-space: pre;
 }
 @media (min-width: 67rem){
-  aside > div > button {
-    font-size: 15px;
-  }
-  header {
-    width: 40%;
-  }
-  header> div:nth-of-type(2){
-    width: 60%;
-  }
-  header > div:nth-of-type(1) > h1 > a {
-    margin: 0;
-    font-size: 40px;
-  }
-  header > div:nth-of-type(1) > nav > ul li {
-    font-size: 18px;
-  }
   section{
     width: 60%;
     margin: auto;
-    margin-top: 5rem;
+    margin-top: 3rem;
   }
 }

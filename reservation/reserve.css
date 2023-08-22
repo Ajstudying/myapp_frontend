@@ -202,4 +202,8 @@ footer> form > div:nth-of-type(2){
   gap: 10px;
   justify-content: flex-end;
 }
-
+@media (min-width: 67rem) {
+  section:nth-of-type(2) {
+    width: 60%;
+  }
+}

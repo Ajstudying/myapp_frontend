@@ -3,8 +3,16 @@ let now =  new Date();
 let today = new Date();
 
 (() => {
+  const token = getCookie("token");
+  console.log(token);
+  if(!token){
+    window.location.href = "http://localhost:5500/auth/login.html"
+  }
   hiddenButton();
   loginLogout();
+})();
+
+(() => {
   window.addEventListener("DOMContentLoaded", () => {
     today.setHours(0, 0, 0, 0);
     buildCalendar(now);

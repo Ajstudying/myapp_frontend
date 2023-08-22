@@ -110,23 +110,25 @@ article {
   gap: 10px;
   margin: 10px;
 }
+h4 {
+  margin: 0;
+}
+p {
+  margin: 0;
+}
 article > div {
   display: flex;
   justify-content: space-between;
 }
 article > div > div {
   display: flex;
-  gap: 2rem;
-}
-article > div > button {
-  margin-top: 1em;
-  height: 1.7rem;
+  gap: 1.5rem;
 }
 article > div:nth-of-type(2){
   display: flex;
   gap: 2rem;
 }
-#modify-layer {
+footer {
   position: fixed;
   top: 0;
   left: 0;
@@ -153,27 +155,15 @@ article > div:nth-of-type(2){
   margin: 0;
 }
 @media (min-width: 67rem) {
-  aside > div > button {
-    font-size: 15px;
-  }
-  header {
-    width: 40%;
-  }
-  header> div:nth-of-type(2){
-    width: 60%;
-  }
-  header > div:nth-of-type(1) > h1 > a {
-    margin: 0;
-    font-size: 40px;
-  }
-  header > div:nth-of-type(1) > nav > ul li {
-    font-size: 18px;
-  }
   main {
     width: 60%;
     margin: auto;
+    margin-top: 3rem;
   }
   main > footer > div {
     width: 55%;
+  }
+  section {
+    font-size: 20px;
   }
 }

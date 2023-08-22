@@ -1,5 +1,6 @@
 (() => {
   hiddenButton();
+  loginLogout();
   const token = getCookie("token");
   console.log(token);
   if(!token){
@@ -26,7 +27,7 @@
 
   result.data.forEach(item => {
     const option =  /*html*/
-    `<option data-pet="${item[2]}"value="${item[3]}">${item[3]}</option>`;
+    `<option data-pet="${item[4]}"value="${item[3]}">${item[3]}</option>`;
     select.insertAdjacentHTML("beforeend", option);
   });
 

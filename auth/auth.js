@@ -28,13 +28,31 @@ function loginLogout() {
   })
   buttons[1].addEventListener("click", async(e) => {
     e.preventDefault();
-    localStorage.removeItem("token");
-    // const response = await fetch(`http://localhost:8080/auth/logout`, {
-
-    // });
-    //   console.log(response);
-    window.location.replace("http://localhost:5500/index.html")
-  })
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        
+    window.location.replace("http://localhost:5500/index.html");
+    // try {
+    //   // 서버로 로그아웃 요청 보내기
+    //   const response = await fetch("http://localhost:8080/auth/logout", {
+    //     method: "DELETE",
+    //     headers: {
+    //       Authorization: `Bearer ${getCookie("token")}`,
+    //     },
+    //   });
+  
+    //   if (response.ok) {
+    //     // 세션 정보 삭제
+    //     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        
+    //     window.location.replace("http://localhost:5500/index.html");
+    //   } else {
+    //     console.error("로그아웃 실패");
+    //   }
+    // } catch (error) {
+    //   console.error("에러 발생:", error);
+    // }
+    
+  });
 }
 
 

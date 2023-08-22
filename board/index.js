@@ -4,13 +4,13 @@ const MAX_PAGE = 10;// 고정된 페이지 갯수
 let currentQuery = ""; // 현재 검색 키워드
 
 (() => {
-  hiddenButton();
   const token = getCookie("token");
   console.log(token);
   if(!token){
-    window.location.href = "http://localhost:8080/auth/login.html"
+    window.location.href = "http://localhost:5500/auth/login.html"
   }
-
+  hiddenButton();
+  loginLogout();
 })();
 
 async function getPagedBoard(page, option, query){
@@ -64,7 +64,9 @@ async function getPagedBoard(page, option, query){
   setBtnActive();
 }
 (() => {
-  window.addEventListener("DOMContentLoaded", async(page, query) => {
+  hiddenButton();
+  loginLogout();
+  window.addEventListener("DOMContentLoaded", () => {
     getPagedBoard(0);
   });
 })();

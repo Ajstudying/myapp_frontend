@@ -1,3 +1,4 @@
+
 //펫 셀렉트 옵션 형태
 function createOption(item){
   const option =  /*html*/
@@ -6,8 +7,7 @@ function createOption(item){
 }
 //펫 셀렉트 옵션 추가
 (async() => {
-  hiddenButton();
-  loginLogout();
+
   const select = document.forms[0].querySelector("select");
 
   const url = "http://localhost:8080/profile";

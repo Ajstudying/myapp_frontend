@@ -6,18 +6,14 @@ function myTemplate(item){
   <h4>펫이름: </h4>
   <p>${item[2]}</p>
   </div>
-  <div>
   <button>수정</button>
-  </div>
   </div>
   <div>
   <div>
   <h4>펫종류: </h4>
   <p>${item[3]}</p>
   </div>
-  <div>
   <button>삭제</button>
-  </div>
   </div>
   </article>
   <hr>
@@ -87,7 +83,7 @@ function myTemplate(item){
         removeArticle.remove();
         window.location.reload();
     }else if(e.target == modifyButton){
-      const layer = document.querySelector("#modify-layer");
+      const layer = document.querySelector("footer");
       const modifybox = document.querySelector("#modify-box");
       const h5 = document.createElement("h5");
       h5.innerHTML = "< 수정 >";
@@ -149,7 +145,7 @@ function myTemplate(item){
   const addBtn = profile.querySelector("button");
   addBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    const layer = document.querySelector("#modify-layer");
+    const layer = document.querySelector("footer");
     const insertBox = document.querySelector("#modify-box");
     const h5 = document.createElement("h5");
     h5.innerHTML = "< 추가 >";
@@ -204,7 +200,7 @@ function myTemplate(item){
 
 
 function cleanLayer(){
-  const layer = document.querySelector("#modify-layer");
+  const layer = document.querySelector("footer");
   const inputs = layer.querySelectorAll("input");
   const h5 = layer.querySelector("h5");
   h5.innerHTML = "";
