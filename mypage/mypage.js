@@ -1,3 +1,14 @@
+(() => {
+  hiddenButton();
+  loginLogout();
+  const token = getCookie("token");
+  console.log(token);
+  if(!token){
+    window.location.href = "http://localhost:5500/auth/login.html"
+  }
+
+})();
+
 function myTemplate(item){
   const template = /*html*/
   `<article data-no="${item[4]}">
@@ -21,11 +32,8 @@ function myTemplate(item){
   return template;
 }
 
-
 //조회
 (async() => {
-  hiddenButton();
-  loginLogout();
   const main = document.querySelector("main");
   const url = "http://localhost:8080/profile";
   const response = await fetch(url, {

@@ -73,34 +73,103 @@ header > div > nav > ul > li > a:hover{
   color:  palevioletred;
 }
 section{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-article {
-  width: 30rem;
+  width: 25rem;
   padding: 1.5rem;
-  margin: 1.5rem 0.8rem;
+  margin: auto;
   background-color:rgb(255, 250, 240);
   box-shadow: 5px 5px 10px hsl(19, 28%, 33%);
   border-radius: 10px;
 }
-article > h4:hover{
-  cursor: pointer;
-  color: crimson;
+h4{
+  margin: 0;
 }
-article > h5 {
+h5 {
   display: flex;
   justify-content: flex-end;
   margin: 0;
   margin-bottom: 10px;
 }
-article > div:nth-of-type(3) {
+section > div:nth-of-type(1){
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0px;
+}
+section > div:nth-of-type(1) > div > button {
+  background-color: rgba(100, 200, 150, 0.2);
+  border-radius: 5px;
+}
+section > div:nth-of-type(4) {
   display: flex;
   justify-content: space-between;
 }
-article > div:nth-of-type(1) > img {
+section > div:nth-of-type(2) > img {
   width: 100%;
+}
+article {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#modify-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: white;
+  width: 500px;
+  padding: 2rem;
+  align-items: center;
+}
+#modify-box > div:nth-of-type(1) > input{
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+}
+#modify-box > div:nth-of-type(2) > textarea{
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+}
+#modify-box > div:nth-of-type(3){
+  width: 75%;
+}
+#modify-box > div:nth-of-type(3) > label > div {
+  justify-content: center;
+  width: 23%;
+  background-color: #f8f9fa;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: #3c4043;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: pre;
+}
+#modify-box > div:nth-of-type(3) > label > input {
+  display: none;
+}
+#modify-box > div:nth-of-type(4){
+  display: flex;
+  width: 75%;
+  gap: 40px;
+  justify-content: flex-end;
+}
+.btn-modify {
+  background-color: rgb(40, 54, 24);
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
 }
 @media (min-width: 61rem){
   aside > div > button {
@@ -119,12 +188,9 @@ article > div:nth-of-type(1) > img {
   header > div:nth-of-type(1) > nav > ul li {
     font-size: 18px;
   }
-  article{
+  section {
     width: 60%;
     padding: 3rem;
-  }
-  article > div:nth-of-type(1) {
-    width: 60%;
-    margin: auto;
+    font-size: 20px;
   }
 }

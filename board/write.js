@@ -4,7 +4,7 @@
   const token = getCookie("token");
   console.log(token);
   if(!token){
-    window.location.href = "http://localhost:8080/auth/login.html"
+    window.location.href = "http://localhost:5500/auth/login.html"
   }
 
 })();

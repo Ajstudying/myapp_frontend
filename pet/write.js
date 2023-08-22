@@ -1,3 +1,13 @@
+(() => {
+  hiddenButton();
+  loginLogout();
+  const token = getCookie("token");
+  console.log(token);
+  if(!token){
+    window.location.href = "http://localhost:5500/auth/login.html"
+  }
+
+})();
 
 //펫 셀렉트 옵션 형태
 function createOption(item){
