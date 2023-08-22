@@ -73,7 +73,7 @@ header > div > h1 > a:hover {
 header > div > nav > ul > li > a:hover{
   color:  palevioletred;
 }
-section{
+main{
   background-color : white;
   height: auto;
   width: 400px;
@@ -121,7 +121,85 @@ table > thead > tr:last-child > td {
   font-weight: 600;
   cursor: pointer;
 }
-article {
+section:nth-of-type(1) {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
 }
+section:nth-of-type(1) > form {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin: 15px;
+}
+section:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background-color: white;
+  width: 100%;
+}
+article{
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+article > div {
+  display: flex;
+  gap: 10px;
+}
+article > div:nth-of-type(1) > h4 {
+  font-weight: 400;
+  font-size: 15px;
+  margin: 0;
+}
+article > div:nth-of-type(1) > p {
+  margin: 0;
+}
+footer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+footer> form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: white;
+  width: 400px;
+  padding: 1.5rem;
+  align-items: center;
+}
+footer> form > div:nth-of-type(1){
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+footer> form > div:nth-of-type(1) > label {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+footer> form > div:nth-of-type(1) > label > input{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 200px;
+}
+footer> form > div:nth-of-type(2){
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  justify-content: flex-end;
+}
+

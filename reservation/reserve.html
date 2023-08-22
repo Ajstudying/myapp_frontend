@@ -31,7 +31,7 @@
       </div>
     </header>
     <hr />
-    <section>
+    <main>
       <table>
         <thead>
           <tr>
@@ -51,9 +51,8 @@
         </thead>
         <tbody></tbody>
       </table>
-    </section>
-    <hr />
-    <article>
+    </main>
+    <section>
       <form>
         <select>
           <option>반려동물의 이름</option>
@@ -63,7 +62,21 @@
         </label>
         <button>입력</button>
       </form>
-    </article>
+    </section>
+    <section></section>
+    <footer hidden>
+      <form>
+        <div>
+          <label>일정: <input type="date" /></label>
+          <label>반려동물: <input type="text" /></label>
+          <label>내용: <input type="text" /></label>
+        </div>
+        <div>
+          <button>확인</button>
+          <button>취소</button>
+        </div>
+      </form>
+    </footer>
     <script src="reserve.js"></script>
   </body>
 </html>

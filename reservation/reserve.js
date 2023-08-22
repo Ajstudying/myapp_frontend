@@ -11,10 +11,138 @@ let today = new Date();
   });
 
 })();
+
+//유저에게 등록된 총 일정 조회
+(async() => {
+  const sections = document.querySelectorAll("section");
+  const response = await fetch(`http://localhost:8080/reserve`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${getCookie(
+        "token"
+      )}`,
+    },
+  });
+
+  const result = await response.json();
+  
+  result.forEach(item => {
+    const time= new Date(item.reservationTime);
+    const reservationTime = `${time.getFullYear()}-${time.getMonth()}-${time.getDate().toString()}`;
+    const schedule = /*html*/
+    `<article data-no="${item.no}">
+    <div>
+    <h4>예정일: ${reservationTime}</h4>
+    <h4>내용: </h4>
+    <p>${item.petname}</p>
+    <p>${item.content}</p>
+    </div>
+    <div>
+    <button>수정</button>
+    <button>삭제</button>
+    </div>
+    </article>
+    `;
+    sections[1].insertAdjacentHTML("beforeend", schedule);
+  });
+})();
+
+//등록된 일정 수정 삭제
+(() => {
+  const sections = document.querySelectorAll("section");
+  sections[1].addEventListener("click", async(e) => {
+    e.preventDefault();
+    const article = e.target.closest("article");
+    const buttons = article.querySelectorAll("button");
+    const modifyButton = buttons[0];
+    const removeButton = buttons[1];
+    if(e.target == removeButton){
+      const removeNumber = article.dataset.no;
+      //서버연결
+      const response = await fetch(`http://localhost:8080/reserve/${removeNumber}`,
+      {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          "Authorization": `Bearer ${getCookie(
+            "token"
+          )}`,
+        },
+        body: JSON.stringify ({
+          
+        }),
+      });
+      if ([404].includes(response.status)) {
+        alert("해당 일정을 찾을 수 없습니다.");
+      }
+      removeArticle.remove();
+      window.location.reload();
+    }
+    else if(e.target == modifyButton){
+      const layer = document.querySelector("footer");
+      layer.hidden = false;
+      const inputs = layer.querySelectorAll("input");
+      const petname = article.querySelectorAll("p")[0];
+      inputs[1].value = petname.innerHTML;
+      const content = article.querySelectorAll("p")[1];
+      inputs[2].value = content.innerHTML;
+
+      const btns = layer.querySelectorAll("button");
+      //취소 버튼
+      btns[1].addEventListener("click", (e) => {
+        e.preventDefault();
+        layer.hidden = true;
+      });
+
+      //확인 버튼
+      btns[0].addEventListener("click", async(e) => {
+        e.preventDefault();
+        const time = inputs[0].value;
+        const modifyYear = time.split("-")[0];
+        const modifyMonth = time.split("-")[1];
+        const modifyDay = time.split("-")[2];
+        //변경된 예약 날짜
+        const modifyReserve = new Date(modifyYear, modifyMonth, modifyDay);
+        console.log(modifyReserve.getTime());
+        const modifyPet = inputs[1].value;
+        const modifyContent = inputs[2].value;
+        const modifyNum = article.dataset.no;
+        //서버연결
+        const response = await fetch(`http://localhost:8080/reserve/${modifyNum}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+            "Authorization": `Bearer ${getCookie(
+              "token"
+            )}`,
+          },
+          body: JSON.stringify ({
+            petname: modifyPet,
+            content: modifyContent,
+            reservationTime: modifyReserve.getTime(),
+          }),
+        });
+        if([404].includes(response.status)){
+          alert("해당 일정을 찾을 수 없습니다.")
+        }
+        const schedule = article.querySelector("h4");
+        schedule.innerHTML = `예정일: ${time}`;
+        petname.innerHTML = modifyPet;
+        content.innerHTML = modifyContent;
+        window.location.reload();
+
+      });
+      
+
+    }  
+  });
+})();
+
 //날짜 선택
 (() => {
-  const section = document.querySelector("section");
-  section.addEventListener("click", (e)=> {
+  const main = document.querySelector("main");
+  main.addEventListener("click", (e)=> {
     e.preventDefault();
     const td = e.target.closest("td");
     if(td && !td.classList.contains("pastDay")){
@@ -26,7 +154,6 @@ let today = new Date();
 
 //달력 만들기
 function buildCalendar(now) {
-  
     //달의 1일
     const firstDate = new Date(now.getFullYear(), now.getMonth(), 1); 
     //달의 마지막 날
@@ -136,8 +263,8 @@ function buildCalendar(now) {
 
     if([201].includes(response.status)){
       form.hidden = true;
-      const article = document.querySelector("article");
-      article.innerHTML = /*html*/
+      const section = document.querySelector("section");
+      section.innerHTML = /*html*/
       `<p> 등록이 완료되었습니다. </p>`;
     }
   });
@@ -146,7 +273,6 @@ function buildCalendar(now) {
 
 //달력 페이징
 (() => {
-  
   const thead = document.querySelector("thead"); 
   const arrows = thead.querySelectorAll("th");
   //이전 달 버튼 클릭
@@ -175,7 +301,6 @@ function createOption(item){
 }
 //펫 셀렉트 옵션 추가
 (async() => {
-  hiddenButton();
   const select = document.forms[0].querySelector("select");
 
   const url = "http://localhost:8080/profile";
