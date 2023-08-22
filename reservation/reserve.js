@@ -16,7 +16,6 @@ let today = new Date();
   const section = document.querySelector("section");
   section.addEventListener("click", (e)=> {
     e.preventDefault();
-    console.log(e.target);
     const td = e.target.closest("td");
     if(td && !td.classList.contains("pastDay")){
       td.classList.toggle("choiceDay");
@@ -92,7 +91,7 @@ function buildCalendar(now) {
   button.addEventListener("click", async(e) => {
     e.preventDefault();
     const petname = form.querySelector("select");
-    const input = form.querySelector("input");
+    const content = form.querySelector("input");
     const choiceYear = parseInt(document.querySelectorAll("span")[0].innerHTML);
     const choiceMonth = parseInt(document.querySelectorAll("span")[1].innerHTML);
     const choiceArray = Array.from(document.getElementsByClassName("choiceDay"));
@@ -100,9 +99,7 @@ function buildCalendar(now) {
     choiceArray.forEach((item) => {
       choiceDay = parseInt(item.innerHTML);
     });
-    console.log(choiceYear);
-    console.log(choiceMonth);
-    console.log(choiceDay);
+    
     const reservationTime = new Date(choiceYear, choiceMonth, choiceDay);
     console.log(reservationTime.getTime());
 
@@ -114,7 +111,7 @@ function buildCalendar(now) {
       alert("반려동물을 선택해주세요.");
       return;
     }
-    if(input.value === ""){
+    if(content.value === ""){
       alert("일정 내용을 입력해주세요.");
       return;
     }
@@ -131,6 +128,7 @@ function buildCalendar(now) {
         },
         body: JSON.stringify({
           petname: petname.value,
+          content: content.value,
           reservationTime: reservationTime.getTime(),
         }),
       }
@@ -150,7 +148,7 @@ function buildCalendar(now) {
 (() => {
   
   const thead = document.querySelector("thead"); 
-  const arrows = thead.querySelectorAll("td");
+  const arrows = thead.querySelectorAll("th");
   //이전 달 버튼 클릭
   arrows[0].addEventListener("click", (e) => {
     e.preventDefault();
@@ -160,7 +158,7 @@ function buildCalendar(now) {
   buildCalendar(now);  
   });
 
-  arrows[2].addEventListener("click", (e) => {
+  arrows[1].addEventListener("click", (e) => {
     e.preventDefault();
     // 현재 달을 1 증가
     now = new Date(now.getFullYear(), now.getMonth() + 1); 

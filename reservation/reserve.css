@@ -92,6 +92,9 @@ td {
   height: 50px;
   cursor: pointer;
 }
+table > thead > tr:first-child > th {
+  cursor: pointer;
+}
 table > thead > tr:first-child > td {
   font-size: 1.1em;
   font-weight: bold;
@@ -117,4 +120,8 @@ table > thead > tr:last-child > td {
   color: #fff;
   font-weight: 600;
   cursor: pointer;
+}
+article {
+  display: flex;
+  justify-content: center;
 }
