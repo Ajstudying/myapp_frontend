@@ -71,43 +71,61 @@ main {
   margin: 10px;
   border-radius: 10px;
 }
-main > section {
+h3{
+  margin: 0;
+  text-align: center;
+}
+main > section:nth-of-type(1) {
   background-color: beige;
-  padding: 15px;
+  padding: 20px;
   border-radius: 20px;
   margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
 }
-main > section > h3 {
-  text-align: center;
-  margin-top: 0.5rem;
-}
-main > section > div{
+main > section:nth-of-type(1) > div{
   display: flex;
   gap: 2rem;
 }
-main > footer{
+main > section:nth-of-type(2){
   margin: 0.5rem;
   background-color: beige;
-  padding: 15px;
+  padding: 20px;
   border-radius: 20px;
 }
-main > footer > h3 {
-  text-align: center;
-  margin-top: 0.5rem;
+main > section:nth-of-type(2) > div {
+  display: flex;
+  gap: 10px;
+  width: 60%;
+  justify-content: flex-end;
 }
-main > footer > article > div {
+main > section:nth-of-type(2) > div > h3 {
+  margin: 0;
+}
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px;
+}
+article > div {
   display: flex;
   justify-content: space-between;
 }
-main > footer > article > div  > div {
+article > div > div {
   display: flex;
   gap: 2rem;
 }
-main > footer > article > div > button {
+article > div > button {
   margin-top: 1em;
   height: 1.7rem;
 }
-
+article > div:nth-of-type(2){
+  display: flex;
+  gap: 2rem;
+}
 #modify-layer {
   position: fixed;
   top: 0;
@@ -120,7 +138,7 @@ main > footer > article > div > button {
 #modify-box {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 2px;
   position: absolute;
   justify-content: center;
   left: 50%;
@@ -130,6 +148,9 @@ main > footer > article > div > button {
   width: 500px;
   padding: 2rem;
   align-items: center;
+}
+#modify-box > h5 {
+  margin: 0;
 }
 @media (min-width: 67rem) {
   aside > div > button {
@@ -151,5 +172,8 @@ main > footer > article > div > button {
   main {
     width: 60%;
     margin: auto;
+  }
+  main > footer > div {
+    width: 55%;
   }
 }
