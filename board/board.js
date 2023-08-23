@@ -1,6 +1,6 @@
 let currentPage = 0; //현재 페이지 번호
 let isLastPage = false; //마지막 페이지 인지 여부 
-const MAX_PAGE = 10;// 고정된 페이지 갯수
+const MAX_PAGE = 5;// 고정된 페이지 갯수
 let currentQuery = ""; // 현재 검색 키워드
 
 (() => {
@@ -58,7 +58,6 @@ async function getPagedBoard(page, option, query){
       </span>
       </div>`;
       li.dataset.no = item.no;
-      console.log(item.no);
       li.insertAdjacentHTML("afterbegin", template);
       ul.append(li);
     });
@@ -123,12 +122,12 @@ function setBtnActive() {
   //이전 버튼
   btnPrev.addEventListener("click", (e) => {
     e.preventDefault();
-    currentPage > 0 && getPagedMemo(currentPage -1, currentQuery);
+    currentPage > 0 && getPagedBoard(currentPage -1, currentQuery);
   });
   //다음 버튼
   btnNext.addEventListener("click", (e) => {
     e.preventDefault();
-    !isLastPage && getPagedMemo(currentPage + 1, currentQuery);
+    !isLastPage && getPagedBoard(currentPage + 1, currentQuery);
   });
 })();
 
@@ -138,17 +137,19 @@ function setBtnActive() {
   const textQuery = document.querySelector("input");
   const buttons = document.querySelectorAll("section")[2].querySelectorAll("button");
   const btnSearch = buttons[0];
-  
+
   btnSearch.addEventListener("click", (e) => {
     e.preventDefault();
     currentQuery = textQuery.value;
-    getPagedBoard(0, option, currentPage);
+    getPagedBoard(0, option.value, currentQuery);
   });
 
   textQuery.addEventListener("keyup", (e) => {
     e.preventDefault();
-    currentQuery = textQuery.value;
-    getPagedBoard(0, option, currentPage);
+    if(e.key.toLowerCase() === "enter"){
+      currentQuery = textQuery.value;
+      getPagedBoard(0, option.value, currentQuery);
+    }
   });
 
 })();

@@ -3,6 +3,15 @@ let isLastPage = false; //마지막 페이지 인지 여부
 const MAX_MEMO = 4;// 고정된 메모 갯수
 let currentQuery = ""; // 현재 검색 키워드
 
+//화면을 처음 켰을 때 첫번째 페이지 조회
+(async() => {
+  hiddenButton();
+  loginLogout();
+  window.addEventListener("DOMContentLoaded", () => {
+    getPagedMemo(0);
+  });
+})();
+
 //메모 형태
 function cardTemplate(item, token){
   const imageElement = item.image ? `<img src="${item.image}" alt="반려동물사진">` : "";
@@ -70,22 +79,10 @@ async function getPagedMemo(page, query){
   setBtnActive();
 }
 
-//화면을 처음 켰을 때 첫번째 페이지 조회
-(async() => {
-  hiddenButton();
-  loginLogout();
-  window.addEventListener("DOMContentLoaded", () => {
-    getPagedMemo(0);
-  });
-})();
-
 //검색 기능
 (() => {
   const textQuery = document.forms[0].querySelector("input");
   const btnSearch = document.forms[0].querySelector("button");
-
-  console.log(textQuery);
-  console.log(btnSearch);
 
   btnSearch.addEventListener("click", (e) => {
     e.preventDefault();
@@ -104,7 +101,7 @@ async function getPagedMemo(page, query){
 
 //검색 조건 초기화
 (() => {
-  const btnReset = document.forms[0].querySelectorAll("button")[0];
+  const btnReset = document.forms[0].querySelectorAll("button")[1];
   btnReset.addEventListener("click", (e) => {
     e.preventDefault();
     document.forms[0].reset();
