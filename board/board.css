@@ -81,6 +81,9 @@ section > ul > li {
   background-color: rgba(255,248,222, 0.7);
   gap: 10px;
 }
+p{
+  margin: 10px;
+}
 section > ul > li > div:nth-of-type(1) > sub{
   background-color: antiquewhite;
   padding: 5px;
@@ -90,6 +93,8 @@ section > ul > li > div:nth-of-type(1) > sub{
 section > ul > li > div:nth-of-type(2) {
   display: flex;
   justify-content: space-between;
+  padding: 5px;
+  background-color: #fff;
 }
 section > ul > li > div:nth-of-type(2) > span:nth-of-type(2){
   display: flex;

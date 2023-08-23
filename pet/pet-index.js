@@ -6,15 +6,18 @@ let currentQuery = ""; // 현재 검색 키워드
 //메모 형태
 function cardTemplate(item, token){
   const imageElement = item.image ? `<img src="${item.image}" alt="반려동물사진">` : "";
-  const template =  /*html*/
-    `<article data-no="${item.no}">
-    <div>
-    <h4>${item.title}</h4>
-    <select>
+  const select = token ? 
+  `<select>
     <option>선택</option>
     <option class="modify" value="modify">수정</option>
     <option class="delete" value="delete">삭제</option>
     </select>
+  `:"";
+  const template =  /*html*/
+    `<article data-no="${item.no}">
+    <div>
+    <h4>${item.title}</h4>
+    ${select}
     </div>
     <hr>
     <h5><sub>생성시간: ${new Date(item.createdTime).toLocaleString()}</sub></h5>
