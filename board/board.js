@@ -50,7 +50,7 @@ async function getPagedBoard(page, option, query){
       `<div><sub>${item.species}</sub></div>
       <div>
       <span>
-      <p>${item.title}</p>
+      <p class="title">${item.title}</p>
       </span>
       <span>
       <p>작성자: ${item.nickname}</p>
@@ -70,8 +70,6 @@ async function getPagedBoard(page, option, query){
   setBtnActive();
 }
 (() => {
-  hiddenButton();
-  loginLogout();
   window.addEventListener("DOMContentLoaded", () => {
     getPagedBoard(0);
   });
@@ -83,8 +81,9 @@ async function getPagedBoard(page, option, query){
   section.addEventListener("click", (e) => {
     e.preventDefault();
     
-    if(e.target.tagName.toLowerCase() === "sub"){
-      const boardNo = e.target.parentElement.parentElement.dataset.no;
+    if(e.target.classList.contains("title")){
+      const li = e.target.closest("li");
+      const boardNo = li.dataset.no;
 
       window.location.href = `http://localhost:5500/board/details.html?boardNo=${boardNo}`;
     }
@@ -165,4 +164,3 @@ function setBtnActive() {
     getPagedBoard(0, currentQuery);
   });
 })();
-

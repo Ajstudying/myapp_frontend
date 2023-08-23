@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pet-write</title>
-    <link rel="stylesheet" href="write.css" />
+    <title>modify</title>
+    <link rel="stylesheet" href="modify.css" />
   </head>
   <body>
     <script src="../auth/auth.js"></script>
     <aside>
       <div>
         <button><a href="../mypage/mypage.html">마이페이지</a></button>
-        <button><a href="write.html">포스트 작성</a></button>
+        <button><a href="../pet/write.html">포스트 작성</a></button>
       </div>
       <div>
         <button>로그인</button>
@@ -20,10 +20,10 @@
     </aside>
     <header>
       <div>
-        <h1><a href="../index.html">special pet</a></h1>
+        <h1>special pet</h1>
         <nav>
           <ul>
-            <li><a href="pet-index.html">펫</a></li>
+            <li><a href="../pet/pet-index.html">펫</a></li>
             <li><a href="../reservation/reserve.html">일정관리</a></li>
             <li><a href="../board/board.html">정보나눔</a></li>
           </ul>
@@ -34,17 +34,26 @@
     <section>
       <form>
         <div>
-          <label>
-            <input type="text" placeholder="제목" />
-          </label>
-          <select>
-            <option>반려동물의 이름을 선택해주세요</option>
-          </select>
+          <div>
+            <h3>제목:</h3>
+            <label>
+              <input type="text" />
+            </label>
+          </div>
+          <div>
+            <h3>이름:</h3>
+            <select>
+              <option>반려동물을 선택해주세요</option>
+            </select>
+          </div>
         </div>
-        <textarea name="" id="" cols="30" rows="20"></textarea>
         <div>
+          <h3>내용:</h3>
+          <textarea name="" id="" cols="40" rows="20"></textarea>
+        </div>
+        <div>
+          <h3>파일선택:</h3>
           <label>
-            <div>파일선택</div>
             <input type="file" />
           </label>
           <div>
@@ -53,6 +62,6 @@
         </div>
       </form>
     </section>
-    <script src="write.js"></script>
+    <script src="modify.js"></script>
   </body>
 </html>

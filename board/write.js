@@ -115,7 +115,7 @@
       `<p> 작성이 완료되었습니다. </p>`;
     }else {
       //파일이 없을 때
-      createPost();
+      createBoard();
       const section = document.querySelector("section");
       const form = section.querySelector("form");
       form.hidden = true;
