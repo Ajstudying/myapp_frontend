@@ -230,12 +230,6 @@ footer {
   gap: 40px;
   justify-content: flex-end;
 }
-.btn-modify {
-  background-color: rgb(40, 54, 24);
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
-}
 
 @media (min-width: 67rem) {
   aside > div > button {

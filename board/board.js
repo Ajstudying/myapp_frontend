@@ -43,13 +43,19 @@ async function getPagedBoard(page, option, query){
     const ul = document.createElement("ul");
     section.append(ul);
     result.forEach(item => {
+      const time= new Date(item.createdTime);
+      const reservationTime = `${time.getFullYear()}-${time.getMonth()}-${time.getDate().toString()}`;
       const li = document.createElement("li");
       const template = /*html*/
       `<div><sub>${item.species}</sub></div>
       <div>
-      <span>${item.title}</span>
-      <span>${item.nickname}</span>
-      <span>${new Date(item.createdTime).toLocaleString()}</span>
+      <span>
+      <p>${item.title}</p>
+      </span>
+      <span>
+      <p>작성자: ${item.nickname}</p>
+      <p>${reservationTime}</p>
+      </span>
       </div>`;
       li.dataset.no = item.no;
       console.log(item.no);
@@ -69,6 +75,20 @@ async function getPagedBoard(page, option, query){
   window.addEventListener("DOMContentLoaded", () => {
     getPagedBoard(0);
   });
+})();
+
+//상세페이지 이동
+(() => {
+  const section = document.querySelector("section");
+  section.addEventListener("click", (e) => {
+    e.preventDefault();
+    
+    if(e.target.tagName.toLowerCase() === "sub"){
+      const boardNo = e.target.parentElement.parentElement.dataset.no;
+
+      window.location.href = `http://localhost:5500/board/details.html?boardNo=${boardNo}`;
+    }
+  })
 })();
 
 function setBtnActive() {
@@ -117,8 +137,8 @@ function setBtnActive() {
 (() => {
   const option = document.querySelector("select");
   const textQuery = document.querySelector("input");
-  const buttons = document.querySelectorAll("section")[1].querySelectorAll("button");
-  const btnSearch = buttons[2];
+  const buttons = document.querySelectorAll("section")[2].querySelectorAll("button");
+  const btnSearch = buttons[0];
   
   btnSearch.addEventListener("click", (e) => {
     e.preventDefault();
@@ -136,7 +156,7 @@ function setBtnActive() {
 
 //검색조건 초기화
 (() => {
-  const btnReset = document.querySelectorAll("section")[1].querySelectorAll("button")[3];
+  const btnReset = document.querySelectorAll("section")[2].querySelectorAll("button")[1];
 
   btnReset.addEventListener("click", (e) => {
     e.preventDefault();
@@ -146,16 +166,3 @@ function setBtnActive() {
   });
 })();
 
-// //상세페이지 이동
-// (() => {
-//   const section = document.querySelector("section");
-//   section.addEventListener("click", (e) => {
-//     e.preventDefault();
-    
-//     if(e.target.tagName.toLowerCase() === "sub"){
-//       const boardNo = e.target.parentElement.parentElement.dataset.no;
-
-//       window.location.href = `http://localhost:5500/pet/details.html?postNo=${postNo}`;
-//     }
-//   })
-// })();

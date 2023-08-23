@@ -63,7 +63,7 @@ header > div > nav > ul > li {
   padding-bottom: 0.1rem;
   border-radius: 5px;
 }
-header > div > nav > ul > li > a {
+a {
   color: white;
   text-decoration: none;
 }
@@ -76,14 +76,59 @@ header > div > nav > ul > li > a:hover{
 section > ul > li {
   display: flex;
   flex-direction: column;
+  width: 95%;
+  padding: 15px;
+  background-color: rgba(255,248,222, 0.7);
   gap: 10px;
 }
 section > ul > li > div:nth-of-type(1) > sub{
   background-color: antiquewhite;
   padding: 5px;
   border-radius: 50px;
+  box-shadow: 2px 3px 5px hsl(19, 28%, 33%);
 }
 section > ul > li > div:nth-of-type(2) {
   display: flex;
+  justify-content: space-between;
+}
+section > ul > li > div:nth-of-type(2) > span:nth-of-type(2){
+  display: flex;
+  gap: 20px;
+}
+sub:hover{
+  cursor: pointer;
+  color: crimson;
+}
+section:nth-of-type(2){
+  display: flex;
+  justify-content: center;
+}
+section:nth-of-type(3){
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 20px;
+}
+section:nth-of-type(3) > form > div:nth-of-type(1){
+  display: flex;
   gap: 10px;
+}
+section:nth-of-type(3) > form{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+section:nth-of-type(3) > div{
+  display: flex;
+  justify-content: flex-end;
+}
+section:nth-of-type(3) > div >button {
+  background-color: rgb(96, 108, 56);
+  border-radius: 5px;
+}
+@media (min-width: 67rem) {
+  section > ul > li {
+    margin: auto;
+    width: 60%;
+  }
 }

@@ -193,7 +193,8 @@ function setBtnActive() {
     }
   });
 })();
-//수정 삭제
+
+//수정
 (() => {
   const section = document.querySelector("section");
   let previousValue = null; 

@@ -74,7 +74,7 @@ header > div > nav > ul > li > a:hover{
   color:  palevioletred;
 }
 section {
-  margin: 20px;
+  margin: 2rem;
 }
 section > form > div:nth-of-type(1) div {
   display: flex;
@@ -108,4 +108,9 @@ section > form > div:nth-of-type(3) {
 }
 select {
   width: 70%;
+}
+@media (min-width: 67rem) {
+  section{
+    margin-left: 20rem;
+  }
 }

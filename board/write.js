@@ -27,7 +27,7 @@
 
   result.data.forEach(item => {
     const option =  /*html*/
-    `<option data-pet="${item[4]}"value="${item[3]}">${item[3]}</option>`;
+    `<option data-pet="${item[3]}"value="${item[2]}">${item[2]}</option>`;
     select.insertAdjacentHTML("beforeend", option);
   });
 
@@ -44,7 +44,7 @@
   const title = inputs[0];
   const content = textbox;
   const file = inputs[1];
-  const species = select;
+  const petname = select;
 
   const add = document.forms[0].querySelector("button");
 
@@ -61,15 +61,15 @@
       return;
     }
     
-    if(select.value === "반려동물의 종류를 선택해주세요"){
-      alert("반려동물 종류를 선택해주세요.");
+    if(petname.value === "반려동물을 선택해주세요"){
+      alert("반려동물을 선택해주세요.");
       return;
     }
 
     //데이터를 서버에 전송하고, UI 요소 생성
     async function createBoard(image) {
-      const petname = select[select.selectedIndex].dataset.pet;
-      console.log(petname);
+      const species = select[select.selectedIndex].dataset.pet;
+      console.log(species);
       //서버에 전송하면 UI를 생성한다.
       const response = await fetch(
         "http://localhost:8080/boards",
@@ -85,8 +85,8 @@
             title: title.value,
             content: content.value,
             image: image ? image : null,
-            species: species.value,
-            petname: petname,
+            species: species,
+            petname: petname.value,
           }),
         }
       );
