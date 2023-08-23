@@ -83,7 +83,8 @@ let today = new Date();
       if ([404].includes(response.status)) {
         alert("해당 일정을 찾을 수 없습니다.");
       }
-      removeArticle.remove();
+      article.remove();
+      alert("삭제가 완료되었습니다.");
       window.location.reload();
     }
     else if(e.target == modifyButton){
@@ -139,6 +140,7 @@ let today = new Date();
         schedule.innerHTML = `예정일: ${time}`;
         petname.innerHTML = modifyPet;
         content.innerHTML = modifyContent;
+        alert("수정이 완료되었습니다.")
         window.location.reload();
 
       });
@@ -272,9 +274,8 @@ function buildCalendar(now) {
 
     if([201].includes(response.status)){
       form.hidden = true;
-      const section = document.querySelector("section");
-      section.innerHTML = /*html*/
-      `<p> 등록이 완료되었습니다. </p>`;
+      alert("등록이 완료되었습니다.");
+      window.location.reload();
     }
   });
 })();

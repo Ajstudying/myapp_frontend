@@ -8,7 +8,14 @@ function cardTemplate(item, token){
   const imageElement = item.image ? `<img src="${item.image}" alt="반려동물사진">` : "";
   const template =  /*html*/
     `<article data-no="${item.no}">
-    <h4 title="제목을 누르면 상세페이지로 이동합니다.">${item.title}</h4>
+    <div>
+    <h4>${item.title}</h4>
+    <select>
+    <option>선택</option>
+    <option class="modify" value="modify">수정</option>
+    <option class="delete" value="delete">삭제</option>
+    </select>
+    </div>
     <hr>
     <h5><sub>생성시간: ${new Date(item.createdTime).toLocaleString()}</sub></h5>
     <div>
@@ -103,8 +110,6 @@ async function getPagedMemo(page, query){
   });
 })();
 
-
-
 //페이징 버튼
 function setBtnActive() {
   //버튼 선택
@@ -149,16 +154,124 @@ function setBtnActive() {
   });
 })();
 
-//상세페이지 이동
+//삭제
 (() => {
   const section = document.querySelector("section");
-  section.addEventListener("click", (e) => {
+  let previousValue = null; 
+  section.addEventListener("click", async(e) => {
     e.preventDefault();
-    
-    if(e.target.tagName.toLowerCase() === "h4"){
-      const postNo = e.target.parentElement.dataset.no;
-
-      window.location.href = `http://localhost:5500/pet/details.html?postNo=${postNo}`;
+    const select = e.target.closest("select");
+    const article = select.parentElement.parentElement;
+    const number = article.dataset.no;
+    if (!select) return;
+    const currentValue = select.value;
+    if (currentValue !== previousValue) {
+      previousValue = currentValue;
+      if(currentValue === "delete"){
+        //서버연결
+        const response = await fetch(`http://localhost:8080/posts/${number}`,
+        {
+          method: "DELETE",
+          headers: {
+          Authorization: `Bearer ${getCookie(
+            "token"
+          )}`,
+          },
+         });
+         if([401, 403].includes(response.status)) {
+          hasChanged = false;
+          alert("해당 포스트의 작성자가 아닙니다.");
+        }else if([404].includes(response.status)){
+          hasChanged = false;
+          alert("해당 포스트를 찾을 수 없습니다.");
+        }else{
+          article.remove();
+          hasChanged = false;
+          alert("삭제가 완료 되었습니다.");
+        }
+      }
     }
-  })
+  });
+})();
+//수정 삭제
+(() => {
+  const section = document.querySelector("section");
+  let previousValue = null; 
+  section.addEventListener("click", async(e) => {
+    e.preventDefault();
+    const select = e.target.closest("select");
+    const article = select.parentElement.parentElement;
+    const number = article.dataset.no;
+    if (!select) return;
+    const currentValue = select.value;
+    if (currentValue !== previousValue) {
+      previousValue = currentValue;
+      if(currentValue === "modify") {
+        //레이어 띄우기
+        /** @type {HTMLDivElement} */
+        const layer = document.querySelector("footer");
+        layer.hidden = false;
+        const title = section.querySelector("h4");
+        layer.querySelector("input").value = title.innerHTML;
+        const textbox = section.querySelector("p");
+        layer.querySelector("textarea").value = textbox.innerHTML;
+        const buttons = layer.querySelectorAll("button");
+    
+         //취소버튼
+         buttons[1].addEventListener("click", (e) => {
+          e.preventDefault();
+          layer.hidden = true;
+        });
+    
+        //확인버튼
+        buttons[0].addEventListener("click", async(e) => {
+          e.preventDefault();
+    
+          const inputs = layer.querySelectorAll("input");
+          const modifyTitle = inputs[0].value;
+          const modifyTextbox = layer.querySelector("textarea").value;
+          const file = inputs[1];
+    
+          async function modifyPost(image) {
+            const response = await fetch (
+            `http://localhost:8080/posts/${number}` , {
+              method: "PUT",
+              headers: {
+                "content-type": "application/json",
+                "Authorization": `Bearer ${getCookie(
+                 "token")}`,
+              },
+              body: JSON.stringify ({
+                title: modifyTitle,
+                content: modifyTextbox,
+                image: image ? image : null,
+              }),
+            });
+            if([401, 403].includes(response.status)) {
+              hasChanged = false;
+              alert("해당 포스트의 작성자가 아닙니다.");
+              window.location.reload();
+            }else if([404].includes(response.status)){
+              hasChanged = false;
+              alert("해당 포스트를 찾을 수 없습니다.");
+              window.location.reload();
+            }
+          }
+          if(file.files[0]){
+            const reader = new FileReader();
+            reader.addEventListener("load", async(e) => {
+            const image = e.target.result;
+            modifyPost(image);
+            const imageElement = modifyArticle.querySelector("img");
+            imageElement.src = image;
+            });
+            reader.readAsDataURL(file.files[0]);
+          }else {modifyPost();}
+          title.innerHTML = layer.querySelector("input").value;
+          textbox.innerHTML = layer.querySelector("textarea").value;
+          layer.hidden = true;
+        });
+      }
+    }
+  });
 })();

@@ -29,7 +29,10 @@
           </ul>
         </nav>
         <form>
-          <input type="text" placeholder="검색상자" />
+          <input
+            type="text"
+            placeholder="반려동물 이름이나 작성자를 입력하세요."
+          />
           <button>검색</button>
         </form>
       </div>
@@ -39,6 +42,30 @@
       <button>이전</button>
       <button>다음</button>
     </div>
+    <footer hidden>
+      <div id="modify-box">
+        <div>
+          <input type="text" placeholder="수정할 제목" />
+        </div>
+        <div>
+          <textarea
+            placeholder="작성자의 이름을 입력해주세요."
+            cols="45"
+            rows="15"
+          ></textarea>
+        </div>
+        <div>
+          <label>
+            <div>파일 선택</div>
+            <input type="file" />
+          </label>
+        </div>
+        <div>
+          <button>확인</button>
+          <button>취소</button>
+        </div>
+      </div>
+    </footer>
     <script src="pet-index.js"></script>
   </body>
 </html>

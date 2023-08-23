@@ -148,14 +148,14 @@ function setBtnActive() {
 
 // //상세페이지 이동
 // (() => {
-//   const ul = document.querySelector("ul");
-//   ul.addEventListener("click", (e) => {
+//   const section = document.querySelector("section");
+//   section.addEventListener("click", (e) => {
 //     e.preventDefault();
-//     console.log(e.target);
-//     if(e.target.tagName.toLowerCase() === "li"){
-//       const boardNo = e.target.parentElement.dataset.no;
+    
+//     if(e.target.tagName.toLowerCase() === "sub"){
+//       const boardNo = e.target.parentElement.parentElement.dataset.no;
 
-//       window.location.href = `http://localhost:5500/boards/details.html?boardNo=${boardNo}`;
+//       window.location.href = `http://localhost:5500/pet/details.html?postNo=${postNo}`;
 //     }
 //   })
 // })();

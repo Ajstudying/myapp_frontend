@@ -102,15 +102,15 @@ section > div:nth-of-type(1) > h1:nth-of-type(2) {
   margin: 0;
   
 }
-.rotate:first-child{
+/* .rotate:first-child{
   transition: 3s 0.2s;
 }
 .rotate:last-child {
   transition: 3s 3s;
-}
-.rotate-animate{
+} */
+/* .rotate-animate{
   transform: rotate( 720deg );
-}
+} */
 section > div:nth-of-type(1) > h1:nth-of-type(1):after{
   content: "❤";
   color: red;
@@ -132,6 +132,7 @@ section > div:nth-of-type(2) > img {
   }
   section > div:nth-of-type(1) > h1:nth-of-type(2) {
     margin: 0;
+    font-size: 40px;
   }
   section > div:nth-of-type(1){
     flex-direction: row;
