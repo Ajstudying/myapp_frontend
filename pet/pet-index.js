@@ -215,9 +215,9 @@ function setBtnActive() {
         /** @type {HTMLDivElement} */
         const layer = document.querySelector("footer");
         layer.hidden = false;
-        const title = section.querySelector("h4");
+        const title = article.querySelector("h4");
         layer.querySelector("input").value = title.innerHTML;
-        const textbox = section.querySelector("p");
+        const textbox = article.querySelector("p");
         layer.querySelector("textarea").value = textbox.innerHTML;
         const buttons = layer.querySelectorAll("button");
     
@@ -225,6 +225,7 @@ function setBtnActive() {
          buttons[1].addEventListener("click", (e) => {
           e.preventDefault();
           layer.hidden = true;
+          window.location.reload();
         });
     
         //확인버튼
