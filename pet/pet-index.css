@@ -168,7 +168,7 @@ article > div:nth-of-type(2) > img {
   letter-spacing: .5px;
   background:  rgb(96, 108, 56);
   color: #fff;
-  box-shadow: 0 2px 8px -1px rgb(96, 108, 56);;
+  box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
 }
 footer {
   position: fixed;

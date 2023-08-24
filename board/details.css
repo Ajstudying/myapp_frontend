@@ -62,7 +62,6 @@ header > div > nav > ul > li {
   padding-bottom: 0.1rem;
   border-radius: 5px;
 }
-
 header > div > h1 > a:hover {
   color: palevioletred;
 }
@@ -70,31 +69,38 @@ header > div > nav > ul > li > a:hover{
   color:  palevioletred;
 }
 section{
-  padding: 1.5rem;
-  margin: auto;
-  background-color: white;
+  margin: 30px;
+}
+article {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 10px;
+  background-color: white;
+  width: 95%;
+  padding: 20px;
+  margin: auto;
 }
 h3, h4, p {
   margin: 0;
+  font-size: 14px;
 }
-section span h3 {
+section article span h3 {
   display: inline;
   background-color: antiquewhite;
   padding: 8px;
+  margin-bottom: 30px;
   border-radius: 50px;
 }
-section > div:nth-of-type(2) {
+section > article > div:nth-of-type(2) {
   display: flex;
   justify-content: flex-end;
-  gap: 30px;
+  gap: 5px;
 }
-section > div:nth-of-type(1) > img{
+section > article > div:nth-of-type(1) > img{
   width: 100%;
 }
 form{
+  margin: 20px;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -110,6 +116,10 @@ hr{
   color: black;
 }
 @media (min-width: 61rem){
+  body{
+    width: 70%;
+    margin: auto;
+  }
   aside > div > button {
     font-size: 15px;
   }
@@ -120,10 +130,11 @@ hr{
   header > div:nth-of-type(1) > nav > ul li {
     font-size: 18px;
   }
-  section {
-    width: 60%;
-    padding: 3rem;
-    font-size: 20px;
+  h3, h4, p {
+    font-size: 16px;
+  }
+  article{
+    gap: 15px;
   }
   form label {
     width: 50%;

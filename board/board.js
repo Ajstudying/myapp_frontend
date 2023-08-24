@@ -15,7 +15,7 @@ let currentQuery = ""; // 현재 검색 키워드
 
 //게시글 모양
 async function getPagedBoard(page, option, query){
-  const section = document.querySelector("section");
+  const section = document.querySelectorAll("section")[0];
     let url = "";
     if(query) {
       url = `http://localhost:8080/boards/paging/search?page=${page}&size=${MAX_PAGE}&${option}=${query}`

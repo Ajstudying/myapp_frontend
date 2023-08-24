@@ -59,11 +59,6 @@ function createOption(item){
       return;
     }
 
-    if(content.value === ""){
-      alert("내용을 입력해주세요.");
-      return;
-    }
-
     if(select.value === "반려동물의 이름을 선택해주세요"){
       alert("반려동물을 선택해주세요.")
       return;

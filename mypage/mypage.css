@@ -168,6 +168,10 @@ hr{
   color: black;
 }
 @media (min-width: 67rem) {
+  body{
+    width: 70%;
+    margin: auto;
+  }
   aside > div > button {
     font-size: 15px;
   }

@@ -73,43 +73,47 @@ header > div > h1 > a:hover {
 header > div > nav > ul > li > a:hover{
   color:  palevioletred;
 }
-section {
-  margin: 2rem;
-}
-section > form > div:nth-of-type(1) div {
-  display: flex;
-  gap: 30px;
-}
-label {
-  width: 70%;
-}
-input {
-  width: 100%;
-}
-h3 {
-  margin: 0;
-  font-size: 18px;
+section{
+  padding: 10px;
+  padding-top: 20px;
+  background-color: rgba(255, 235, 180, 0.2);
 }
 section > form{
+  width: 95%;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
-section > form > div:nth-of-type(2) {
-  display: flex;
-  gap: 30px;
+section > form > select {
+  width: 15%;
 }
-section > form > div:nth-of-type(2) > textarea {
-  width: 70%;
-}
-section > form > div:nth-of-type(3) {
+section > form > div:nth-of-type(1){
   display: flex;
   justify-content: space-between;
 }
-select {
-  width: 70%;
+label {
+  width: 100%;
+}
+input{
+  width: 95%;
+  height: 2rem;
+}
+textarea {
+  width: 100%;
+  padding: 10px;
+  resize: none; /* 리사이즈 비활성화 */
+  overflow: hidden; /* 오버플로우를 숨김으로 설정 */
+}
+section > form > div:nth-of-type(2){
+  display: flex;
+  justify-content: flex-end;
 }
 @media (min-width: 67rem) {
+  body{
+    width: 70%;
+    margin: auto;
+  }
   aside > div > button {
     font-size: 15px;
   }
@@ -121,6 +125,7 @@ select {
     font-size: 18px;
   }
   section{
-    margin-left: 20rem;
+    margin: auto;
+    width: 80%;
   }
 }

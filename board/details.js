@@ -61,7 +61,7 @@
     e.preventDefault();
     const boardNo = section.dataset.no;
 
-    window.location.href = `http://localhost:5500/board/modify.html?boardNo=${boardNo}`;
+    window.location.href = `http://localhost:5500/board/modify-write.html?boardNo=${boardNo}`;
   });
 
 })();

@@ -126,6 +126,10 @@ section > div:nth-of-type(2) > img {
   border-radius: 50px;
 }
 @media (min-width: 67rem){
+  body{
+    width: 70%;
+    margin: auto;
+  }
   aside > div > button {
     font-size: 15px;
   }

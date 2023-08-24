@@ -245,7 +245,7 @@ function setBtnActive() {
               },
               body: JSON.stringify ({
                 title: modifyTitle,
-                content: modifyTextbox,
+                content: modifyTextbox ? modifyTextbox : null,
                 image: image ? image : null,
               }),
             });

@@ -81,7 +81,7 @@ section > ul > li {
   gap: 10px;
   font-size: 14px;
 }
-section > ul{
+section:nth-of-type(1) > ul{
   padding: 0;
 }
 p{
@@ -92,19 +92,19 @@ hr{
   color: black;
   margin: 0;
 }
-section > ul > li > div:nth-of-type(1) > sub{
+section:nth-of-type(1) > ul > li > div:nth-of-type(1) > sub{
   background-color: antiquewhite;
   padding: 5px;
   border-radius: 50px;
   box-shadow: 2px 3px 5px hsl(19, 28%, 33%);
 }
-section > ul > li > div:nth-of-type(2) {
+section:nth-of-type(1) > ul > li > div:nth-of-type(2) {
   display: flex;
   justify-content: space-between;
   padding: 5px;
   background-color: #fff;
 }
-section > ul > li > div:nth-of-type(2) > span:nth-of-type(2){
+section:nth-of-type(1) > ul > li > div:nth-of-type(2) > span:nth-of-type(2){
   display: flex;
   gap: 20px;
 }
@@ -117,6 +117,24 @@ section:nth-of-type(2){
   margin: auto;
   margin-bottom: 15px;
 }
+section:nth-of-type(2) > div {
+  display: flex;
+  gap: 15px;
+}
+section:nth-of-type(2) > div > button {
+  padding: 8px 10px;
+  font-weight: 300;
+  line-height: 12px;
+  border-radius: 24px;
+  display: block;
+  outline: none;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: .5px;
+  background:  rgb(96, 108, 56);
+  color: #fff;
+  box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
+}
 section:nth-of-type(3){
   display: flex;
   flex-direction: column;
@@ -127,6 +145,11 @@ section:nth-of-type(3) > form > div:nth-of-type(1){
   display: flex;
   gap: 10px;
 }
+section:nth-of-type(3) > form > div > div >button {
+  background-color: rgb(40, 54, 24);
+  color: white;
+  border-radius: 5px;
+}
 section:nth-of-type(3) > div{
   display: flex;
   justify-content: flex-end;
@@ -136,6 +159,10 @@ section:nth-of-type(3) > div >button {
   border-radius: 5px;
 }
 @media (min-width: 63rem) {
+  body{
+    width: 70%;
+    margin: auto;
+  }
   aside > div > button {
     font-size: 15px;
   }
@@ -147,11 +174,14 @@ section:nth-of-type(3) > div >button {
     font-size: 18px;
   }
   section:nth-of-type(1) {
-    margin: 30px;
+    margin: 20px;
   }
   section:nth-of-type(1) > ul{
     width: 60%;
     margin: auto;
+  }
+  section:nth-of-type(1) > ul > li {
+    font-size: 16px;
   }
   section:nth-of-type(2){
     margin-bottom: 20px;
@@ -159,7 +189,8 @@ section:nth-of-type(3) > div >button {
   section:nth-of-type(3){
     display: flex;
     flex-direction: row;
-    gap: 10rem;
+    width: 55%;
+    justify-content: space-between;
   } 
   section:nth-of-type(3) > form > div:nth-of-type(1){
     gap: 30px;
