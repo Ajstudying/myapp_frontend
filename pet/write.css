@@ -73,6 +73,11 @@ header > div > h1 > a:hover {
 header > div > nav > ul > li > a:hover{
   color:  palevioletred;
 }
+section {
+  padding: 10px;
+  padding-top: 20px;
+  background-color: rgba(255, 235, 180, 0.2);
+}
 section > p{
   text-align: center;
 }
@@ -84,25 +89,32 @@ section > form{
 }
 section > form > div:nth-of-type(1){
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 15px;
 }
 section > form > div:nth-of-type(1) > label{
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  height: 30px;
 }
 section > form > div:nth-of-type(1) > label > input{
   width: 100%;
+  height: 100%;
+  text-align: center;
   border-radius: 5px;
+}
+textarea {
+  border-radius: 5px;
+  padding: 10px;
+}
+textarea {
+  resize: none; /* 리사이즈 비활성화 */
+  overflow: hidden; /* 오버플로우를 숨김으로 설정 */
 }
 section > form > div:nth-of-type(2){
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
-section > form > div:nth-of-type(2) > label > input{
-  display: none;
-}
-section > form > div:nth-of-type(2) > label > div{
+section > form > div:nth-of-type(2) > button{
   justify-content: center;
   background-color: #f8f9fa;
   border: 1px solid black;
@@ -116,6 +128,13 @@ section > form > div:nth-of-type(2) > label > div{
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: pre;
+}
+img {
+  display: none;
+  margin: auto;
+  max-width: 80%;
+  height: 300px;
+  margin-top: 10px;
 }
 @media (min-width: 67rem){
   aside > div > button {
@@ -131,6 +150,7 @@ section > form > div:nth-of-type(2) > label > div{
   section{
     width: 60%;
     margin: auto;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    border-radius: 10px;
   }
 }

@@ -93,7 +93,7 @@ function myTemplate(item){
     }else if(e.target == modifyButton){
       const layer = document.querySelector("footer");
       const modifybox = document.querySelector("#modify-box");
-      const h5 = document.createElement("h5");
+      const h5 = modifybox.querySelector("h5");
       h5.innerHTML = "< 수정 >";
       modifybox.prepend(h5);
       layer.hidden = false;
@@ -155,7 +155,7 @@ function myTemplate(item){
     e.preventDefault();
     const layer = document.querySelector("footer");
     const insertBox = document.querySelector("#modify-box");
-    const h5 = document.createElement("h5");
+    const h5 = layer.querySelector("h5");
     h5.innerHTML = "< 추가 >";
     insertBox.prepend(h5);
     layer.hidden = false;
@@ -212,6 +212,6 @@ function cleanLayer(){
   const inputs = layer.querySelectorAll("input");
   const h5 = layer.querySelector("h5");
   h5.innerHTML = "";
-  inputs[0].innerHTML = "";
-  inputs[1].innerHTML = "";
+  inputs[0].value = "";
+  inputs[1].value = "";
 }

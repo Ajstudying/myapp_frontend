@@ -129,3 +129,45 @@ function createOption(item){
   });
 
 })();
+
+//미리보기
+(() => {
+  const form = document.querySelector("form");
+  const labels = form.querySelectorAll("label");
+  const file = labels[1].querySelector("input");
+  const img = labels[1].querySelector("img");
+
+  file.addEventListener("change", (e) => {
+    const selectedFile = file.files[0];
+    if(selectedFile){
+      img.style.display = "block";
+      const reader = new FileReader();
+      reader.addEventListener("load", (event) => {
+        event.preventDefault();
+        img.src = event.target.result;
+      });
+      reader.readAsDataURL(selectedFile);
+    }else {
+      img.style.display = "none";
+      img.src = "#";
+    }
+  });
+  // const imageInput = document.getElementById('imageInput');
+  //   const previewImage = document.getElementById('preview');
+
+  //   imageInput.addEventListener('change', function() {
+  //     const selectedImage = imageInput.files[0];
+
+  //     if (selectedImage) {
+  //       previewImage.style.display = 'block';
+  //       const reader = new FileReader();
+        // reader.onload = function(event) {
+        //   previewImage.src = event.target.result;
+        // };
+  //       reader.readAsDataURL(selectedImage);
+  //     } else {
+  //       previewImage.style.display = 'none';
+  //       previewImage.src = '#';
+  //     }
+  //   });
+})();

@@ -145,7 +145,7 @@ footer {
 #modify-box {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 5px;
   position: absolute;
   justify-content: center;
   left: 50%;
@@ -156,8 +156,12 @@ footer {
   padding: 2rem;
   align-items: center;
 }
+#modify-box > div {
+  height: 30px;
+}
 #modify-box > h5 {
   margin: 0;
+  padding: 5px;
 }
 hr{
   width: 100%;
