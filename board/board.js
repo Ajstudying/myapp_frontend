@@ -13,6 +13,7 @@ let currentQuery = ""; // 현재 검색 키워드
   loginLogout();
 })();
 
+//게시글 모양
 async function getPagedBoard(page, option, query){
   const section = document.querySelector("section");
     let url = "";
@@ -46,6 +47,7 @@ async function getPagedBoard(page, option, query){
       const time= new Date(item.createdTime);
       const reservationTime = `${time.getFullYear()}-${time.getMonth()}-${time.getDate().toString()}`;
       const li = document.createElement("li");
+      const hr = document.createElement("hr");
       const template = /*html*/
       `<div><sub>${item.species}</sub></div>
       <div>
@@ -60,6 +62,7 @@ async function getPagedBoard(page, option, query){
       li.dataset.no = item.no;
       li.insertAdjacentHTML("afterbegin", template);
       ul.append(li);
+      ul.append(hr);
     });
 
   currentPage = results.number; //현재 페이지 설정
@@ -68,6 +71,8 @@ async function getPagedBoard(page, option, query){
   //이전 /다음 버튼 활성화 처리
   setBtnActive();
 }
+
+//맨처음 화면 열었을 때
 (() => {
   window.addEventListener("DOMContentLoaded", () => {
     getPagedBoard(0);

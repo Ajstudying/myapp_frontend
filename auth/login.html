@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>로그인</title>
     <style>
+      /* video{
+        position: absolute;
+        left: 50%;
+        top: 23%;
+        transform: translateX(-50%) translateY(-50%);
+      } */
       form {
         display: flex;
         flex-direction: column;
@@ -22,6 +28,7 @@
       }
       form > h1 {
         text-align: center;
+        margin: 0;
       }
       form > div:nth-of-type(1) {
         display: flex;
@@ -49,6 +56,11 @@
   <body>
     <form action="http://localhost:8080/auth/signin" method="post">
       <h1>special pet</h1>
+      <video width="500px" height="250px" autoplay muted loop>
+        <source src="../AdobeStock_246919757.mov"></source>
+        <source src="../AdobeStock_464922686.mov"></source>
+        <strong>Your browser does not support the video tag.</strong>
+      </video>
       <div>
         <label><input type="text" name="userid" placeholder="아이디" /></label>
         <label

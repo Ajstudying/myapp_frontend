@@ -50,14 +50,14 @@ function myTemplate(item){
   }
   const results = await response.json();
 
-  const divs = main.querySelectorAll("div");
+  const divs = main.querySelectorAll("section")[0].querySelectorAll("div");
   const profile = main.querySelectorAll("section")[1];
   results.data.forEach(item => {
     profile.insertAdjacentHTML("beforeend", myTemplate(item));
   });
-    
-  divs[0].querySelector("p:last-child").innerHTML = results.data[0][0];
-  divs[1].querySelector("p:last-child").innerHTML = results.data[0][1];
+
+  divs[1].querySelectorAll("span")[0].querySelector("p:last-child").innerHTML = results.data[0][0];
+  divs[1].querySelectorAll("span")[1].querySelector("p:last-child").innerHTML = results.data[0][1];
 
 })();
 

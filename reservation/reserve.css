@@ -92,11 +92,12 @@ td {
   height: 50px;
   cursor: pointer;
 }
+table > thead {
+  align-items: center;
+}
 table > thead > tr:first-child > th {
   cursor: pointer;
-}
-table > thead > tr:first-child > td {
-  font-size: 1.1em;
+  font-size: 16px;
   font-weight: bold;
   width: 50px;
   height: 50px;
@@ -203,6 +204,16 @@ footer> form > div:nth-of-type(2){
   justify-content: flex-end;
 }
 @media (min-width: 67rem) {
+  aside > div > button {
+    font-size: 15px;
+  }
+  header > div:nth-of-type(1) > h1 > a {
+    margin: 0;
+    font-size: 40px;
+  }
+  header > div:nth-of-type(1) > nav > ul li {
+    font-size: 18px;
+  }
   section:nth-of-type(2) {
     width: 60%;
   }

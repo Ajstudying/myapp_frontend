@@ -76,13 +76,21 @@ header > div > nav > ul > li > a:hover{
 section > ul > li {
   display: flex;
   flex-direction: column;
-  width: 95%;
   padding: 15px;
   background-color: rgba(255,248,222, 0.7);
   gap: 10px;
+  font-size: 14px;
+}
+section > ul{
+  padding: 0;
 }
 p{
   margin: 10px;
+}
+hr{
+  width: 100%;
+  color: black;
+  margin: 0;
 }
 section > ul > li > div:nth-of-type(1) > sub{
   background-color: antiquewhite;
@@ -106,8 +114,8 @@ section > ul > li > div:nth-of-type(2) > span:nth-of-type(2){
   color: crimson;
 }
 section:nth-of-type(2){
-  display: flex;
-  justify-content: center;
+  margin: auto;
+  margin-bottom: 15px;
 }
 section:nth-of-type(3){
   display: flex;
@@ -119,11 +127,6 @@ section:nth-of-type(3) > form > div:nth-of-type(1){
   display: flex;
   gap: 10px;
 }
-section:nth-of-type(3) > form{
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
 section:nth-of-type(3) > div{
   display: flex;
   justify-content: flex-end;
@@ -132,9 +135,34 @@ section:nth-of-type(3) > div >button {
   background-color: rgb(96, 108, 56);
   border-radius: 5px;
 }
-@media (min-width: 67rem) {
-  section > ul > li {
-    margin: auto;
-    width: 60%;
+@media (min-width: 63rem) {
+  aside > div > button {
+    font-size: 15px;
   }
+  header > div:nth-of-type(1) > h1 > a {
+    margin: 0;
+    font-size: 40px;
+  }
+  header > div:nth-of-type(1) > nav > ul li {
+    font-size: 18px;
+  }
+  section:nth-of-type(1) {
+    margin: 30px;
+  }
+  section:nth-of-type(1) > ul{
+    width: 60%;
+    margin: auto;
+  }
+  section:nth-of-type(2){
+    margin-bottom: 20px;
+  }
+  section:nth-of-type(3){
+    display: flex;
+    flex-direction: row;
+    gap: 10rem;
+  } 
+  section:nth-of-type(3) > form > div:nth-of-type(1){
+    gap: 30px;
+  }
+  
 }

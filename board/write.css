@@ -110,6 +110,16 @@ select {
   width: 70%;
 }
 @media (min-width: 67rem) {
+  aside > div > button {
+    font-size: 15px;
+  }
+  header > div:nth-of-type(1) > h1 > a {
+    margin: 0;
+    font-size: 40px;
+  }
+  header > div:nth-of-type(1) > nav > ul li {
+    font-size: 18px;
+  }
   section{
     margin-left: 20rem;
   }
