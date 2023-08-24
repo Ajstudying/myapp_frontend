@@ -109,6 +109,21 @@ section > form > div:nth-of-type(2){
   display: flex;
   justify-content: flex-end;
 }
+section > form > div:nth-of-type(2)> button {
+  justify-content: center;
+  background-color: #f8f9fa;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: #3c4043;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 23px;
+  padding: 0 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: pre;
+}
 @media (min-width: 67rem) {
   body{
     width: 70%;

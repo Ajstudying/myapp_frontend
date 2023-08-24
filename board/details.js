@@ -8,7 +8,7 @@
 (async() => {
   // URL에서 쿼리 파라미터 가져오기
   const urlParams = new URLSearchParams(window.location.search);
-  const boardNo = urlParams.get('boardNo'); // 쿼리 파라미터에서 postNo 값을 가져옴
+  const boardNo = urlParams.get('boardNo'); // 쿼리 파라미터에서 boardNo 값을 가져옴
   
   const response = await fetch(`http://localhost:8080/boards/${boardNo}`, {
         method: "GET",
