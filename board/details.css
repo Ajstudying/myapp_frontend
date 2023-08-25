@@ -42,9 +42,20 @@ form label {
 form label input{
   width: 100%;
 }
+form > button {
+  background-color: rgb(96, 108, 56);
+  color: white;
+  border-radius: 5px;
+}
 hr{
   width: 100%;
   color: black;
+}
+section > article > div:nth-of-type(2)> span > button {
+  background-color: rgb(173, 193, 120);
+  color: darkslategrey;
+  font-weight: bold;
+  border-radius: 5px;
 }
 @media (min-width: 61rem){
   body{
