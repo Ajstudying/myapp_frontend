@@ -1,78 +1,4 @@
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(100, 200, 150, 0.2);
-}
-aside {
-  display: flex;
-  justify-content: space-between;
-}
-aside > div{
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-}
-aside > div> button {
-  background-color: rgb(173, 193, 120);
-  color: rgb(255, 255, 255);
-  border-radius: 5px;
-}
-aside > div> button a {
-  text-decoration: none;
-  color: white;
-}
-aside > div> button a:visited {
-  color: white;
-}
-header> div {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-header > div > h1 > a {
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  margin-top: 2rem;
-  color: rgb(96, 108, 56);
-}
-header > div> nav > ul {
-  display: flex;
-  justify-content: space-evenly;
-  list-style: none;
-  padding: 0;
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-header > div > nav > ul > li {
-  background-color: rgb(141, 112, 83);
-  text-align: center;
-  width: 20%;
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
-  border-radius: 5px;
-}
-a {
-  color: white;
-  text-decoration: none;
-}
-header > div > h1 > a:hover {
-  color: palevioletred;
-}
-header > div > nav > ul > li > a:hover{
-  color:  palevioletred;
-}
+@import url("../css/header.css");
 section > ul > li {
   display: flex;
   flex-direction: column;
@@ -92,11 +18,23 @@ hr{
   color: black;
   margin: 0;
 }
+section:nth-of-type(1) > ul > li > div:nth-of-type(1) {
+  display: flex;
+  justify-content: space-between;
+}
 section:nth-of-type(1) > ul > li > div:nth-of-type(1) > sub{
   background-color: antiquewhite;
   padding: 5px;
   border-radius: 50px;
   box-shadow: 2px 3px 5px hsl(19, 28%, 33%);
+}
+section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button{
+  cursor: pointer;
+  background-color: floralwhite;
+  border-radius: 50px;
+}
+section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button:hover{
+  color: crimson;
 }
 section:nth-of-type(1) > ul > li > div:nth-of-type(2) {
   display: flex;
@@ -154,15 +92,17 @@ section:nth-of-type(3) > div{
   display: flex;
   justify-content: flex-end;
 }
-section:nth-of-type(3) > div >button {
+section:nth-of-type(3) > div > button {
   background-color: rgb(96, 108, 56);
   border-radius: 5px;
 }
-@media (min-width: 63rem) {
-  body{
-    width: 70%;
-    margin: auto;
-  }
+section:nth-of-type(3) > div > button > a {
+  text-decoration: none;
+}
+section:nth-of-type(3) > div > button > a:visited {
+  color: #fff;
+}
+@media (min-width: 55rem){
   aside > div > button {
     font-size: 15px;
   }
@@ -178,6 +118,12 @@ section:nth-of-type(3) > div >button {
   }
   section:nth-of-type(1) > ul{
     width: 60%;
+    margin: auto;
+  }
+}
+@media (min-width: 100rem) {
+  body{
+    width: 70%;
     margin: auto;
   }
   section:nth-of-type(1) > ul > li {
