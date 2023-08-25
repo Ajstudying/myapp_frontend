@@ -1,3 +1,7 @@
+// URL에서 쿼리 파라미터 가져오기
+const urlParams = new URLSearchParams(window.location.search);
+const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo 값을 가져옴
+
 (() => {
   hiddenButton();
   loginLogout();
@@ -5,10 +9,6 @@
 
 //해당 페이지 조회
 (async () => {
-  // URL에서 쿼리 파라미터 가져오기
-  const urlParams = new URLSearchParams(window.location.search);
-  const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo 값을 가져옴
-
   const response = await fetch(`http://localhost:8080/boards/${boardNo}`, {
     method: "GET",
     headers: {
@@ -53,9 +53,6 @@
 
 //댓글 조회
 (async () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const boardNo = urlParams.get("boardNo");
-
   const section = document.querySelectorAll("section")[1];
   const response = await fetch(
     `http://localhost:8080/boards/${boardNo}/comments`,
@@ -69,41 +66,78 @@
   const result = await response.json();
   console.log(result);
   console.log(result.otherComment);
-  if (result.findedComment.length) {
-    console.log(1);
-    result.findedComment.forEach((item) => {
-      const card =
-        /*html*/
-        `<article data-id="${item.id}">
+  result.findedComment.forEach((item) => {
+    const time = new Date();
+    const currentTime = `${time.getFullYear()}-${time.getMonth()}-${time
+      .getDate()
+      .toString()}`;
+    const card =
+      /*html*/
+      `<article data-id="${item.id}">
       <span>${item.ownerName}</span>
       <p>${item.content}</p>
+      <span>${currentTime}</span>
       <button>삭제</button>
       </article>
       `;
-      section.insertAdjacentHTML("afterbegin", card);
-    });
-  } else {
-    console.log(2);
-    result.otherComment.forEach((item) => {
-      const time = new Date();
-      const currentTime = `${time.getFullYear()}-${time.getMonth()}-${time
-        .getDate()
-        .toString()}`;
-      const card =
-        /*html*/
-        `<article data-id="${item.id}">
+    section.insertAdjacentHTML("afterbegin", card);
+  });
+  result.otherComment.forEach((item) => {
+    const time = new Date();
+    const currentTime = `${time.getFullYear()}-${time.getMonth()}-${time
+      .getDate()
+      .toString()}`;
+    const card =
+      /*html*/
+      `<article data-id="${item.id}">
       <span>${item.ownerName}</span>
       <p>${item.content}</p>
       <span>${currentTime}</span>
       </article> 
       `;
-      section.insertAdjacentHTML("afterbegin", card);
-    });
-  }
+    section.insertAdjacentHTML("afterbegin", card);
+  });
 })();
 
 //댓글 등록
-(() => {})();
+(() => {
+  const form = document.querySelector("form");
+  const content = form.querySelector("input");
+  const addBtn = form.querySelector("button");
+
+  addBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    if (content.value === "") {
+      alert("댓글을 입력해주세요.");
+      return;
+    }
+    const response = await fetch(
+      `http://localhost:8080/boards/${boardNo}/comments`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+        body: JSON.stringify({
+          content: content.value,
+        }),
+      }
+    );
+    const result = response.json();
+    const section = document.querySelectorAll("section")[1];
+    const card =
+      /*html*/
+      `<article data-id="${result.id}">
+      <span>${result.ownerName}</span>
+      <p>${result.content}</p>
+      <button>삭제</button>
+      </article>
+      `;
+    section.insertAdjacentHTML("afterbegin", card);
+    content.value = "";
+  });
+})();
 
 //수정 페이지 이동
 (() => {
@@ -146,5 +180,3 @@
     }
   });
 })();
-
-(() => {})();
