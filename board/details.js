@@ -51,94 +51,6 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
   }
 })();
 
-//댓글 조회
-(async () => {
-  const section = document.querySelectorAll("section")[1];
-  const response = await fetch(
-    `http://localhost:8080/boards/${boardNo}/comments`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${getCookie("token")}`,
-      },
-    }
-  );
-  const result = await response.json();
-  console.log(result);
-  console.log(result.otherComment);
-  result.findedComment.forEach((item) => {
-    const time = new Date();
-    const currentTime = `${time.getFullYear()}-${time.getMonth()}-${time
-      .getDate()
-      .toString()}`;
-    const card =
-      /*html*/
-      `<article data-id="${item.id}">
-      <span>${item.ownerName}</span>
-      <p>${item.content}</p>
-      <span>${currentTime}</span>
-      <button>삭제</button>
-      </article>
-      `;
-    section.insertAdjacentHTML("afterbegin", card);
-  });
-  result.otherComment.forEach((item) => {
-    const time = new Date();
-    const currentTime = `${time.getFullYear()}-${time.getMonth()}-${time
-      .getDate()
-      .toString()}`;
-    const card =
-      /*html*/
-      `<article data-id="${item.id}">
-      <span>${item.ownerName}</span>
-      <p>${item.content}</p>
-      <span>${currentTime}</span>
-      </article> 
-      `;
-    section.insertAdjacentHTML("afterbegin", card);
-  });
-})();
-
-//댓글 등록
-(() => {
-  const form = document.querySelector("form");
-  const content = form.querySelector("input");
-  const addBtn = form.querySelector("button");
-
-  addBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    if (content.value === "") {
-      alert("댓글을 입력해주세요.");
-      return;
-    }
-    const response = await fetch(
-      `http://localhost:8080/boards/${boardNo}/comments`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${getCookie("token")}`,
-        },
-        body: JSON.stringify({
-          content: content.value,
-        }),
-      }
-    );
-    const result = response.json();
-    const section = document.querySelectorAll("section")[1];
-    const card =
-      /*html*/
-      `<article data-id="${result.id}">
-      <span>${result.ownerName}</span>
-      <p>${result.content}</p>
-      <button>삭제</button>
-      </article>
-      `;
-    section.insertAdjacentHTML("afterbegin", card);
-    content.value = "";
-  });
-})();
-
 //수정 페이지 이동
 (() => {
   const section = document.querySelector("section");
@@ -180,3 +92,145 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
     }
   });
 })();
+
+//댓글 조회
+(async () => {
+  const section = document.querySelectorAll("section")[1];
+  const response = await fetch(
+    `http://localhost:8080/boards/${boardNo}/comments`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getCookie("token")}`,
+      },
+    }
+  );
+  const result = await response.json();
+  result.findedComment.forEach((item) => {
+    const card =
+      /*html*/
+      `<article data-id="${item.id}">
+        <div>
+        <sup>${item.ownerName}</sup>
+        <p>${item.content}</p>
+        </div>
+        <div>
+        <button>삭제</button>
+        <sub>${timeCheck(item.createdTime)}</sub>
+        </div>
+        </article>
+        `;
+    section.insertAdjacentHTML("afterbegin", card);
+  });
+  result.otherComment.forEach((item) => {
+    const card =
+      /*html*/
+      `<article data-id="${item.id}">
+      <div>
+      <sup>${item.ownerName}</sup>
+      <p>${item.content}</p>
+      </div>
+      <sub>${timeCheck(item.createdTime)}</sub>
+      </article> 
+      `;
+    section.insertAdjacentHTML("afterbegin", card);
+  });
+})();
+
+//댓글 등록
+(() => {
+  const form = document.querySelector("form");
+  const content = form.querySelector("input");
+  const addBtn = form.querySelector("button");
+  const time = new Date();
+
+  addBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    if (content.value === "") {
+      alert("댓글을 입력해주세요.");
+      return;
+    }
+    const response = await fetch(
+      `http://localhost:8080/boards/${boardNo}/comments`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+        body: JSON.stringify({
+          content: content.value,
+          createdTime: time.getTime(),
+        }),
+      }
+    );
+    const result = await response.json();
+    const section = document.querySelectorAll("section")[1];
+    const currentTime = `${time.getHours().toString().padStart(2, "0")}:
+    ${time.getMinutes().toString().padStart(2, "0")}:
+    ${time.getSeconds().toString().padStart(2, "0")}`;
+    const card =
+      /*html*/
+      `<article data-id="${result.id}">
+      <div>
+      <sup>${result.ownerName}</sup>
+      <p>${result.content}</p>
+      </div>
+      <div>
+      <button>삭제</button>
+      <sub>${currentTime}</sub>
+      </div>
+      </article>
+      `;
+    section.insertAdjacentHTML("afterbegin", card);
+    content.value = "";
+  });
+})();
+
+//댓글 삭제
+(() => {
+  const section = document.querySelectorAll("section")[1];
+
+  section.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const article = e.target.parentElement.parentElement;
+    const id = article.dataset.id;
+    if (e.target.tagName.toLowerCase() == "button" && e.target.innerHTML === "삭제") {
+      //서버연결
+      const response = await fetch(
+        `http://localhost:8080/boards/${boardNo}/comments/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        }
+      );
+      if ([404].includes(response.status)) {
+        alert("댓글을 찾을 수 없습니다.");
+      } else {
+        article.remove();
+        alert("삭제가 완료되었습니다.");
+      }
+    }
+  });
+})();
+
+function timeCheck(createdTime) {
+  const time = new Date();
+  const savedTime = new Date(createdTime);
+  const savedDay = `${savedTime.getFullYear()}-${savedTime.getMonth()}-${savedTime
+    .getDate()
+    .toString()}`;
+  const currentDay = `${time.getFullYear()}-${time.getMonth()}-${time
+    .getDate()
+    .toString()}`;
+  if (savedDay === currentDay) {
+    const currentTime = `${time.getHours().toString().padStart(2, "0")}:
+    ${time.getMinutes().toString().padStart(2, "0")}:
+    ${time.getSeconds().toString().padStart(2, "0")}`;
+    return currentTime;
+  } else {
+    return savedDay;
+  }
+}

@@ -277,3 +277,27 @@ function setBtnActive() {
     }
   });
 })();
+
+//수정 사진 미리 보기
+(() => {
+  const modifyBox = document.getElementById("modify-box");
+  const label = modifyBox.querySelector("label");
+  const file = label.querySelector("input");
+  const img = label.querySelector("img");
+
+  file.addEventListener("change", (e) => {
+    const selectedFile = file.files[0];
+    if(selectedFile){
+      img.style.display = "block";
+      const reader = new FileReader();
+      reader.addEventListener("load", (event) => {
+        event.preventDefault();
+        img.src = event.target.result;
+      });
+      reader.readAsDataURL(selectedFile);
+    }else {
+      img.style.display = "none";
+      img.src = "#";
+    }
+  });
+})();

@@ -16,6 +16,11 @@ section > form:nth-of-type(2)> div:nth-of-type(1){
 section > form:nth-of-type(2)> div:nth-of-type(1) > button {
   margin-top: 15px;
   height: 1.5rem;
+  background:  rgb(96, 108, 56);
+  color: #fff;
+  box-shadow: 0 2px 2px -1px rgb(96, 108, 56);
+  border: 1px solid black;
+  border-radius: 4px;
 }
 form {
   display: flex;
@@ -35,11 +40,18 @@ form {
 .inputbox > label {
   margin: 0;
 }
-section > div {
+section > span {
   background-color: beige;
   display: flex;
   justify-content: flex-end;
   padding: 1rem;
+}
+section > span > button {
+  background:  rgb(96, 108, 56);
+  color: #fff;
+  box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
+  border: 1px solid black;
+  border-radius: 4px;
 }
 @media (min-width: 61rem){
   aside > div > button {
@@ -76,7 +88,7 @@ section > div {
     width: 60%;
     margin: auto;
   }
-  section > div > button {
+  section > span > button {
     font-size: 14px;
   }
 }

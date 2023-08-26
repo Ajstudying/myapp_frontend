@@ -94,6 +94,7 @@ section:nth-of-type(3) > div{
 }
 section:nth-of-type(3) > div > button {
   background-color: rgb(96, 108, 56);
+  color: #fff;
   border-radius: 5px;
 }
 section:nth-of-type(3) > div > button > a {

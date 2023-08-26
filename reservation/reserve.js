@@ -31,11 +31,19 @@ let today = new Date();
       )}`,
     },
   });
-
   const result = await response.json();
   
   result.forEach(item => {
     const time= new Date(item.reservationTime);
+    const reservationDay = time.getDate().toString();
+    const tds = document.querySelectorAll("td");
+    tds.forEach(td => {
+      if(td.innerHTML === reservationDay){
+        td.style.backgroundColor = "cadetblue";
+        td.style.color = "darkblue";
+        td.style.borderRadius = "50px";
+      }
+    });
     const reservationTime = `${time.getFullYear()}-${time.getMonth()}-${time.getDate().toString()}`;
     const schedule = /*html*/
     `<article data-no="${item.no}">
@@ -294,7 +302,7 @@ function buildCalendar(now) {
   buildCalendar(now);  
   });
 
-  arrows[1].addEventListener("click", (e) => {
+  arrows[2].addEventListener("click", (e) => {
     e.preventDefault();
     // 현재 달을 1 증가
     now = new Date(now.getFullYear(), now.getMonth() + 1); 

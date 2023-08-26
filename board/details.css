@@ -15,19 +15,19 @@ h3, h4, p {
   margin: 0;
   font-size: 14px;
 }
-section article span h3 {
+section:nth-of-type(1) article span h3 {
   display: inline;
   background-color: antiquewhite;
   padding: 8px;
   margin-bottom: 30px;
   border-radius: 50px;
 }
-section > article > div:nth-of-type(2) {
+section:nth-of-type(1) > article > div:nth-of-type(2) {
   display: flex;
   justify-content: flex-end;
   gap: 5px;
 }
-section > article > div:nth-of-type(1) > img{
+section:nth-of-type(1) > article > div:nth-of-type(1) > img{
   width: 100%;
 }
 form{
@@ -41,6 +41,7 @@ form label {
 }
 form label input{
   width: 100%;
+  padding: 3px;
 }
 form > button {
   background-color: rgb(96, 108, 56);
@@ -51,7 +52,28 @@ hr{
   width: 100%;
   color: black;
 }
-section > article > div:nth-of-type(2)> span > button {
+section:nth-of-type(1) > article > div:nth-of-type(2)> span > button {
+  background-color: rgb(173, 193, 120);
+  color: darkslategrey;
+  font-weight: bold;
+  border-radius: 5px;
+}
+section:nth-of-type(2) > article:nth-of-type(1){
+  border-top: 1px solid black;
+}
+section:nth-of-type(2) > article {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid black;
+  justify-content: space-between;
+  background-color: beige;
+}
+section:nth-of-type(2) > article > div:nth-of-type(2){
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+section:nth-of-type(2) > article > div:nth-of-type(2) > button {
   background-color: rgb(173, 193, 120);
   color: darkslategrey;
   font-weight: bold;
