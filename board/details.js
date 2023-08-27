@@ -107,30 +107,21 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
   );
   const result = await response.json();
   result.findedComment.forEach((item) => {
-    const card =
-      /*html*/
-      `<article data-id="${item.id}">
-        <div>
-        <sup>${item.ownerName}</sup>
-        <p>${item.content}</p>
-        </div>
-        <div>
-        <button>삭제</button>
-        <sub>${timeCheck(item.createdTime)}</sub>
-        </div>
-        </article>
-        `;
-    section.insertAdjacentHTML("afterbegin", card);
+    section.insertAdjacentHTML("afterbegin", createCard(item));
   });
   result.otherComment.forEach((item) => {
     const card =
       /*html*/
       `<article data-id="${item.id}">
       <div>
-      <sup>${item.ownerName}</sup>
+      <div>
+      <sup><em>${item.ownerName}</em></sup>
       <p>${item.content}</p>
       </div>
+      <div>
       <sub>${timeCheck(item.createdTime)}</sub>
+      </div>
+      </div>
       </article> 
       `;
     section.insertAdjacentHTML("afterbegin", card);
@@ -166,23 +157,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
     );
     const result = await response.json();
     const section = document.querySelectorAll("section")[1];
-    const currentTime = `${time.getHours().toString().padStart(2, "0")}:
-    ${time.getMinutes().toString().padStart(2, "0")}:
-    ${time.getSeconds().toString().padStart(2, "0")}`;
-    const card =
-      /*html*/
-      `<article data-id="${result.id}">
-      <div>
-      <sup>${result.ownerName}</sup>
-      <p>${result.content}</p>
-      </div>
-      <div>
-      <button>삭제</button>
-      <sub>${currentTime}</sub>
-      </div>
-      </article>
-      `;
-    section.insertAdjacentHTML("afterbegin", card);
+    section.insertAdjacentHTML("afterbegin", createCard(result));
     content.value = "";
   });
 })();
@@ -216,6 +191,53 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
   });
 })();
 
+//댓글 수정
+(() => {
+  const section = document.querySelectorAll("section")[1];
+
+  section.addEventListener("click",  (e) => {
+    e.preventDefault();
+    const article = e.target.parentElement.parentElement.parentElement;
+    const text = article.querySelector("textarea");
+    const textDiv = text.parentElement;
+    const time = new Date();
+    console.log(text);
+    const id = article.dataset.id;
+    if (e.target.tagName.toLowerCase() == "button" && e.target.innerHTML === "수정"){
+      textDiv.hidden = false;
+      const modifyBtn = e.target;
+      modifyBtn.innerHTML = "완료";
+      modifyBtn.addEventListener("click", async(event) => {
+        event.preventDefault();
+        const modifyText = text.value;
+        console.log(modifyText);
+        if(text.value === ""){
+          alert("댓글을 입력해주세요.");
+          return;
+        }
+        await fetch(
+          `http://localhost:8080/boards/${boardNo}/comments/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              Authorization: `Bearer ${getCookie("token")}`,
+            },
+            body: JSON.stringify({
+              content: modifyText,
+              createdTime: time.getTime(),
+            }),
+          }
+        );
+        const p = article.querySelector("p");
+        textDiv.hidden = true;
+        p.innerHTML = modifyText;
+        modifyBtn.innerHTML = "수정";
+      });
+    }
+  });
+})();
+
 function timeCheck(createdTime) {
   const time = new Date();
   const savedTime = new Date(createdTime);
@@ -233,4 +255,27 @@ function timeCheck(createdTime) {
   } else {
     return savedDay;
   }
+}
+
+function createCard(item){
+  const card =
+      /*html*/
+      `<article data-id="${item.id}">
+        <div>
+        <div>
+        <sup><em>${item.ownerName}</em></sup>
+        <p>${item.content}</p>
+        </div>
+        <div>
+        <sub>${timeCheck(item.createdTime)}</sub>
+        <button>수정</button>
+        <button>삭제</button>
+        </div>
+        </div>
+        <div hidden>
+        <textarea cols="40" rows="5"></textarea>
+        </div>
+        </article>
+        `;
+  return card;
 }
