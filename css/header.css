@@ -58,23 +58,54 @@ header > div> nav > ul {
   margin-left: 2rem;
   margin-right: 2rem;
 }
-header > div > nav > ul > li {
-  background-color: rgb(141, 112, 83);
+header > div > nav > ul > a  {
+  /* background-color: rgb(141, 112, 83); */
   text-align: center;
   width: 20%;
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
   border-radius: 5px;
+  font-size: 14px;
+  border: 2px solid rgb(141, 112, 83);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
 }
-header > div > nav > ul > li > a {
+header > div > nav > ul > a {
   color: white;
   text-decoration: none;
+  background: rgb(141, 112, 83);
+  color: #fff;
+  z-index: 1;
 }
 header > div > h1 > a:hover {
   color: palevioletred;
+
 }
-header > div > nav > ul > li > a:hover{
-  color:  palevioletred;
+.btn-14:after {
+ position: absolute;
+ content: "";
+ width: 100%;
+ height: 0;
+ top: 0;
+ left: 0;
+ z-index: -1;
+ background: #dde5b6;
+ transition: all 0.3s ease;
+}
+.btn-14:hover {
+  color:  darkolivegreen;
+  font-weight: bold;
+}
+.btn-14:hover:after {
+ top: auto;
+ bottom: 0;
+ height: 100%;
+}
+.btn-14:active {
+ top: 2px;
 }
 @media (min-width: 67rem) {
   body{

@@ -39,17 +39,20 @@ section > div:nth-of-type(2){
   
 }
 section > div:nth-of-type(2) > img {
-  width: 28rem;
+  width: 100%;
   border-radius: 50px;
 }
 @media (min-width: 67rem){
+  section {
+    margin-top: 3rem;
+  }
   section > div:nth-of-type(1) > h1:nth-of-type(1) {
-    font-size: 40px;
+    font-size: 30px;
     margin: 0;
   }
   section > div:nth-of-type(1) > h1:nth-of-type(2) {
     margin: 0;
-    font-size: 40px;
+    font-size: 30px;
   }
   section > div:nth-of-type(1){
     flex-direction: row;
@@ -57,7 +60,7 @@ section > div:nth-of-type(2) > img {
   }
   section > div:nth-of-type(2) > img {
     width: 80%;
-    height: 41.5rem;
+    height: 50%;
   }
   section > div:nth-of-type(2) {
     margin-bottom: 0;
