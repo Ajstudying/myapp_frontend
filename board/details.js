@@ -66,7 +66,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
   });
 })();
 
-//삭제
+//해당 페이지 삭제
 (() => {
   const section = document.querySelector("section");
   const buttons = section.querySelectorAll("button");
@@ -221,7 +221,10 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
     );
     const result = await response.json();
     const section = document.querySelectorAll("section")[1];
-    section.insertAdjacentHTML("afterbegin", createCard(result));
+    const article = document.createElement("article");
+    article.dataset.id = result.id;
+    article.innerHTML = createCard(result);
+    section.append(article);
     content.value = "";
   });
 })();
