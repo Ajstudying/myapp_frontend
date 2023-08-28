@@ -1,18 +1,19 @@
 @import url("../css/header.css");
 main {
-  margin: 10px;
-  display: flex;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 h3{
   margin: 0;
   text-align: center;
 }
 main > section:nth-of-type(1) {
+  margin: auto;
   width: 230px;
   background-color: beige;
   padding: 20px;
-  margin: 0.5rem;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -47,23 +48,6 @@ main > section:nth-of-type(2) > div > button {
 }
 main > section:nth-of-type(2) > div > h3 {
   margin: 0;
-}
-section{
-  margin: 0.5rem;
-  background-color: beige;
-  padding: 20px;
-  border-radius: 20px;
-}
-section > div > div > span {
-  display: flex;
-  margin-top: 10px;
-  gap: 2rem;
-  margin-bottom: 10px;
-}
-section > div > div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 }
 article {
   display: flex;
@@ -102,6 +86,29 @@ article > div:nth-of-type(2){
   display: flex;
   gap: 2rem;
 }
+body > section{
+  margin: 0.5rem;
+  background-color: beige;
+  padding: 20px;
+  border-radius: 20px;
+}
+body > section > div > div > span {
+  display: flex;
+  margin-top: 10px;
+  gap: 2rem;
+  margin-bottom: 10px;
+}
+body > section > div > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+body > section > div > div > span > p {
+  cursor: pointer;
+}
+body > section > div > div > span > p:hover {
+  color: crimson;
+}
 footer {
   position: fixed;
   top: 0;
@@ -136,12 +143,19 @@ hr{
   width: 100%;
   color: black;
 }
-@media (min-width: 67rem) {
+@media (min-width: 50rem) {
   main {
+    flex-direction: row;
     margin: auto;
     margin-top: 3rem;
   }
   section {
     font-size: 16px;
+  }
+  section:nth-of-type(3) {
+    width: 70%;
+  }
+  main > section:nth-of-type(1) {
+    margin: 0.5rem;
   }
 }

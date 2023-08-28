@@ -1,28 +1,55 @@
 let currentPage = 0; //현재 페이지 번호
-let isLastPage = false; //마지막 페이지 인지 여부 
-const MAX_MEMO = 4;// 고정된 메모 갯수
+let isLastPage = false; //마지막 페이지 인지 여부
+const MAX_MEMO = 4; // 고정된 메모 갯수
 let currentQuery = ""; // 현재 검색 키워드
 
 //화면을 처음 켰을 때 첫번째 페이지 조회
-(async() => {
+(async () => {
   hiddenButton();
   loginLogout();
-  window.addEventListener("DOMContentLoaded", () => {
-    getPagedMemo(0);
+  window.addEventListener("DOMContentLoaded", async () => {
+    // 마이페이지에서 넘어왔을 때 쿼리 받기
+    const urlParams = new URLSearchParams(window.location.search);
+    const nickname = urlParams.get("nickname"); // 쿼리 파라미터에서 nickname 값을 가져옴
+    if (nickname) {
+      const response = await fetch(
+        `http://localhost:8080/posts/${nickname}?page=0&size=4`,
+        {
+          headers: {
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        }
+      );
+      const results = await response.json();
+      const section = document.querySelector("section");
+      section.innerHTML = "";
+      results.content.forEach((item) => {
+        section.insertAdjacentHTML("beforeend", cardTemplate(item));
+      });
+      currentPage = results.number;
+      isLastPage = results.last;
+      setBtnActive();
+    } else {
+      getPagedMemo(0);
+    }
   });
 })();
 
 //메모 형태
-function cardTemplate(item, token){
-  const imageElement = item.image ? `<img src="${item.image}" alt="반려동물사진">` : "";
-  const select = token ? 
-  `<select>
+function cardTemplate(item, token) {
+  const imageElement = item.image
+    ? `<img src="${item.image}" alt="반려동물사진">`
+    : "";
+  const select = token
+    ? `<select>
     <option>선택</option>
     <option class="modify" value="modify">수정</option>
     <option class="delete" value="delete">삭제</option>
     </select>
-  `:"";
-  const template =  /*html*/
+  `
+    : "";
+  const template =
+    /*html*/
     `<article data-no="${item.no}">
     <div>
     <h4>${item.title}</h4>
@@ -44,16 +71,16 @@ function cardTemplate(item, token){
     <h3>${item.nickname}</h3>
     </div>
     </article>`;
-    return template;
+  return template;
 }
 
 //메모를 찾아서 조회 후 화면에 보이는 메서드
-async function getPagedMemo(page, query){
+async function getPagedMemo(page, query) {
   const section = document.querySelector("section");
   let url = "";
-  if(query){
-    url = `http://localhost:8080/posts/paging/search?page=${page}&size=${MAX_MEMO}&query=${query}`
-  }else {
+  if (query) {
+    url = `http://localhost:8080/posts/paging/search?page=${page}&size=${MAX_MEMO}&query=${query}`;
+  } else {
     url = `http://localhost:8080/posts/paging?page=${page}&size=${MAX_MEMO}`;
   }
   const response = await fetch(url);
@@ -62,15 +89,13 @@ async function getPagedMemo(page, query){
 
   //목록 초기화
   section.innerHTML = "";
-  results.content.forEach(item => {
-    
+  results.content.forEach((item) => {
     const token = getCookie("token");
-    if(!token){
+    if (!token) {
       section.insertAdjacentHTML("beforeend", cardTemplate(item));
-    }else{
+    } else {
       section.insertAdjacentHTML("beforeend", cardTemplate(item, token));
     }
-          
   });
 
   currentPage = results.number;
@@ -92,7 +117,7 @@ async function getPagedMemo(page, query){
 
   textQuery.addEventListener("keyup", (e) => {
     e.preventDefault();
-    if(e.key.toLowerCase() === "enter"){
+    if (e.key.toLowerCase() === "enter") {
       currentQuery = textQuery.value;
       getPagedMemo(0, currentQuery);
     }
@@ -119,15 +144,15 @@ function setBtnActive() {
   const btnPrev = buttons[0];
   const btnNext = buttons[1];
 
-  if(currentPage === 0){
+  if (currentPage === 0) {
     btnPrev.disabled = true;
-  }else{
+  } else {
     btnPrev.disabled = false;
   }
- 
-  if(isLastPage) {
+
+  if (isLastPage) {
     btnNext.disabled = true;
-  }else{
+  } else {
     btnNext.disabled = false;
   }
 }
@@ -145,7 +170,7 @@ function setBtnActive() {
   //이전 버튼
   btnPrev.addEventListener("click", (e) => {
     e.preventDefault();
-    currentPage > 0 && getPagedMemo(currentPage -1, currentQuery);
+    currentPage > 0 && getPagedMemo(currentPage - 1, currentQuery);
   });
   //다음 버튼
   btnNext.addEventListener("click", (e) => {
@@ -157,8 +182,8 @@ function setBtnActive() {
 //삭제
 (() => {
   const section = document.querySelector("section");
-  let previousValue = null; 
-  section.addEventListener("click", async(e) => {
+  let previousValue = null;
+  section.addEventListener("click", async (e) => {
     e.preventDefault();
     const select = e.target.closest("select");
     const article = select.parentElement.parentElement;
@@ -167,24 +192,21 @@ function setBtnActive() {
     const currentValue = select.value;
     if (currentValue !== previousValue) {
       previousValue = currentValue;
-      if(currentValue === "delete"){
+      if (currentValue === "delete") {
         //서버연결
-        const response = await fetch(`http://localhost:8080/posts/${number}`,
-        {
+        const response = await fetch(`http://localhost:8080/posts/${number}`, {
           method: "DELETE",
           headers: {
-          Authorization: `Bearer ${getCookie(
-            "token"
-          )}`,
+            Authorization: `Bearer ${getCookie("token")}`,
           },
-         });
-         if([401, 403].includes(response.status)) {
+        });
+        if ([401, 403].includes(response.status)) {
           hasChanged = false;
           alert("해당 포스트의 작성자가 아닙니다.");
-        }else if([404].includes(response.status)){
+        } else if ([404].includes(response.status)) {
           hasChanged = false;
           alert("해당 포스트를 찾을 수 없습니다.");
-        }else{
+        } else {
           article.remove();
           hasChanged = false;
           alert("삭제가 완료 되었습니다.");
@@ -197,8 +219,8 @@ function setBtnActive() {
 //수정
 (() => {
   const section = document.querySelector("section");
-  let previousValue = null; 
-  section.addEventListener("click", async(e) => {
+  let previousValue = null;
+  section.addEventListener("click", async (e) => {
     e.preventDefault();
     const select = e.target.closest("select");
     const article = select.parentElement.parentElement;
@@ -207,7 +229,7 @@ function setBtnActive() {
     const currentValue = select.value;
     if (currentValue !== previousValue) {
       previousValue = currentValue;
-      if(currentValue === "modify") {
+      if (currentValue === "modify") {
         //레이어 띄우기
         /** @type {HTMLDivElement} */
         const layer = document.querySelector("footer");
@@ -217,58 +239,61 @@ function setBtnActive() {
         const textbox = article.querySelector("p");
         layer.querySelector("textarea").value = textbox.innerHTML;
         const buttons = layer.querySelectorAll("button");
-    
-         //취소버튼
-         buttons[1].addEventListener("click", (e) => {
+
+        //취소버튼
+        buttons[1].addEventListener("click", (e) => {
           e.preventDefault();
           layer.hidden = true;
           window.location.reload();
         });
-    
+
         //확인버튼
-        buttons[0].addEventListener("click", async(e) => {
+        buttons[0].addEventListener("click", async (e) => {
           e.preventDefault();
-    
+
           const inputs = layer.querySelectorAll("input");
           const modifyTitle = inputs[0].value;
           const modifyTextbox = layer.querySelector("textarea").value;
           const file = inputs[1];
-    
+
           async function modifyPost(image) {
-            const response = await fetch (
-            `http://localhost:8080/posts/${number}` , {
-              method: "PUT",
-              headers: {
-                "content-type": "application/json",
-                "Authorization": `Bearer ${getCookie(
-                 "token")}`,
-              },
-              body: JSON.stringify ({
-                title: modifyTitle,
-                content: modifyTextbox ? modifyTextbox : null,
-                image: image ? image : null,
-              }),
-            });
-            if([401, 403].includes(response.status)) {
+            const response = await fetch(
+              `http://localhost:8080/posts/${number}`,
+              {
+                method: "PUT",
+                headers: {
+                  "content-type": "application/json",
+                  Authorization: `Bearer ${getCookie("token")}`,
+                },
+                body: JSON.stringify({
+                  title: modifyTitle,
+                  content: modifyTextbox ? modifyTextbox : null,
+                  image: image ? image : null,
+                }),
+              }
+            );
+            if ([401, 403].includes(response.status)) {
               hasChanged = false;
               alert("해당 포스트의 작성자가 아닙니다.");
               window.location.reload();
-            }else if([404].includes(response.status)){
+            } else if ([404].includes(response.status)) {
               hasChanged = false;
               alert("해당 포스트를 찾을 수 없습니다.");
               window.location.reload();
             }
           }
-          if(file.files[0]){
+          if (file.files[0]) {
             const reader = new FileReader();
-            reader.addEventListener("load", async(e) => {
-            const image = e.target.result;
-            modifyPost(image);
-            const imageElement = modifyArticle.querySelector("img");
-            imageElement.src = image;
+            reader.addEventListener("load", async (e) => {
+              const image = e.target.result;
+              modifyPost(image);
+              const imageElement = modifyArticle.querySelector("img");
+              imageElement.src = image;
             });
             reader.readAsDataURL(file.files[0]);
-          }else {modifyPost();}
+          } else {
+            modifyPost();
+          }
           title.innerHTML = layer.querySelector("input").value;
           textbox.innerHTML = layer.querySelector("textarea").value;
           layer.hidden = true;
@@ -287,7 +312,7 @@ function setBtnActive() {
 
   file.addEventListener("change", (e) => {
     const selectedFile = file.files[0];
-    if(selectedFile){
+    if (selectedFile) {
       img.style.display = "block";
       const reader = new FileReader();
       reader.addEventListener("load", (event) => {
@@ -295,7 +320,7 @@ function setBtnActive() {
         img.src = event.target.result;
       });
       reader.readAsDataURL(selectedFile);
-    }else {
+    } else {
       img.style.display = "none";
       img.src = "#";
     }

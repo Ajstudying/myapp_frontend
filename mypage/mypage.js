@@ -1,5 +1,3 @@
-let nickname = "";
-
 (() => {
   hiddenButton();
   loginLogout();
@@ -55,27 +53,34 @@ function myTemplate(item) {
   results.data.forEach((item) => {
     profile.insertAdjacentHTML("beforeend", myTemplate(item));
   });
-  nickname = results.data[0][1];
-  console.log(nickname);
   divs[1].querySelectorAll("span")[0].querySelector("p:last-child").innerHTML =
     results.data[0][0];
   divs[1].querySelectorAll("span")[1].querySelector("p:last-child").innerHTML =
     results.data[0][1];
+  console.log(results.data);
+  const myArticle = document.querySelectorAll("section")[2];
+  const posts = myArticle.querySelectorAll("p")[0];
+  const boards = myArticle.querySelectorAll("p")[1];
+  posts.dataset.nick = results.data[0][1];
+  posts.innerHTML = `<ins data-nick="${results.data[0][1]}">${results.data[0][4]}건</ins>`;
+  boards.innerHTML = `<ins>${results.data[0][5]}건</ins>`;
 })();
 
 //포스트, 정보나눔 조회
 (() => {
-  console.log(nickname);
-  const section = document.querySelectorAll("section")[2];
-  const posts = section.querySelectorAll("p")[0];
-  const boards = section.querySelectorAll("p")[1];
+  const myArticle = document.querySelectorAll("section")[2];
+  const posts = myArticle.querySelectorAll("p")[0];
+  const boards = myArticle.querySelectorAll("p")[1];
 
-  posts.addEventListener("click", async (e) => {
+  posts.addEventListener("click", (e) => {
     e.preventDefault();
-    url = `http://localhost:8080/posts/paging/search?page=0&size=4&query=${nickname}`;
-    const response = await fetch(url);
-    const results = await response.json();
-    console.log(results);
+    const nickname = posts.querySelector("ins").dataset.nick;
+    window.location.href = `http://localhost:5500/pet/pet-index.html?nickname=${nickname}`;
+  });
+  boards.addEventListener("click", (e) => {
+    e.preventDefault();
+    const nickname = posts.querySelector("ins").dataset.nick;
+    window.location.href = `http://localhost:5500/board/board.html?nickname=${nickname}`;
   });
 })();
 

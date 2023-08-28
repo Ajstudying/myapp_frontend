@@ -81,8 +81,63 @@ async function getPagedBoard(page, option, query) {
 
 //맨처음 화면 열었을 때
 (() => {
-  window.addEventListener("DOMContentLoaded", () => {
-    getPagedBoard(0);
+  window.addEventListener("DOMContentLoaded", async () => {
+    // URL에서 쿼리 파라미터 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const nickname = urlParams.get("nickname"); // 쿼리 파라미터에서 nickname 값을 가져옴
+    if (nickname) {
+      const response = await fetch(
+        `http://localhost:8080/boards/nickname/${nickname}?page=0&size=5`,
+        {
+          headers: {
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        }
+      );
+      const results = await response.json();
+      const section = document.querySelectorAll("section")[0];
+      section.innerHTML = "";
+      const result = results.content;
+      const ul = document.createElement("ul");
+      section.append(ul);
+      result.forEach((item) => {
+        const time = new Date(item.createdTime);
+        const reservationTime = `${time.getFullYear()}-${time.getMonth()}-${time
+          .getDate()
+          .toString()}`;
+        const li = document.createElement("li");
+        const hr = document.createElement("hr");
+        const request =
+          item.request === "inquiry"
+            ? "문의"
+            : item.request === "recommend"
+            ? "추천"
+            : "";
+        const template =
+          /*html*/
+          `<div><sub>${item.species}</sub><button data-request="${item.request}">${request}</button></div>
+      <div>
+      <span>
+      <p class="title">${item.title}</p>
+      </span>
+      <span>
+      <p>작성자: ${item.nickname}</p>
+      <p>${reservationTime}</p>
+      </span>
+      </div>`;
+        li.dataset.no = item.no;
+        li.insertAdjacentHTML("afterbegin", template);
+        ul.append(li);
+        ul.append(hr);
+      });
+      currentPage = results.number; //현재 페이지 설정
+      isLastPage = results.last; // 마지막 페이지 여부
+
+      //이전 /다음 버튼 활성화 처리
+      setBtnActive();
+    } else {
+      getPagedBoard(0);
+    }
   });
 })();
 
