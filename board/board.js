@@ -201,9 +201,7 @@ function setBtnActive() {
 (() => {
   const option = document.querySelector("select");
   const textQuery = document.querySelector("input");
-  const buttons = document
-    .querySelectorAll("section")[2]
-    .querySelectorAll("button");
+  const buttons = document.querySelector("form").querySelectorAll("button");
   const btnSearch = buttons[0];
 
   btnSearch.addEventListener("click", (e) => {
@@ -223,9 +221,7 @@ function setBtnActive() {
 
 //검색조건 초기화
 (() => {
-  const btnReset = document
-    .querySelectorAll("section")[2]
-    .querySelectorAll("button")[1];
+  const btnReset = document.querySelector("form").querySelectorAll("button")[1];
 
   btnReset.addEventListener("click", (e) => {
     e.preventDefault();

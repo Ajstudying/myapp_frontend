@@ -91,6 +91,8 @@ body > section{
   background-color: beige;
   padding: 20px;
   border-radius: 20px;
+  margin: auto;
+  width: 350px;
 }
 body > section > div > div > span {
   display: flex;

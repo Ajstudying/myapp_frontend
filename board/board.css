@@ -7,6 +7,21 @@ section > ul > li {
   gap: 10px;
   font-size: 14px;
 }
+body > div{
+  display: flex;
+  justify-content: flex-end;
+}
+body > div > button {
+  background-color: rgb(96, 108, 56);
+  color: #fff;
+  border-radius: 5px;
+}
+body > div > button > a {
+  text-decoration: none;
+}
+body > div > button > a:visited {
+  color: #fff;
+}
 section:nth-of-type(1) > ul{
   padding: 0;
 }
@@ -73,37 +88,24 @@ section:nth-of-type(2) > div > button {
   color: #fff;
   box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
 }
-section:nth-of-type(3){
+form{
   display: flex;
-  flex-direction: column;
   margin: auto;
-  gap: 20px;
 }
-section:nth-of-type(3) > form > div:nth-of-type(1){
+form > div:nth-of-type(1){
   display: flex;
   gap: 10px;
 }
-section:nth-of-type(3) > form > div > div >button {
+form > div > div >button {
   background-color: rgb(40, 54, 24);
   color: white;
   border-radius: 5px;
 }
-section:nth-of-type(3) > div{
-  display: flex;
-  justify-content: flex-end;
-}
-section:nth-of-type(3) > div > button {
-  background-color: rgb(96, 108, 56);
-  color: #fff;
-  border-radius: 5px;
-}
-section:nth-of-type(3) > div > button > a {
-  text-decoration: none;
-}
-section:nth-of-type(3) > div > button > a:visited {
-  color: #fff;
-}
 @media (min-width: 55rem){
+  body > div{
+    width: 78%;
+    margin: auto;
+  }
   section:nth-of-type(1) {
     margin: 20px;
   }
@@ -111,19 +113,10 @@ section:nth-of-type(3) > div > button > a:visited {
     width: 80%;
     margin: auto;
   }
-  section:nth-of-type(3){
-    display: flex;
-    flex-direction: row;
-    width: 55%;
-    justify-content: space-between;
-  } 
 }
 @media (min-width: 90rem) {
   section:nth-of-type(2){
     margin-bottom: 20px;
-  }
-  section:nth-of-type(3) > form > div:nth-of-type(1){
-    gap: 30px;
   }
   
 }
