@@ -126,20 +126,16 @@ footer {
 }
 #modify-box > div:nth-of-type(2) > label > div {
   width: 100%;
+  padding: 2px;
   height: 23px;
   text-align: center;
-  background-color: cadetblue;
+  background: #adc178;
   border: 1px solid black;
   border-radius: 4px;
-  color: #3c4043;
+  color: darkgreen;
   cursor: pointer;
   font-size: 12px;
   font-weight: bold;
-  line-height: 20px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: pre;
 }
 #modify-box > div:nth-of-type(2) > label {
   display: flex;

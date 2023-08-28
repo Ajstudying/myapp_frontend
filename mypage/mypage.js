@@ -11,7 +11,7 @@
 function myTemplate(item) {
   const template =
     /*html*/
-    `<article data-no="${item[4]}">
+    `<article data-no="${item[6]}">
   <div>
   <div>
   <h4>펫이름: </h4>
@@ -93,10 +93,8 @@ function myTemplate(item) {
     const buttons = article.querySelectorAll("button");
     const modifyButton = buttons[0];
     const removeButton = buttons[1];
-    if (e.target == removeButton) {
-      const removeBtn = removeArticle.querySelectorAll("button")[1];
-      console.log(removeBtn);
-      const removeNum = removeArticle.dataset.no;
+    if (e.target === removeButton) {
+      const removeNum = article.dataset.no;
 
       //서버연결
       const response = await fetch(
@@ -111,9 +109,9 @@ function myTemplate(item) {
       if ([404].includes(response.status)) {
         alert("해당 프로필이 존재하지 않습니다.");
       }
-      removeArticle.remove();
+      article.remove();
       window.location.reload();
-    } else if (e.target == modifyButton) {
+    } else if (e.target === modifyButton) {
       const layer = document.querySelector("footer");
       const modifybox = document.querySelector("#modify-box");
       const h5 = modifybox.querySelector("h5");
