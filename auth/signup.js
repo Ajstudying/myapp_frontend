@@ -74,12 +74,10 @@
       icon.classList.remove("feedback-icon"); // feedback 아이콘 클래스 제거
       icon.classList.add("help-icon"); // help 아이콘 클래스 추가
     }
-    console.log(icon.childNodes[1]);
     icon.childNodes[1].addEventListener("input", (e) => {
       if (
         password.value.toLowerCase() === icon.childNodes[1].value.toLowerCase()
       ) {
-        console.log(e.target);
         icon.innerHTML = `feedback
         <input type="password" placeholder="입력완료" />`;
 

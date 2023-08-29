@@ -50,16 +50,14 @@ section > span > button {
   opacity: 1;
 }
 .bar > label > input {
-  /* display: none; */
+  vertical-align: top; /*상단의 태그와 윗부분 연결*/
   width: 80%;
   height: 25px;
   border: none; /*검색창 border 을 없앰으로써 자연스러워짐 */
   --webkit-appearance: none; /*기본 search 디자인을 없앰 */
   overflow: auto; /*검색어가 길어졌을때 오른쪽으로 자연스럽게 검색되도록 하기 위해*/
   z-index: -1;
-  font-size: 15px;
-  margin-bottom: 5px;
-  
+  font-size: 15px; 
 }
 .bar label{
   width: 100%;

@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pet</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <link rel="stylesheet" href="pet-index.css" />
   </head>
   <body>
@@ -31,9 +35,19 @@
           </ul>
         </nav>
         <form>
-          <input type="text" placeholder="반려동물이나 작성자를 입력하세요." />
-          <button>검색</button>
-          <button>초기화</button>
+          <div class="bar">
+            <label class="material-symbols-outlined"
+              >search
+              <input
+                type="text"
+                placeholder="반려동물이나 작성자를 입력하세요."
+              />
+            </label>
+          </div>
+          <span>
+            <button>검색</button>
+            <button>초기화</button>
+          </span>
         </form>
       </div>
     </header>
