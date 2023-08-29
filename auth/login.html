@@ -76,7 +76,52 @@
       <div>
         <button>로그인</button>
         <button><a href="signup.html">회원가입</a></button>
+
       </div>
     </form>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("err")) {
+        console.log(params.get("err"));
+        alert(params.get("err"));
+        history.replaceState(null, null, "http://localhost:5500/auth/login.html");
+      }
+    </script>
+    <script>
+      const btn = document.forms[0].querySelector("button");
+      const id = document.forms[0].querySelectorAll("input")[0];
+      const pass = document.forms[0].querySelectorAll("input")[1];
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        filledCheck();
+      });
+      id.addEventListener("keyup", (e) => {
+        e.preventDefault();
+        if(e.key.toLowerCase() === "enter"){
+          filledCheck();
+        }
+      });
+      pass.addEventListener("keyup", (e) => {
+        e.preventDefault();
+        if(e.key.toLowerCase() === "enter"){
+          filledCheck();
+        }
+      });
+      function filledCheck(){
+        const id = document.forms[0].querySelectorAll("input")[0];
+        const pass = document.forms[0].querySelectorAll("input")[1];
+        if (!id.value) {
+          alert("사용자 이름을 입력해주세요.");
+          return;
+        }
+        if (!pass.value) {
+          alert("비밀번호를 입력해주세요.");
+          return;
+        }
+        if(id.value && pass.value){
+          document.forms[0].submit();
+        }
+      }
+    </script>
   </body>
 </html>
