@@ -12,18 +12,17 @@
     e.preventDefault();
     const profileTemplate =
       /*html*/
-      `<hr>
-    <div class="inputbox">
-    <h4>펫이름:</h4>
-    <label>
-    <input type="text" />
-    </label>
+      `<div class="bar">
+      <label class="material-symbols-outlined"
+        >pets
+        <input type="text" placeholder="반려동물의 이름을 입력해주세요." />
+      </label>
     </div>
-    <div class="inputbox">
-    <h4>펫종류:</h4>
-    <label>
-    <input type="text" />
-    </label>
+    <div class="bar">
+      <label class="material-symbols-outlined"
+        >pet_supplies
+        <input type="text" placeholder="반려동물의 종류를 입력해주세요." />
+      </label>
     </div>`;
     forms[1].insertAdjacentHTML("beforeend", profileTemplate);
   });
