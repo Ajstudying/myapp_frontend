@@ -52,6 +52,7 @@ let today = new Date();
     <button>삭제</button>
     </div>
     </article>
+    <hr>
     `;
     sections[1].insertAdjacentHTML("beforeend", schedule);
   });
