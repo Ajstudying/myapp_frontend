@@ -91,17 +91,17 @@ article > div:nth-of-type(2){
   gap: 2rem;
 }
 body > section{
-  margin: 0.5rem;
   background-color: beige;
   padding: 20px;
   border-radius: 20px;
   margin: auto;
+  margin-top: 0.5rem;
   width: 350px;
 }
 body > section > div > div > span {
   display: flex;
+  justify-content: space-between;
   margin-top: 10px;
-  gap: 2rem;
   margin-bottom: 10px;
 }
 body > section > div > div {
@@ -109,12 +109,18 @@ body > section > div > div {
   flex-direction: column;
   gap: 0.5rem;
 }
+body > section > div > div > span > h4 {
+  margin-left: 10px;
+}
 body > section > div > div > span > p {
   cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 10px;
 }
 body > section > div > div > span > p:hover {
   color: #ECEFF1;
-  background-color: #7986cb;
+  background-color: #333d29;
   padding: 0.3rem;
   border-radius: 10px;
 }
@@ -171,9 +177,7 @@ hr{
     font-size: 16px;
   }
   body > section {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    margin-top: 1rem;
   }
   body > section > div {
     width: 100%;
