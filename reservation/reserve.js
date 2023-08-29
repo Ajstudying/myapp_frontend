@@ -44,8 +44,10 @@ let today = new Date();
     <h4>예정일: </h4>
     <p>${reservationTime}</p>
     <h4>내용: </h4>
+    <span>
     <p>${item.petname}</p>
     <p>${item.content}</p>
+    <span>
     </div>
     <div>
     <button>수정</button>

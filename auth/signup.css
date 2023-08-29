@@ -2,16 +2,13 @@
 section{
   display: flex;
   flex-direction: column;
-  margin: 10px;
-}
-section form {
   background-color: beige;
-  padding: 15px;
-  padding-bottom: 40px;
+  width: 100%;
 }
 section > form:nth-of-type(2)> div:nth-of-type(1){
   display: flex;
   justify-content: space-between;
+  border: 1px solid black;
 }
 section > form:nth-of-type(2)> div:nth-of-type(1) > button {
   margin-top: 15px;
@@ -32,7 +29,7 @@ form {
   display: flex;
   gap: 10px;
   justify-content: flex-end;
-  width: 80%;
+  width: 90%;
 }
 .inputbox > h4 {
   margin: 0;
@@ -41,7 +38,6 @@ form {
   margin: 0;
 }
 section > span {
-  background-color: beige;
   display: flex;
   justify-content: flex-end;
   padding: 1rem;
@@ -52,8 +48,7 @@ section > span > button {
   box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
   border: 1px solid black;
   border-radius: 4px;
-}
-@media (min-width: 61rem){
+}@media (min-width: 58rem) {
   section{
     margin: 3rem;
   }
@@ -63,12 +58,17 @@ section > span > button {
     padding: 1.5rem;
     padding-bottom: 3.5rem;
   }
+  .inputbox{
+    gap: 30px;
+    width: 65%;
+  }
+}
+@media (min-width: 58rem){
   section form h3 {
     font-size: 22px;
   }
   .inputbox{
     gap: 30px;
-    font-size: 18px;
     width: 65%;
   }
   .inputbox input {
@@ -80,5 +80,10 @@ section > span > button {
   }
   section > span > button {
     font-size: 14px;
+  }
+}
+@media (min-width: 90rem){
+  .inputbox{
+    font-size: 18px;
   }
 }
