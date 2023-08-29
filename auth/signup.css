@@ -69,6 +69,15 @@ hr {
   width: 100%;
   color: black;
 }
+.feedback-icon{
+  /* feedback 아이콘에 대한 스타일 */
+  color: green;
+}
+
+.help-icon {
+  /* help 아이콘에 대한 스타일 */
+  color: red;
+}
 @media (min-width: 43rem) {
   section{
     margin: 3rem;

@@ -59,3 +59,33 @@
     window.location.replace("http://localhost:5500/index.html");
   });
 })();
+
+//비밀번호 확인 아이콘 모양으로 하기
+(() => {
+  const password = document.forms[0].querySelectorAll("input")[1];
+  const icon = document.forms[0].querySelectorAll("label")[2];
+
+  password.addEventListener("input", () => {
+    const passwordCheck = icon.querySelector("input");
+    if (password.value.toLowerCase() !== passwordCheck.value.toLowerCase()) {
+      icon.innerHTML = `live_help
+      <input type="password" placeholder="비밀번호 다시 입력해주세요." />`;
+
+      icon.classList.remove("feedback-icon"); // feedback 아이콘 클래스 제거
+      icon.classList.add("help-icon"); // help 아이콘 클래스 추가
+    }
+    console.log(icon.childNodes[1]);
+    icon.childNodes[1].addEventListener("input", (e) => {
+      if (
+        password.value.toLowerCase() === icon.childNodes[1].value.toLowerCase()
+      ) {
+        console.log(e.target);
+        icon.innerHTML = `feedback
+        <input type="password" placeholder="입력완료" />`;
+
+        icon.classList.remove("help-icon"); // help 아이콘 클래스 제거
+        icon.classList.add("feedback-icon"); // feedback 아이콘 클래스 추가
+      }
+    });
+  });
+})();
