@@ -57,6 +57,7 @@ let today = new Date();
     <hr>
     `;
     sections[1].insertAdjacentHTML("beforeend", schedule);
+    checkDay();
   });
 })();
 

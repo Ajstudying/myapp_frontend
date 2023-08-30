@@ -3,6 +3,17 @@ let isLastPage = false; //마지막 페이지 인지 여부
 const MAX_MEMO = 4; // 고정된 메모 갯수
 let currentQuery = ""; // 현재 검색 키워드
 
+async function getUserNickname() {
+  let url = `http://localhost:8080/auth/userinfo`;
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${getCookie("token")}`,
+    },
+  });
+  const result = await response.json();
+  return result.nickname;
+}
+
 //화면을 처음 켰을 때 첫번째 페이지 조회
 (async () => {
   hiddenButton();
@@ -36,21 +47,29 @@ let currentQuery = ""; // 현재 검색 키워드
 })();
 
 //메모 형태
-function cardTemplate(item, token) {
+function cardTemplate(item, token, nickname) {
   const imageElement = item.image
     ? `<img src="${item.image}" alt="반려동물사진">`
     : "";
-  const select = token
-    ? `<select>
+  let select = "";
+  let like = "";
+  if (token && nickname === item.nickname) {
+    select = `<select>
     <option>선택</option>
     <option class="modify" value="modify">수정</option>
     <option class="delete" value="delete">삭제</option>
     </select>
-  `
-    : "";
+  `;
+  }
+  if (item.likes === true) {
+    like = `<span class="material-icons-outlined heart">favorite<span>`;
+  } else {
+    like = `<span class="material-icons-outlined">favorite_border<span>`;
+  }
   const template =
     /*html*/
     `<article data-no="${item.no}">
+    <h3>${item.petname}</h3>
     <div>
     <h4>${item.title}</h4>
     ${select}
@@ -62,13 +81,12 @@ function cardTemplate(item, token) {
     </div>
     <div>
     <p>${item.content}</p>
-    <div>
-    </div>
+    ${like}
     </div>
     <hr>
     <div>
-    <h3>${item.petname}</h3>
     <h3>${item.nickname}</h3>
+    <h3>❤ ${item.likeCount}</h3>
     </div>
     </article>`;
   return template;
@@ -87,6 +105,7 @@ async function getPagedMemo(page, query) {
 
   const results = await response.json();
 
+  const nickname = await getUserNickname();
   //목록 초기화
   section.innerHTML = "";
   results.content.forEach((item) => {
@@ -94,7 +113,11 @@ async function getPagedMemo(page, query) {
     if (!token) {
       section.insertAdjacentHTML("beforeend", cardTemplate(item));
     } else {
-      section.insertAdjacentHTML("beforeend", cardTemplate(item, token));
+      section.insertAdjacentHTML(
+        "beforeend",
+        cardTemplate(item, token, nickname)
+      );
+      likeSign();
     }
   });
 
@@ -171,11 +194,13 @@ function setBtnActive() {
   btnPrev.addEventListener("click", (e) => {
     e.preventDefault();
     currentPage > 0 && getPagedMemo(currentPage - 1, currentQuery);
+    likeSign();
   });
   //다음 버튼
   btnNext.addEventListener("click", (e) => {
     e.preventDefault();
     !isLastPage && getPagedMemo(currentPage + 1, currentQuery);
+    likeSign();
   });
 })();
 
@@ -326,3 +351,76 @@ function setBtnActive() {
     }
   });
 })();
+
+//좋아요 표시
+async function likeSign() {
+  const response = await fetch(`http://localhost:8080/posts/like`, {
+    headers: {
+      Authorization: `Bearer ${getCookie("token")}`,
+    },
+  });
+  const results = await response.json();
+  const section = document.querySelector("section");
+  const articles = section.querySelectorAll("article");
+  results.forEach((result) => {
+    articles.forEach((article) => {
+      if (
+        result.likes === true &&
+        Number(article.dataset.no) === Number(result.post.no)
+      ) {
+        const icon = article.querySelector("span");
+        icon.classList.add("heart");
+        icon.innerHTML = "favorite";
+      }
+    });
+  });
+}
+
+//좋아요 추가 취소
+(() => {
+  const section = document.querySelector("section");
+  section.addEventListener("click", async (e) => {
+    e.preventDefault();
+    if (
+      e.target.classList.contains("material-icons-outlined") &&
+      e.target.tagName.toLowerCase() === "span"
+    ) {
+      e.target.classList.toggle("heart");
+      const article = e.target.closest("article");
+      const no = article.dataset.no;
+      if (e.target.classList.contains("heart")) {
+        e.target.innerHTML = "favorite";
+        const response = await fetch(`http://localhost:8080/posts/${no}/true`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        });
+        responseAlert(response);
+      } else {
+        e.target.innerHTML = "favorite_border";
+        const res = await fetch(`http://localhost:8080/posts/${no}/false`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        });
+        responseAlert(res);
+      }
+    }
+  });
+})();
+
+function responseAlert(response) {
+  if ([201].includes(response.status)) {
+    alert("좋아요가 추가되었습니다.");
+  } else if ([200].includes(response.status)) {
+    alert("좋아요가 취소되었습니다.");
+  } else if ([409].includes(response.status)) {
+    alert("이미 좋아요를 누르셨습니다.");
+  } else if ([404].includes(response.status)) {
+    alert("해당 포스트를 찾을 수 없습니다.");
+  } else if ([401].includes(response.status)) {
+    alert("로그인이 완료되지 않았습니다. 로그인 해주세요.");
+  }
+}
