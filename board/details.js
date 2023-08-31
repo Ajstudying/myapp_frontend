@@ -160,7 +160,9 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
         `
       <div>
       <div>
-      <sup><em>${item.ownerName}</em></sup>
+      <sup class="material-symbols-outlined">pets<em>${
+        item.ownerName
+      }</em></sup>
       <p>${item.content}</p>
       </div>
       <div>
@@ -431,7 +433,9 @@ function createCard(item) {
     /*html*/
     `<div>
       <div>
-      <sup><em>${item.ownerName}</em></sup>
+      <sup class="material-symbols-outlined">pets<em>${
+        item.ownerName
+      }</em></sup>
       <p>${item.content}</p>
       </div>
       <div>
@@ -451,7 +455,9 @@ function replyCard(result) {
     /*html*/
     `<div>
       <div>
-      <sup><em>${result.ownerName}</em></sup>
+      <sup class="material-symbols-outlined">pets<em>${
+        result.ownerName
+      }</em></sup>
       <p>${result.content}</p>
       </div>
       <div>
@@ -467,7 +473,9 @@ function card(reply) {
     /*html*/
     `<div>
       <div>
-      <sup><em>${reply.ownerName}</em></sup>
+      <sup class="material-symbols-outlined">pets<em>${
+        reply.ownerName
+      }</em></sup>
       <p>${reply.content}</p>
       </div>
       <div>

@@ -9,7 +9,7 @@ article {
   width: 22rem;
   padding: 1.5rem;
   margin: 1.5rem 0.8rem;
-  background-color:rgb(255, 250, 240);
+  background-color: rgb(232, 243, 213);
   box-shadow: 5px 5px 10px hsl(19, 28%, 33%);
   border-radius: 10px;
 }
@@ -18,7 +18,7 @@ article> h3 {
   font-size: 16px;
   padding: 2px 10px;
   border-radius: 50px;
-  background-color: antiquewhite;
+  background-color: #FEFEDF;
 }
 article > div:nth-of-type(1){
   margin: 10px;
@@ -67,6 +67,11 @@ article > div:nth-of-type(4) {
 article > div:nth-of-type(4) > h3:nth-of-type(2){
   color: crimson;
 }
+article > div:nth-of-type(4) > h3 {
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+}
 article > div:nth-of-type(2) > img {
   width: 100%;
 }
@@ -85,7 +90,7 @@ article > div:nth-of-type(2) > img {
   text-decoration: none;
   font-size: 14px;
   letter-spacing: .5px;
-  background:  rgb(96, 108, 56);
+  background:  #458871;
   color: #fff;
   box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
 }
@@ -99,7 +104,8 @@ footer {
   background-color: rgba(0, 0, 0, 0.7);
 }
 #modify-box {
-  background-color: beige;
+  background-color: #D2DFBD;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -127,16 +133,16 @@ footer {
 }
 #modify-box > div:nth-of-type(2) > label > div {
   width: 100%;
-  padding: 2px;
+  padding: 3px;
   height: 23px;
   text-align: center;
-  background: #adc178;
+  background: #458871;
+  box-shadow: 0 2px 2px -1px rgb(96, 108, 56);
   border: 1px solid black;
   border-radius: 4px;
-  color: darkgreen;
+  color: #fff;
   cursor: pointer;
   font-size: 12px;
-  font-weight: bold;
 }
 #modify-box > div:nth-of-type(2) > label {
   display: flex;
@@ -171,8 +177,8 @@ footer {
   justify-content: flex-end;
 }
 #modify-box > div:nth-of-type(4) > button{
-  background-color: rgb(96, 108, 56);
-  color: #fff;
+  background-color: #76A486;
+  color: white;
   border-radius: 5px;
 }
 hr{
@@ -251,7 +257,7 @@ header > div > form > span > button {
     width: 150px;
   }
   header {
-    width: 50%;
+    width: 40%;
   }
   section {
     flex-direction: row;

@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mypage</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0"
+    />
     <link rel="stylesheet" href="mypage.css" />
   </head>
   <body>
@@ -33,63 +37,60 @@
       </div>
     </header>
     <main>
-      <section>
-        <div>
-          <h3>개인정보</h3>
-          <hr />
-          <div>
-            <span>
-              <h4>아이디:</h4>
-              <p></p>
-            </span>
-            <span>
-              <h4>닉네임:</h4>
-              <p></p>
-            </span>
-          </div>
-          <hr />
-        </div>
-      </section>
-      <section>
-        <div>
-          <h3>프로필</h3>
-          <button>+</button>
-        </div>
-        <hr />
-      </section>
+      <h3>개인정보</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th class="material-symbols-outlined">person</th>
+            <th>아이디:</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="material-symbols-outlined">account_circle</th>
+            <th>닉네임:</th>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>프로필 <button>+</button></h3>
+      <table>
+        <tbody></tbody>
+      </table>
+      <h3>내가 쓴 글</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th class="material-symbols-outlined">photo_camera</th>
+            <th>펫:</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="material-symbols-outlined">prescriptions</th>
+            <th>정보나눔:</th>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
     </main>
-    <section>
-      <div>
-        <h3>내가 쓴 글</h3>
-        <hr />
-        <div>
-          <span>
-            <h4>펫:</h4>
-            <p></p>
-          </span>
-          <span>
-            <h4>정보나눔:</h4>
-            <p></p>
-          </span>
-        </div>
-        <hr />
-      </div>
-    </section>
-    <footer hidden>
-      <div id="modify-box">
+    <section hidden>
+      <article>
         <h5></h5>
-        <div>
+        <label class="material-symbols-outlined"
+          >pets
           <input type="text" placeholder="반려동물 이름" />
-        </div>
-        <div>
+        </label>
+        <label class="material-symbols-outlined"
+          >pet_supplies
           <input type="text" placeholder="반려동물 종류" />
-        </div>
+        </label>
         <div>
           <button>확인</button>
           <button>취소</button>
         </div>
-      </div>
-    </footer>
+      </article>
+    </section>
     <script src="mypage.js"></script>
   </body>
 </html>

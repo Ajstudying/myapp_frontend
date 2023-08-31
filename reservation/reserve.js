@@ -58,6 +58,7 @@ let today = new Date();
     `;
     sections[1].insertAdjacentHTML("beforeend", schedule);
     checkDay();
+    sections[1].style.boxShadow = "0px 10px 10px 1px rgba(0,0,0,0.3)";
   });
 })();
 

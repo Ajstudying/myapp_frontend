@@ -8,33 +8,26 @@
   }
 })();
 
-function myTemplate(item) {
-  const template =
+function mytable(item) {
+  const table =
     /*html*/
-    `<article data-no="${item[6]}">
-  <div>
-  <div>
-  <h4>펫이름: </h4>
-  <p>${item[2]}</p>
-  </div>
-  <button>수정</button>
-  </div>
-  <div>
-  <div>
-  <h4>펫종류: </h4>
-  <p>${item[3]}</p>
-  </div>
-  <button>삭제</button>
-  </div>
-  </article>
-  <hr>
+    `<tr data-no="${item[6]}">
+    <th class="material-symbols-outlined">pets</th>
+  <th>펫이름: </th>
+  <td>${item[2]}</td>
+  <td><button>수정</button> <button>삭제</button></td>
+  </tr>
+  <tr>
+  <th class="material-symbols-outlined">pet_supplies</th>
+  <th>펫종류: </th>
+  <td>${item[3]}</td>
+  </tr>
   `;
-  return template;
+  return table;
 }
 
 //프로필 조회
 (async () => {
-  const main = document.querySelector("main");
   const url = "http://localhost:8080/profile";
   const response = await fetch(url, {
     headers: {
@@ -48,29 +41,32 @@ function myTemplate(item) {
   }
   const results = await response.json();
 
-  const divs = main.querySelectorAll("section")[0].querySelectorAll("div");
-  const profile = main.querySelectorAll("section")[1];
+  const userTable = document.querySelectorAll("table")[0];
+  const profileTbody = document
+    .querySelectorAll("table")[1]
+    .querySelector("tbody");
+  const myArticles = document.querySelectorAll("table")[2];
+
   results.data.forEach((item) => {
-    profile.insertAdjacentHTML("beforeend", myTemplate(item));
+    profileTbody.insertAdjacentHTML("beforeend", mytable(item));
   });
-  divs[1].querySelectorAll("span")[0].querySelector("p:last-child").innerHTML =
-    results.data[0][0];
-  divs[1].querySelectorAll("span")[1].querySelector("p:last-child").innerHTML =
-    results.data[0][1];
-  console.log(results.data);
-  const myArticle = document.querySelectorAll("section")[2];
-  const posts = myArticle.querySelectorAll("p")[0];
-  const boards = myArticle.querySelectorAll("p")[1];
-  posts.dataset.nick = results.data[0][1];
-  posts.innerHTML = `<ins data-nick="${results.data[0][1]}">${results.data[0][4]}건</ins>`;
-  boards.innerHTML = `<ins>${results.data[0][5]}건</ins>`;
+  const id = userTable.querySelectorAll("td")[0];
+  const nickname = userTable.querySelectorAll("td")[2];
+  id.innerHTML = results.data[0][0];
+  nickname.innerHTML = results.data[0][1];
+
+  const petArticle = myArticles.querySelectorAll("td")[0];
+  const boardArticle = myArticles.querySelectorAll("td")[2];
+
+  petArticle.innerHTML = `<ins data-nick="${results.data[0][1]}">${results.data[0][4]}건</ins>`;
+  boardArticle.innerHTML = `<ins>${results.data[0][5]}건</ins>`;
 })();
 
 //포스트, 정보나눔 조회
 (() => {
-  const myArticle = document.querySelectorAll("section")[2];
-  const posts = myArticle.querySelectorAll("p")[0];
-  const boards = myArticle.querySelectorAll("p")[1];
+  const myArticles = document.querySelectorAll("table")[2];
+  const posts = myArticles.querySelectorAll("td")[0];
+  const boards = myArticles.querySelectorAll("td")[1];
 
   posts.addEventListener("click", (e) => {
     e.preventDefault();
@@ -84,145 +80,17 @@ function myTemplate(item) {
   });
 })();
 
-//삭제 수정 기능
-(() => {
-  const profile = document.querySelectorAll("section")[1];
-  profile.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const article = e.target.closest("article");
-    const buttons = article.querySelectorAll("button");
-    const modifyButton = buttons[0];
-    const removeButton = buttons[1];
-    if (e.target === removeButton) {
-      const removeNum = article.dataset.no;
-
-      //서버연결
-      const response = await fetch(
-        `http://localhost:8080/profile/${removeNum}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${getCookie("token")}`,
-          },
-        }
-      );
-      if ([404].includes(response.status)) {
-        alert("해당 프로필이 존재하지 않습니다.");
-      }
-      article.remove();
-      window.location.reload();
-    } else if (e.target === modifyButton) {
-      const layer = document.querySelector("footer");
-      const modifybox = document.querySelector("#modify-box");
-      const h5 = modifybox.querySelector("h5");
-      h5.innerHTML = "< 수정 >";
-      modifybox.prepend(h5);
-      layer.hidden = false;
-
-      const ps = article.querySelectorAll("p");
-      const inputs = layer.querySelectorAll("input");
-      const petname = ps[0];
-      inputs[0].value = petname.innerHTML;
-      const species = ps[1];
-      inputs[1].value = species.innerHTML;
-
-      const buttons = layer.querySelectorAll("button");
-      buttons[1].addEventListener("click", (e) => {
-        e.preventDefault();
-        cleanLayer();
-        layer.hidden = true;
-      });
-
-      buttons[0].addEventListener("click", async (e) => {
-        e.preventDefault();
-        const section = document.querySelector("section");
-        console.log(section);
-        const no = article.dataset.no;
-        console.log(no);
-
-        const modifyPetName = inputs[0].value;
-        const modifySpecies = inputs[1].value;
-
-        const response = await fetch(`http://localhost:8080/profile/${no}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${getCookie("token")}`,
-          },
-          body: JSON.stringify({
-            petname: modifyPetName,
-            species: modifySpecies,
-          }),
-        });
-
-        console.log(response.status);
-        petname.innerHTML = inputs[0].value;
-        species.innerHTML = inputs[1].value;
-        cleanLayer();
-        layer.hidden = true;
-      });
-    }
-  });
-})();
-
 //추가
 (() => {
-  const profile = document.querySelectorAll("section")[1];
+  const profile = document.querySelectorAll("h3")[1];
   const addBtn = profile.querySelector("button");
   addBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    const layer = document.querySelector("footer");
-    const insertBox = document.querySelector("#modify-box");
-    const h5 = layer.querySelector("h5");
-    h5.innerHTML = "< 추가 >";
-    insertBox.prepend(h5);
-    layer.hidden = false;
+    const layer = document.querySelector("section");
+    const insertbox = document.querySelector("article");
+    const title = layer.querySelector("h5");
 
-    const buttons = layer.querySelectorAll("button");
-    //취소버튼
-    buttons[1].addEventListener("click", (e) => {
-      e.preventDefault();
-      cleanLayer();
-      layer.hidden = true;
-    });
-    //추가
-    buttons[0].addEventListener("click", async (e) => {
-      e.preventDefault();
-      const inputs = layer.querySelectorAll("input");
-      const petname = inputs[0];
-      const species = inputs[1];
-      if (petname.value == "") {
-        alert("반려동물의 이름을 입력해주세요.");
-        return;
-      }
-      if (species.value == "") {
-        alert("반려동물의 종류를 입력해주세요.");
-        return;
-      }
-      await fetch("http://localhost:8080/profile", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${getCookie("token")}`,
-        },
-        body: JSON.stringify({
-          petname: petname.value,
-          species: species.value,
-          user: null,
-        }),
-      });
-      cleanLayer();
-      layer.hidden = true;
-      window.location.reload();
-    });
+    h5.innerHTML = "< 추가 >";
+    layer.hidden = false;
   });
 })();
-
-function cleanLayer() {
-  const layer = document.querySelector("footer");
-  const inputs = layer.querySelectorAll("input");
-  const h5 = layer.querySelector("h5");
-  h5.innerHTML = "";
-  inputs[0].value = "";
-  inputs[1].value = "";
-}

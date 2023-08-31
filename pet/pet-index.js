@@ -10,7 +10,8 @@ async function getUserNickname() {
       Authorization: `Bearer ${getCookie("token")}`,
     },
   });
-  return String(response);
+  const result = response.text();
+  return result;
 }
 
 //화면을 처음 켰을 때 첫번째 페이지 조회
@@ -52,6 +53,7 @@ function cardTemplate(item, token, nickname) {
     : "";
   let select = "";
   let like = "";
+  console.log(nickname);
   if (token && nickname === item.nickname) {
     select = `<select>
     <option>선택</option>

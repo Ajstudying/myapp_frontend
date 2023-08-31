@@ -3,7 +3,7 @@ section > ul > li {
   display: flex;
   flex-direction: column;
   padding: 15px;
-  background-color: rgba(255,248,222, 0.7);
+  background-color: rgba(211, 228, 183, 0.5);
   gap: 10px;
   font-size: 14px;
 }
@@ -12,13 +12,15 @@ body > div{
   justify-content: flex-end;
 }
 body > div > button {
-  background-color: rgb(96, 108, 56);
-  color: #fff;
+  border: 0.5px solid rgba(23, 94, 9, 0.2);
+  background-color: #458871;
+  color: black;
   border-radius: 5px;
+  box-shadow: 2px 2px 1px hsl(80, 20%, 30%);
 }
 body > div > button > a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 body > div > button > a:visited {
   color: #fff;
@@ -39,14 +41,17 @@ section:nth-of-type(1) > ul > li > div:nth-of-type(1) {
   justify-content: space-between;
 }
 section:nth-of-type(1) > ul > li > div:nth-of-type(1) > sub{
-  background-color: antiquewhite;
+  background-color: #A5C29F;
+  color: #414131;
   padding: 5px;
   border-radius: 50px;
-  box-shadow: 2px 3px 5px hsl(19, 28%, 33%);
+  box-shadow: 2px 3px 5px hsl(88, 28%, 33%);
+  letter-spacing: .5px;
 }
 section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button{
   cursor: pointer;
-  background-color: floralwhite;
+  background-color: #fefedfbb;
+  color: #414131;
   border-radius: 50px;
 }
 section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button:hover{
@@ -86,7 +91,7 @@ section:nth-of-type(2) > div > button {
   text-decoration: none;
   font-size: 14px;
   letter-spacing: .5px;
-  background:  rgb(96, 108, 56);
+  background:  #458871;
   color: #fff;
   box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
 }
@@ -99,8 +104,8 @@ form > div:nth-of-type(1){
   gap: 10px;
 }
 form > div > div >button {
-  background-color: rgb(40, 54, 24);
-  color: white;
+  background-color: #A5C29F;
+  color: black;
   border-radius: 5px;
 }
 @media (min-width: 55rem){

@@ -1,0 +1,190 @@
+@import url("../css/header.css");
+main {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+h3{
+  margin: 0;
+  text-align: center;
+}
+main > section:nth-of-type(1) {
+  margin: auto;
+  width: 230px;
+  background-color: beige;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+main > section:nth-of-type(1) > div span{
+  display: flex;
+  margin-top: 10px;
+  gap: 2rem;
+  margin-bottom: 10px;
+}
+main > section:nth-of-type(1) > div > div{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+main > section:nth-of-type(2){
+  margin: 0.5rem;
+  background-color: beige;
+  padding: 20px;
+  border-radius: 20px;
+}
+main > section:nth-of-type(2) > div {
+  display: flex;
+  gap: 10px;
+  width: 70%;
+  justify-content: flex-end;
+}
+main > section:nth-of-type(2) > div > button {
+  cursor: pointer;
+  background: #dde5b6;
+  color:  darkolivegreen;
+  border-radius: 5px;
+}
+main > section:nth-of-type(2) > div > h3 {
+  margin: 0;
+}
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px;
+}
+h4 {
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+article > div {
+  display: flex;
+  justify-content: space-between;
+}
+article > div button {
+  cursor: pointer;
+  padding: 8px 10px;
+  font-weight: 300;
+  line-height: 12px;
+  border-radius: 24px;
+  display: block;
+  outline: none;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: .5px;
+  background:  rgba(96, 150, 80, 0.2);
+  color:  darkolivegreen;
+  font-weight: bold;
+  box-shadow: 0 2px 5px -1px rgb(96, 108, 56);
+}
+article > div > div {
+  display: flex;
+  gap: 1.5rem;
+}
+article > div:nth-of-type(2){
+  display: flex;
+  gap: 2rem;
+}
+body > section{
+  background-color: beige;
+  padding: 20px;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 0.5rem;
+  width: 350px;
+}
+body > section > div > div > span {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+body > section > div > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+body > section > div > div > span > h4 {
+  margin-left: 10px;
+}
+body > section > div > div > span > p {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 10px;
+}
+body > section > div > div > span > p:hover {
+  color: #ECEFF1;
+  background-color: #333d29;
+  padding: 0.3rem;
+  border-radius: 10px;
+}
+footer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#modify-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: absolute;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: white;
+  width: 500px;
+  padding: 2rem;
+  align-items: center;
+}
+#modify-box > div {
+  height: 30px;
+}
+#modify-box > div > input {
+  border: 2px dotted black;
+  border-radius: 5px;
+}
+#modify-box > h5 {
+  font-size: 16px;
+  margin: 0;
+  padding: 5px;
+}
+#modify-box > div:nth-of-type(3) > button {
+  background:  rgb(96, 120, 56);
+  color: #fff;
+}
+hr{
+  width: 100%;
+  color: black;
+}
+@media (min-width: 50rem) {
+  main {
+    flex-direction: row;
+    margin: auto;
+    margin-top: 3rem;
+  }
+  section {
+    font-size: 16px;
+  }
+  body > section {
+    margin-top: 1rem;
+  }
+  body > section > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  main > section:nth-of-type(1) {
+    margin: 0.5rem;
+  }
+}
