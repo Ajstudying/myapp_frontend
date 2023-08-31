@@ -200,17 +200,13 @@
           createBoard(image);
         });
         reader.readAsDataURL(file.files[0]);
-        const section = document.querySelector("section");
-        const form = section.querySelector("form");
-        form.hidden = true;
-        section.innerHTML = /*html*/ `<p> 작성이 완료되었습니다. </p>`;
+        alert("작성이 완료되었습니다.");
+        window.location.href = `http://localhost:5500/board/board.html`;
       } else {
         //파일이 없을 때
         createBoard();
-        const section = document.querySelector("section");
-        const form = section.querySelector("form");
-        form.hidden = true;
-        section.innerHTML = /*html*/ `<p> 작성이 완료되었습니다. </p>`;
+        alert("작성이 완료되었습니다.");
+        window.location.href = `http://localhost:5500/board/board.html`;
       }
     }
   });

@@ -80,9 +80,9 @@ img {
   height: 300px;
   margin-top: 10px;
 }
-@media (min-width: 67rem){
+@media (min-width: 50rem){
   section{
-    width: 90%;
+    width: 60%;
     margin: auto;
     margin-top: 2rem;
     border-radius: 10px;

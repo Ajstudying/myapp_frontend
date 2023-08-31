@@ -10,8 +10,7 @@ async function getUserNickname() {
       Authorization: `Bearer ${getCookie("token")}`,
     },
   });
-  const result = await response.json();
-  return result.nickname;
+  return String(response);
 }
 
 //화면을 처음 켰을 때 첫번째 페이지 조회
@@ -359,21 +358,25 @@ async function likeSign() {
       Authorization: `Bearer ${getCookie("token")}`,
     },
   });
-  const results = await response.json();
-  const section = document.querySelector("section");
-  const articles = section.querySelectorAll("article");
-  results.forEach((result) => {
-    articles.forEach((article) => {
-      if (
-        result.likes === true &&
-        Number(article.dataset.no) === Number(result.post.no)
-      ) {
-        const icon = article.querySelector("span");
-        icon.classList.add("heart");
-        icon.innerHTML = "favorite";
-      }
+  if ([404].includes(response.status)) {
+    return;
+  } else {
+    const results = await response.json();
+    const section = document.querySelector("section");
+    const articles = section.querySelectorAll("article");
+    results.forEach((result) => {
+      articles.forEach((article) => {
+        if (
+          result.likes === true &&
+          Number(article.dataset.no) === Number(result.post.no)
+        ) {
+          const icon = article.querySelector("span");
+          icon.classList.add("heart");
+          icon.innerHTML = "favorite";
+        }
+      });
     });
-  });
+  }
 }
 
 //좋아요 추가 취소
@@ -397,6 +400,7 @@ async function likeSign() {
           },
         });
         responseAlert(response);
+        window.location.reload();
       } else {
         e.target.innerHTML = "favorite_border";
         const res = await fetch(`http://localhost:8080/posts/${no}/false`, {
@@ -406,6 +410,7 @@ async function likeSign() {
           },
         });
         responseAlert(res);
+        window.location.reload();
       }
     }
   });
