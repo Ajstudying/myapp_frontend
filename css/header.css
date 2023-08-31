@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle:wght@300;400&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800&family=Nunito:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Ubuntu:ital,wght@1,300&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -12,6 +13,8 @@ body {
   display: flex;
   flex-direction: column;
   background-color: rgba(241, 241, 211,0.5);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 600;
 }
 aside {
   display: flex;
@@ -27,13 +30,16 @@ aside > div> button {
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 14px;
 }
 aside > div> button a {
   text-decoration: none;
   color:  white;
+  font-size: 14px;
 }
 aside > div> button a:visited {
   color: white;
+  font-size: 14px;
 }
 header> div {
   display: flex;
@@ -50,6 +56,8 @@ header > div > h1 > a {
   margin: 0;
   margin-top: 2rem;
   color: black;
+  font-family: 'Nunito', sans-serif;
+  font-size: 40px;
 }
 header > div> nav > ul {
   display: flex;

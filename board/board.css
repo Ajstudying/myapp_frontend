@@ -42,7 +42,7 @@ section:nth-of-type(1) > ul > li > div:nth-of-type(1) {
 }
 section:nth-of-type(1) > ul > li > div:nth-of-type(1) > sub{
   background-color: #A5C29F;
-  color: #414131;
+  color: black;
   padding: 5px;
   border-radius: 50px;
   box-shadow: 2px 3px 5px hsl(88, 28%, 33%);
@@ -56,6 +56,7 @@ section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button{
 }
 section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button:hover{
   color: crimson;
+  padding: 5px;
   font-weight: bold;
 }
 section:nth-of-type(1) > ul > li > div:nth-of-type(2) {
@@ -71,7 +72,8 @@ section:nth-of-type(1) > ul > li > div:nth-of-type(2) > span:nth-of-type(2){
 .title:hover{
   cursor: pointer;
   font-weight: bold;
-  color: crimson;
+  font-size: 15px;
+  color: #006B60;
 }
 section:nth-of-type(2){
   margin: auto;

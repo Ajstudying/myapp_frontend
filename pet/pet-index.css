@@ -1,4 +1,7 @@
 @import url("../css/header.css");
+h1{
+  margin: 0;
+}
 section{
   display: flex;
   flex-direction: column;
@@ -9,13 +12,18 @@ article {
   width: 22rem;
   padding: 1.5rem;
   margin: 1.5rem 0.8rem;
-  background-color: rgb(232, 243, 213);
+  background-color: rgba(211, 228, 183, 0.5);
   box-shadow: 5px 5px 10px hsl(19, 28%, 33%);
   border-radius: 10px;
 }
-article> h3 {
-  display: inline;
-  font-size: 16px;
+h3 {
+  font-family: 'Cute Font', cursive;
+  font-size: 25px;
+}
+article > h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
   padding: 2px 10px;
   border-radius: 50px;
   background-color: #FEFEDF;
@@ -28,7 +36,7 @@ article > div:nth-of-type(1){
 article > div:nth-of-type(1) > select {
   width: 20px;
   cursor: pointer;
-  background-color: rgba(23, 94, 9, 0.2);
+  background-color: #76a486b6;
   border-radius: 5px;
 } 
 article > div:nth-of-type(1) > select > option{

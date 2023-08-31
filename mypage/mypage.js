@@ -56,7 +56,7 @@ function mytable(item) {
   nickname.innerHTML = results.data[0][1];
 
   const petArticle = myArticles.querySelectorAll("td")[0];
-  const boardArticle = myArticles.querySelectorAll("td")[2];
+  const boardArticle = myArticles.querySelectorAll("td")[1];
 
   petArticle.innerHTML = `<ins data-nick="${results.data[0][1]}">${results.data[0][4]}건</ins>`;
   boardArticle.innerHTML = `<ins>${results.data[0][5]}건</ins>`;
@@ -67,30 +67,170 @@ function mytable(item) {
   const myArticles = document.querySelectorAll("table")[2];
   const posts = myArticles.querySelectorAll("td")[0];
   const boards = myArticles.querySelectorAll("td")[1];
-
+  console.log(posts);
   posts.addEventListener("click", (e) => {
     e.preventDefault();
-    const nickname = posts.querySelector("ins").dataset.nick;
-    window.location.href = `http://localhost:5500/pet/pet-index.html?nickname=${nickname}`;
+    if (e.target.tagName.toLowerCase() === "ins") {
+      const nickname = posts.querySelector("ins").dataset.nick;
+      window.location.href = `http://localhost:5500/pet/pet-index.html?nickname=${nickname}`;
+    }
   });
   boards.addEventListener("click", (e) => {
     e.preventDefault();
-    const nickname = posts.querySelector("ins").dataset.nick;
-    window.location.href = `http://localhost:5500/board/board.html?nickname=${nickname}`;
+    if (e.target.tagName.toLowerCase() === "ins") {
+      const nickname = posts.querySelector("ins").dataset.nick;
+      window.location.href = `http://localhost:5500/board/board.html?nickname=${nickname}`;
+    }
   });
 })();
 
-//추가
+//프로필 추가
 (() => {
   const profile = document.querySelectorAll("h3")[1];
   const addBtn = profile.querySelector("button");
   addBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    console.log(e.target);
     const layer = document.querySelector("section");
-    const insertbox = document.querySelector("article");
     const title = layer.querySelector("h5");
 
-    h5.innerHTML = "< 추가 >";
+    title.innerHTML = "< 추가 >";
     layer.hidden = false;
+    const buttons = layer.querySelectorAll("button");
+    //취소버튼
+    buttons[1].addEventListener("click", (e) => {
+      e.preventDefault();
+      cleanLayer();
+      layer.hidden = true;
+    });
+    //추가
+    buttons[0].addEventListener("click", async (e) => {
+      e.preventDefault();
+      const inputs = layer.querySelectorAll("input");
+      const petname = inputs[0];
+      const species = inputs[1];
+      if (petname.value == "") {
+        alert("반려동물의 이름을 입력해주세요.");
+        return;
+      }
+      if (species.value == "") {
+        alert("반려동물의 종류를 입력해주세요.");
+        return;
+      }
+      await fetch("http://localhost:8080/profile", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+        body: JSON.stringify({
+          petname: petname.value,
+          species: species.value,
+          user: null,
+        }),
+      });
+      cleanLayer();
+      layer.hidden = true;
+      window.location.reload();
+    });
+  });
+})();
+
+function cleanLayer() {
+  const layer = document.querySelector("section");
+  const inputs = layer.querySelectorAll("input");
+  const title = layer.querySelector("h5");
+  title.innerHTML = "";
+  inputs[0].value = "";
+  inputs[1].value = "";
+}
+
+//프로필 삭제
+(() => {
+  const profile = document.querySelectorAll("table")[1];
+  profile.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const tr = e.target.closest("tr");
+    console.log(tr);
+    const buttons = tr.querySelectorAll("button");
+    const removeBtn = buttons[1];
+
+    if (e.target === removeBtn) {
+      const removeNum = tr.dataset.no;
+
+      //서버연결
+      const response = await fetch(
+        `http://localhost:8080/profile/${removeNum}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        }
+      );
+      if ([404].includes(response.status)) {
+        alert("해당 프로필이 존재하지 않습니다.");
+      }
+      tr.remove();
+      window.location.reload();
+    }
+  });
+})();
+
+//수정
+(() => {
+  const profile = document.querySelectorAll("table")[1];
+  profile.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const tr = e.target.closest("tr");
+    console.log(tr);
+    const buttons = tr.querySelectorAll("button");
+    const modifyBtn = buttons[0];
+
+    if (e.target === modifyBtn) {
+      const layer = document.querySelector("section");
+      const modifyBox = document.querySelector("article");
+      const title = modifyBox.querySelector("h5");
+      title.innerHTML = "< 수정 >";
+      layer.hidden = false;
+
+      const inputs = layer.querySelectorAll("input");
+      const petname = tr.querySelector("td");
+      inputs[0].value = petname.innerHTML;
+      const species = tr.nextElementSibling.querySelector("td");
+      inputs[1].value = species.innerHTML;
+      //취소
+      const buttons = layer.querySelectorAll("button");
+      buttons[1].addEventListener("click", (e) => {
+        e.preventDefault();
+        cleanLayer();
+        layer.hidden = true;
+      });
+      //수정
+      buttons[0].addEventListener("click", async (e) => {
+        e.preventDefault();
+        const no = tr.dataset.no;
+
+        const modifyPetName = inputs[0].value;
+        const modifySpecies = inputs[1].value;
+
+        await fetch(`http://localhost:8080/profile/${no}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+          body: JSON.stringify({
+            petname: modifyPetName,
+            species: modifySpecies,
+          }),
+        });
+
+        petname.innerHTML = inputs[0].value;
+        species.innerHTML = inputs[1].value;
+        cleanLayer();
+        layer.hidden = true;
+      });
+    }
   });
 })();
