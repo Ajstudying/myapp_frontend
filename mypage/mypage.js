@@ -1,17 +1,17 @@
 (() => {
-  hiddenButton();
-  loginLogout();
   const token = getCookie("token");
   console.log(token);
   if (!token) {
     window.location.href = "http://localhost:5500/auth/login.html";
   }
+  hiddenButton();
+  loginLogout();
 })();
 
 function mytable(item) {
   const table =
     /*html*/
-    `<tr data-no="${item[6]}">
+    `<tr data-no="${item[7]}">
     <th class="material-symbols-outlined">pets</th>
   <th>펫이름: </th>
   <td>${item[2]}</td>
@@ -57,9 +57,11 @@ function mytable(item) {
 
   const petArticle = myArticles.querySelectorAll("td")[0];
   const boardArticle = myArticles.querySelectorAll("td")[1];
+  const schedule = myArticles.querySelectorAll("td")[2];
 
   petArticle.innerHTML = `<ins data-nick="${results.data[0][1]}">${results.data[0][4]}건</ins>`;
   boardArticle.innerHTML = `<ins>${results.data[0][5]}건</ins>`;
+  schedule.innerHTML = `<ins>${results.data[0][6]}건</ins>`;
 })();
 
 //포스트, 정보나눔 조회
@@ -67,6 +69,7 @@ function mytable(item) {
   const myArticles = document.querySelectorAll("table")[2];
   const posts = myArticles.querySelectorAll("td")[0];
   const boards = myArticles.querySelectorAll("td")[1];
+  const schedule = myArticles.querySelectorAll("td")[2];
   console.log(posts);
   posts.addEventListener("click", (e) => {
     e.preventDefault();
@@ -80,6 +83,12 @@ function mytable(item) {
     if (e.target.tagName.toLowerCase() === "ins") {
       const nickname = posts.querySelector("ins").dataset.nick;
       window.location.href = `http://localhost:5500/board/board.html?nickname=${nickname}`;
+    }
+  });
+  schedule.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (e.target.tagName.toLowerCase() === "ins") {
+      window.location.href = `http://localhost:5500/schedule/schedule.html`;
     }
   });
 })();

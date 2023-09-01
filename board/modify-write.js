@@ -1,11 +1,11 @@
 (() => {
-  hiddenButton();
-  loginLogout();
   const token = getCookie("token");
   console.log(token);
   if (!token) {
     window.location.href = "http://localhost:5500/auth/login.html";
   }
+  hiddenButton();
+  loginLogout();
 })();
 
 //셀렉트 옵션 추가

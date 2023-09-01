@@ -3,6 +3,11 @@ const urlParams = new URLSearchParams(window.location.search);
 const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo 값을 가져옴
 
 (() => {
+  const token = getCookie("token");
+  console.log(token);
+  if (!token) {
+    window.location.href = "http://localhost:5500/auth/login.html";
+  }
   hiddenButton();
   loginLogout();
 })();
