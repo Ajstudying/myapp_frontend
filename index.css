@@ -59,8 +59,7 @@ section > div:nth-of-type(2) > img:nth-of-type(2) {
   section > div:nth-of-type(2) > img:nth-of-type(2) {
     display: block;
     margin: auto;
-    width: 80%;
-    height: 50%;
+    width: 55vw;
     border-radius: 50px;
   }
   section > div:nth-of-type(2) {

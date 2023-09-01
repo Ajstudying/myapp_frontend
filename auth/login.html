@@ -4,68 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>로그인</title>
-    <style>
-      /* video{
-        position: absolute;
-        left: 50%;
-        top: 23%;
-        transform: translateX(-50%) translateY(-50%);
-      } */
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        position: absolute;
-        /* 부모요소의 크기의 절반만큼을 오른쪽/아래쪽으로 이동시킴 */
-        left: 50%;
-        top: 50%;
-        /* 자기 자신 크기의 절반만큼을 왼쪽/위쪽으로 이동시킴 */
-        transform: translateX(-50%) translateY(-50%);
-        background-color: rgba(211, 228, 183, 0.5);
-        border-radius: 20px;
-        width: 500px;
-        padding: 2rem;
-      }
-      form > h1 {
-        text-align: center;
-        margin: 0;
-      }
-      form > div:nth-of-type(1) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-      }
-      form > div:nth-of-type(1) label input {
-        width: 200px;
-        height: 35px;
-      }
-      form > div:nth-of-type(2) {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        text-align: center;
-        margin: 10px;
-      }
-      form > div:nth-of-type(2) >button {
-        background-color: #FEFEDF;
-        border: 1px solid #458871;
-        color: black;
-        font-weight: bold;
-        border-radius: 5px;
-        box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
-        cursor: pointer;
-      }
-      form > div:nth-of-type(2) > button:nth-of-type(2) > a {
-        text-decoration: none;
-        color: white;
-        border-radius: 5px;
-      }
-    </style>
+    <link rel="stylesheet" href="login.css">
   </head>
   <body>
     <form action="http://localhost:8080/auth/signin" method="post">
-      <h1>special pet</h1>
+      <h1><a href="../index.html">special pet</a></h1>
       <video width="500px" height="250px" autoplay muted loop>
         <source src="../video/AdobeStock_246919757.mov"></source>
         <source src="../video/AdobeStock_464922686.mov"></source>

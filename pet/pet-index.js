@@ -48,9 +48,10 @@ async function getUserNickname() {
 
 //메모 형태
 function cardTemplate(item, token, nickname) {
-  const imageElement = item.image
-    ? `<img src="${item.image}" alt="반려동물사진">`
-    : "";
+  // const imageElement = item.image
+  //   ? `<img src="${item.image}" alt="반려동물사진">`
+  //   : "";
+  const imageElement = `<img src="${item.image}" alt="반려동물사진">`;
   let select = "";
   let like = "";
   console.log(nickname);
@@ -294,7 +295,7 @@ function setBtnActive() {
                 body: JSON.stringify({
                   title: modifyTitle,
                   content: modifyTextbox ? modifyTextbox : null,
-                  image: image ? image : null,
+                  image: image,
                 }),
               }
             );

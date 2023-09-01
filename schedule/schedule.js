@@ -22,7 +22,7 @@ let today = new Date();
 //유저에게 등록된 총 일정 조회
 (async () => {
   const sections = document.querySelectorAll("section");
-  const response = await fetch(`http://localhost:8080/reserve`, {
+  const response = await fetch(`http://localhost:8080/schedule`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
@@ -75,7 +75,7 @@ let today = new Date();
       const removeNumber = article.dataset.no;
       //서버연결
       const response = await fetch(
-        `http://localhost:8080/reserve/${removeNumber}`,
+        `http://localhost:8080/schedule/${removeNumber}`,
         {
           method: "DELETE",
           headers: {
@@ -121,7 +121,7 @@ let today = new Date();
         const modifyNum = article.dataset.no;
         //서버연결
         const response = await fetch(
-          `http://localhost:8080/reserve/${modifyNum}`,
+          `http://localhost:8080/schedule/${modifyNum}`,
           {
             method: "PUT",
             headers: {
@@ -260,7 +260,7 @@ function buildCalendar(now) {
       return;
     }
 
-    const response = await fetch("http://localhost:8080/reserve", {
+    const response = await fetch("http://localhost:8080/schedule", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -50,9 +50,12 @@ function createOption(item) {
       alert("제목을 입력해주세요.");
       return;
     }
-
     if (select.value === "반려동물의 이름을 선택해주세요") {
       alert("반려동물을 선택해주세요.");
+      return;
+    }
+    if (file.value === "") {
+      alert("사진 파일을 입력해주세요.");
       return;
     }
 
@@ -88,12 +91,13 @@ function createOption(item) {
       reader.readAsDataURL(file.files[0]);
       alert("작성이 완료되었습니다.");
       window.location.href = `http://localhost:5500/pet/pet-index.html`;
-    } else {
-      //파일이 없을 때
-      createPost();
-      alert("작성이 완료되었습니다.");
-      window.location.href = `http://localhost:5500/pet/pet-index.html`;
     }
+    // else {
+    //   //파일이 없을 때
+    //   createPost();
+    //   alert("작성이 완료되었습니다.");
+    //   window.location.href = `http://localhost:5500/pet/pet-index.html`;
+    // }
   });
 })();
 
