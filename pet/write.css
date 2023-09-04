@@ -4,25 +4,25 @@ section {
   padding-top: 20px;
   background-color: rgba(211, 228, 183, 0.5);
 }
-section > p{
+section > p {
   text-align: center;
 }
-section > form{
+section > form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin: 1rem;
 }
-section > form > div:nth-of-type(1){
+section > form > div:nth-of-type(1) {
   display: flex;
   flex-direction: row;
   gap: 15px;
 }
-section > form > div:nth-of-type(1) > label{
+section > form > div:nth-of-type(1) > label {
   width: 100%;
   height: 30px;
 }
-section > form > div:nth-of-type(1) > label > input{
+section > form > div:nth-of-type(1) > label > input {
   width: 100%;
   height: 100%;
   text-align: center;
@@ -34,7 +34,7 @@ textarea {
   resize: none; /* 리사이즈 비활성화 */
   overflow: hidden; /* 오버플로우를 숨김으로 설정 */
 }
-section > form > div:nth-of-type(2){
+section > form > div:nth-of-type(2) {
   display: flex;
   justify-content: flex-end;
 }
@@ -58,7 +58,7 @@ section > form > label > div {
   touch-action: manipulation;
   white-space: pre;
 }
-section > form > div:nth-of-type(2) > button{
+section > form > div:nth-of-type(2) > button {
   justify-content: center;
   background-color: #f8f9fa;
   border: 1px solid black;
@@ -80,9 +80,9 @@ img {
   height: 300px;
   margin-top: 10px;
 }
-@media (min-width: 50rem){
-  section{
-    width: 60%;
+@media (min-width: 50rem) {
+  section {
+    width: 40vw;
     margin: auto;
     margin-top: 2rem;
     border-radius: 10px;

@@ -1,5 +1,5 @@
 @import url("../css/header.css");
-section{
+section {
   display: flex;
   flex-direction: column;
   background-color: rgba(211, 228, 183, 0.5);
@@ -7,14 +7,14 @@ section{
   width: 100%;
   padding: 20px;
 }
-section > form:nth-of-type(2)> div:nth-of-type(1){
+section > form:nth-of-type(2) > div:nth-of-type(1) {
   display: flex;
   justify-content: space-between;
 }
-section > form:nth-of-type(2)> div:nth-of-type(1) > button {
+section > form:nth-of-type(2) > div:nth-of-type(1) > button {
   margin-top: 15px;
   height: 1.5rem;
-  background:  rgb(96, 108, 56);
+  background: rgb(96, 108, 56);
   color: #fff;
   box-shadow: 0 2px 2px -1px rgb(96, 108, 56);
   border: 1px solid black;
@@ -32,7 +32,7 @@ section > span {
   padding-top: 2rem;
 }
 section > span > button {
-  background:  rgb(96, 108, 56);
+  background: rgb(96, 108, 56);
   color: #fff;
   box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
   border: 1px solid black;
@@ -59,9 +59,9 @@ section > span > button {
   --webkit-appearance: none; /*기본 search 디자인을 없앰 */
   overflow: auto; /*검색어가 길어졌을때 오른쪽으로 자연스럽게 검색되도록 하기 위해*/
   z-index: -1;
-  font-size: 15px; 
+  font-size: 15px;
 }
-.bar label{
+.bar label {
   width: 100%;
   padding: 5px;
 }
@@ -69,7 +69,7 @@ hr {
   width: 100%;
   color: black;
 }
-.feedback-icon{
+.feedback-icon {
   /* feedback 아이콘에 대한 스타일 */
   color: green;
 }
@@ -79,18 +79,18 @@ hr {
   color: red;
 }
 @media (min-width: 43rem) {
-  section{
+  section {
     width: 80%;
     margin: auto;
     margin-top: 2rem;
   }
-  form{
+  form {
     width: 100%;
   }
 }
-@media (min-width: 80rem){
+@media (min-width: 80rem) {
   section {
-    width: 50vw;
+    width: 40vw;
   }
   section form h3 {
     font-size: 22px;

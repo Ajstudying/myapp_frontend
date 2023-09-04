@@ -7,7 +7,7 @@ section > ul > li {
   gap: 10px;
   font-size: 14px;
 }
-body > div{
+body > div {
   display: flex;
   justify-content: flex-end;
 }
@@ -25,13 +25,13 @@ body > div > button > a {
 body > div > button > a:visited {
   color: #fff;
 }
-section:nth-of-type(1) > ul{
+section:nth-of-type(1) > ul {
   padding: 0;
 }
-p{
+p {
   margin: 10px;
 }
-hr{
+hr {
   width: 100%;
   color: black;
   margin: 0;
@@ -40,21 +40,21 @@ section:nth-of-type(1) > ul > li > div:nth-of-type(1) {
   display: flex;
   justify-content: space-between;
 }
-section:nth-of-type(1) > ul > li > div:nth-of-type(1) > sub{
-  background-color: #A5C29F;
+section:nth-of-type(1) > ul > li > div:nth-of-type(1) > sub {
+  background-color: #a5c29f;
   color: black;
   padding: 5px;
   border-radius: 50px;
   box-shadow: 2px 3px 5px hsl(88, 28%, 33%);
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }
-section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button{
+section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button {
   cursor: pointer;
   background-color: #fefedfbb;
   color: #414131;
   border-radius: 50px;
 }
-section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button:hover{
+section:nth-of-type(1) > ul > li > div:nth-of-type(1) > button:hover {
   color: crimson;
   padding: 5px;
   font-weight: bold;
@@ -65,17 +65,17 @@ section:nth-of-type(1) > ul > li > div:nth-of-type(2) {
   padding: 5px;
   background-color: #fff;
 }
-section:nth-of-type(1) > ul > li > div:nth-of-type(2) > span:nth-of-type(2){
+section:nth-of-type(1) > ul > li > div:nth-of-type(2) > span:nth-of-type(2) {
   display: flex;
   gap: 20px;
 }
-.title:hover{
+.title:hover {
   cursor: pointer;
   font-weight: bold;
   font-size: 15px;
-  color: #006B60;
+  color: #006b60;
 }
-section:nth-of-type(2){
+section:nth-of-type(2) {
   margin: auto;
   margin-bottom: 15px;
 }
@@ -92,40 +92,52 @@ section:nth-of-type(2) > div > button {
   outline: none;
   text-decoration: none;
   font-size: 14px;
-  letter-spacing: .5px;
-  background:  #458871;
+  letter-spacing: 0.5px;
+  background: #458871;
   color: #fff;
   box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
 }
-form{
+form {
   display: flex;
   margin: auto;
 }
-form > div:nth-of-type(1){
+form > div:nth-of-type(1) {
   display: flex;
   gap: 10px;
 }
-form > div > div >button {
-  background-color: #A5C29F;
-  color: black;
+form > div > select {
   border-radius: 5px;
 }
-@media (min-width: 55rem){
-  body > div{
+form > div > div {
+  display: flex;
+  gap: 15px;
+}
+form > div > div > button {
+  background-color: #a5c29f;
+  font-weight: bold;
+  color: black;
+  border-radius: 5px;
+  height: 30px;
+}
+form > div > div > input {
+  height: 30px;
+  border-radius: 5px;
+}
+@media (min-width: 55rem) {
+  body > div {
     width: 78%;
     margin: auto;
   }
   section:nth-of-type(1) {
     margin: 20px;
   }
-  section:nth-of-type(1) > ul{
+  section:nth-of-type(1) > ul {
     width: 80%;
     margin: auto;
   }
 }
 @media (min-width: 90rem) {
-  section:nth-of-type(2){
+  section:nth-of-type(2) {
     margin-bottom: 20px;
   }
-  
 }

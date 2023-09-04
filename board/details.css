@@ -1,5 +1,5 @@
 @import url("../css/header.css");
-section{
+section {
   margin: 30px;
 }
 article {
@@ -10,8 +10,9 @@ article {
   padding: 20px;
   margin: auto;
 }
-h3, h4 {
-  font-family: 'Ubuntu', sans-serif;
+h3,
+h4 {
+  font-family: "Ubuntu", sans-serif;
   margin: 0;
   margin-left: 10px;
   font-size: 14px;
@@ -20,19 +21,19 @@ p {
   margin: 0;
   margin-left: 10px;
   font-weight: 400;
-  font-family: 'Dongle', sans-serif;
+  font-family: "Dongle", sans-serif;
   font-size: 30px;
 }
-.material-symbols-outlined{
+.material-symbols-outlined {
   font-size: 16px;
 }
 em {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-size: 14px;
 }
 section:nth-of-type(1) article {
   border-radius: 20px;
-  background-color:rgba(211, 228, 183, 0.5);
+  background-color: rgba(211, 228, 183, 0.5);
   /* color: #3A4823; */
   color: black;
 }
@@ -49,15 +50,15 @@ section:nth-of-type(1) > article > div:nth-of-type(2) {
   justify-content: flex-end;
   gap: 5px;
 }
-section:nth-of-type(1) > article > div:nth-of-type(1){
+section:nth-of-type(1) > article > div:nth-of-type(1) {
   display: flex;
   justify-content: center;
 }
-section:nth-of-type(1) > article > div:nth-of-type(1) > img{
+section:nth-of-type(1) > article > div:nth-of-type(1) > img {
   margin: 10px;
   width: 80%;
 }
-form{
+form {
   margin: 20px;
   display: flex;
   justify-content: center;
@@ -66,26 +67,26 @@ form{
 form label {
   width: 80%;
 }
-form label input{
+form label input {
   width: 100%;
   padding: 3px;
 }
 form > button {
-  background-color: #A5C29F;
+  background-color: #a5c29f;
   color: #414131;
   border-radius: 5px;
 }
-hr{
+hr {
   width: 100%;
   color: black;
 }
-section:nth-of-type(1) > article > div:nth-of-type(2)> span > button {
+section:nth-of-type(1) > article > div:nth-of-type(2) > span > button {
   background-color: #458871;
   color: #fff;
   font-weight: bold;
   border-radius: 5px;
 }
-section:nth-of-type(2) > article:nth-of-type(1){
+section:nth-of-type(2) > article:nth-of-type(1) {
   border-top: 1px solid black;
 }
 
@@ -96,7 +97,7 @@ section:nth-of-type(2) > article {
   justify-content: space-between;
   background-color: beige;
 }
-section:nth-of-type(2) > article > div:nth-of-type(1){
+section:nth-of-type(2) > article > div:nth-of-type(1) {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -104,17 +105,21 @@ section:nth-of-type(2) > article > div:nth-of-type(1){
 section:nth-of-type(2) > article > div:nth-of-type(1) > div:nth-of-type(1) > p {
   max-width: 200px;
 }
-section:nth-of-type(2) > article > div:nth-of-type(1) > div:nth-of-type(2){
+section:nth-of-type(2) > article > div:nth-of-type(1) > div:nth-of-type(2) {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-section:nth-of-type(2) > article > div:nth-of-type(1) > div:nth-of-type(2) > button {
+section:nth-of-type(2)
+  > article
+  > div:nth-of-type(1)
+  > div:nth-of-type(2)
+  > button {
   background-color: #458871;
   color: #fff;
   border-radius: 5px;
 }
-section:nth-of-type(2) > article > div:nth-of-type(2) > textarea{
+section:nth-of-type(2) > article > div:nth-of-type(2) > textarea {
   width: 100%;
   padding: 10px;
   resize: none;
@@ -123,30 +128,41 @@ section:nth-of-type(2) > article > div:nth-of-type(2) > textarea{
 section:nth-of-type(2) > article > article {
   background-color: #faf7ed;
 }
-section:nth-of-type(2) > article > article > div:nth-of-type(1){
+section:nth-of-type(2) > article > article > div:nth-of-type(1) {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-section:nth-of-type(2) > article > article > div:nth-of-type(1) > div:nth-of-type(2){
+section:nth-of-type(2)
+  > article
+  > article
+  > div:nth-of-type(1)
+  > div:nth-of-type(2) {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-section:nth-of-type(2) > article > article > div:nth-of-type(1) > div:nth-of-type(2) > button {
-  background-color: #A5C29F;
+section:nth-of-type(2)
+  > article
+  > article
+  > div:nth-of-type(1)
+  > div:nth-of-type(2)
+  > button {
+  background-color: #a5c29f;
   color: #414131;
   font-weight: bold;
   border-radius: 5px;
 }
-@media (min-width: 61rem){
-  h3, h4, p {
+@media (min-width: 61rem) {
+  h3,
+  h4,
+  p {
     font-size: 16px;
   }
-  p{
+  p {
     font-size: 30px;
   }
-  article{
+  article {
     gap: 15px;
   }
   form label {
@@ -155,9 +171,16 @@ section:nth-of-type(2) > article > article > div:nth-of-type(1) > div:nth-of-typ
   section {
     margin: auto;
     margin-top: 2rem;
-    width: 70%;
+    width: 40vw;
   }
-  section:nth-of-type(2) > article > div:nth-of-type(1) > div:nth-of-type(1) > p {
+  section:nth-of-type(1) > article > div:nth-of-type(1) > img {
+    width: 20vw;
+  }
+  section:nth-of-type(2)
+    > article
+    > div:nth-of-type(1)
+    > div:nth-of-type(1)
+    > p {
     max-width: none;
   }
 }
