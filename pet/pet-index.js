@@ -345,6 +345,9 @@ function setBtnActive() {
       reader.addEventListener("load", (event) => {
         event.preventDefault();
         img.src = event.target.result;
+        const div = label.querySelector("div");
+        div.hidden = true;
+        label.style.margin = "auto";
       });
       reader.readAsDataURL(selectedFile);
     } else {

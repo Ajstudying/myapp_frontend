@@ -128,6 +128,15 @@ form > div > div > input {
     width: 78%;
     margin: auto;
   }
+  sub {
+    font-size: 14px;
+  }
+  body > div > button > a {
+    font-size: 16px;
+  }
+  ul > li > div > span > p {
+    font-size: 16px;
+  }
   section:nth-of-type(1) {
     margin: 20px;
   }
