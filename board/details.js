@@ -34,7 +34,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
       const h4 = section.querySelector("h4");
       h4.innerHTML = result.title;
       const p = section.querySelector("p");
-      p.innerHTML = result.content;
+      p.innerHTML = result.content.replace(/(?:\r\n|\r|\n)/g, "<br>");
       const image = section.querySelector("div");
       image.innerHTML = result.image
         ? `<img src="${result.image}" alt="반려동물사진">`

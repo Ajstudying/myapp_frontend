@@ -10,7 +10,7 @@ async function getUserNickname() {
       Authorization: `Bearer ${getCookie("token")}`,
     },
   });
-  const result = response.text();
+  const result = await response.text();
   return result;
 }
 

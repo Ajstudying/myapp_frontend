@@ -45,7 +45,7 @@
     fetch("http://localhost:8080/auth/signup", {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify({
         userId,

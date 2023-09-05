@@ -30,6 +30,8 @@ textarea {
   padding: 10px;
   resize: none; /* 리사이즈 비활성화 */
   overflow: hidden; /* 오버플로우를 숨김으로 설정 */
+  line-height: 1.5;
+  white-space: pre-wrap;
 }
 section > form > div:nth-of-type(2) {
   display: flex;

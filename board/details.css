@@ -21,8 +21,7 @@ p {
   margin: 0;
   margin-left: 10px;
   font-weight: 400;
-  font-family: "Dongle", sans-serif;
-  font-size: 30px;
+  font-size: 18px;
 }
 .material-symbols-outlined {
   font-size: 16px;
@@ -160,7 +159,7 @@ section:nth-of-type(2)
     font-size: 16px;
   }
   p {
-    font-size: 30px;
+    font-size: 18px;
   }
   article {
     gap: 15px;

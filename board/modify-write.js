@@ -63,7 +63,11 @@
     title.value = result.title;
     petname.value = result.petname;
     textbox.value = result.content;
-    file.src = result.image ? result.image : "";
+    if (result.image) {
+      file.src = result.image;
+    } else {
+      file.innerHTML = "";
+    }
   } else {
     button.classList.add("add");
     button.innerHTML = "저장";
