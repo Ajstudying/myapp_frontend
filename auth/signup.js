@@ -56,7 +56,7 @@
     });
 
     alert("회원가입이 완료되었습니다.");
-    window.location.replace("http://localhost:5500/index.html");
+    window.location.replace("http://localhost:5500/auth/login.html");
   });
 })();
 

@@ -19,7 +19,7 @@
   const currentDay = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate().toString()}`;
-  const response = await fetch(`http://localhost:8080/reserve`, {
+  const response = await fetch(`http://localhost:8080/schedule`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
