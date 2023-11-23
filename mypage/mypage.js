@@ -2,7 +2,7 @@
   const token = getCookie("token");
   console.log(token);
   if (!token) {
-    window.location.href = `${apiUrl()}/auth/login.html`;
+    window.location.href = `${frontUrl()}/auth/login.html`;
   }
   hiddenButton();
   loginLogout();
@@ -75,20 +75,20 @@ function mytable(item) {
     e.preventDefault();
     if (e.target.tagName.toLowerCase() === "ins") {
       const nickname = posts.querySelector("ins").dataset.nick;
-      window.location.href = `${apiUrl()}/pet/pet-index.html?nickname=${nickname}`;
+      window.location.href = `${frontUrl()}/pet/pet-index.html?nickname=${nickname}`;
     }
   });
   boards.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.target.tagName.toLowerCase() === "ins") {
       const nickname = posts.querySelector("ins").dataset.nick;
-      window.location.href = `${apiUrl()}/board/board.html?nickname=${nickname}`;
+      window.location.href = `${frontUrl()}/board/board.html?nickname=${nickname}`;
     }
   });
   schedule.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.target.tagName.toLowerCase() === "ins") {
-      window.location.href = `${apiUrl()}/schedule/schedule.html`;
+      window.location.href = `${frontUrl()}/schedule/schedule.html`;
     }
   });
 })();

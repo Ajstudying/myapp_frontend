@@ -7,7 +7,7 @@ let currentQuery = ""; // 현재 검색 키워드
   const token = getCookie("token");
   console.log(token);
   if (!token) {
-    window.location.href = "http://localhost:5500/auth/login.html";
+    window.location.href = `${frontUrl()}/auth/login.html`;
   }
   hiddenButton();
   loginLogout();
@@ -18,9 +18,9 @@ async function getPagedBoard(page, option, query) {
   const section = document.querySelectorAll("section")[0];
   let url = "";
   if (query) {
-    url = `http://localhost:8080/boards/paging/search?page=${page}&size=${MAX_PAGE}&${option}=${query}`;
+    url = `${apiUrl()}/boards/paging/search?page=${page}&size=${MAX_PAGE}&${option}=${query}`;
   } else {
-    url = `http://localhost:8080/boards/paging?page=${page}&size=${MAX_PAGE}`;
+    url = `${apiUrl()}/boards/paging?page=${page}&size=${MAX_PAGE}`;
   }
 
   const response = await fetch(url, {
@@ -31,7 +31,7 @@ async function getPagedBoard(page, option, query) {
   if ([401, 403].includes(response.status)) {
     // 로그인 페이지로 튕김
     alert("인증처리가 되지 않았습니다.");
-    window.location.href = "http://localhost:5500/auth/login.html";
+    window.location.href = `${frontUrl()}/auth/login.html`;
   }
 
   const results = await response.json();
@@ -87,7 +87,7 @@ async function getPagedBoard(page, option, query) {
     const nickname = urlParams.get("nickname"); // 쿼리 파라미터에서 nickname 값을 가져옴
     if (nickname) {
       const response = await fetch(
-        `http://localhost:8080/boards/nickname/${nickname}?page=0&size=5`,
+        `${apiUrl()}/boards/nickname/${nickname}?page=0&size=5`,
         {
           headers: {
             Authorization: `Bearer ${getCookie("token")}`,
@@ -151,7 +151,7 @@ async function getPagedBoard(page, option, query) {
       const li = e.target.closest("li");
       const boardNo = li.dataset.no;
 
-      window.location.href = `http://localhost:5500/board/details.html?boardNo=${boardNo}`;
+      window.location.href = `${frontUrl()}/board/details.html?boardNo=${boardNo}`;
     }
   });
 })();
@@ -242,7 +242,7 @@ function setBtnActive() {
       console.log(request);
 
       const response = await fetch(
-        `http://localhost:8080/boards/paging/request?page=0&size=${MAX_PAGE}&request=${request}`,
+        `${apiUrl()}/boards/paging/request?page=0&size=${MAX_PAGE}&request=${request}`,
         {
           headers: {
             Authorization: `Bearer ${getCookie("token")}`,

@@ -1,8 +1,9 @@
 (() => {
+  i;
   const token = getCookie("token");
   console.log(token);
   if (!token) {
-    window.location.href = "http://localhost:5500/auth/login.html";
+    window.location.href = `${frontUrl()}/auth/login.html`;
   }
   hiddenButton();
   loginLogout();
@@ -13,7 +14,7 @@
   const select = document.forms[0].querySelectorAll("select")[1];
 
   console.log(select);
-  const url = "http://localhost:8080/profile";
+  const url = `${apiUrl()}/profile`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
@@ -40,7 +41,7 @@
   const section = document.querySelector("section");
   const button = section.querySelectorAll("div")[1].querySelector("button");
   if (boardNo) {
-    const response = await fetch(`http://localhost:8080/boards/${boardNo}`, {
+    const response = await fetch(`${apiUrl()}/boards/${boardNo}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getCookie("token")}`,
@@ -97,7 +98,7 @@
       console.log(file.src);
 
       async function modifyBoard(image) {
-        await fetch(`http://localhost:8080/boards/${boardNo}`, {
+        await fetch(`${apiUrl()}/boards/${boardNo}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json",
@@ -119,18 +120,18 @@
           const image = e.target.result;
           modifyBoard(image);
           alert("수정이 완료되었습니다.");
-          window.location.href = `http://localhost:5500/board/details.html?boardNo=${boardNo}`;
+          window.location.href = `${frontUrl()}/board/details.html?boardNo=${boardNo}`;
         });
         reader.readAsDataURL(file.files[0]);
       } else if (file.src) {
         const image = file.src;
         modifyBoard(image);
         alert("수정이 완료되었습니다.");
-        window.location.href = `http://localhost:5500/board/details.html?boardNo=${boardNo}`;
+        window.location.href = `${frontUrl()}/board/details.html?boardNo=${boardNo}`;
       } else {
         modifyBoard();
         alert("수정이 완료되었습니다.");
-        window.location.href = `http://localhost:5500/board/details.html?boardNo=${boardNo}`;
+        window.location.href = `${frontUrl()}/board/details.html?boardNo=${boardNo}`;
       }
     }
   });
@@ -177,7 +178,7 @@
         const species = petname[petname.selectedIndex].dataset.pet;
         console.log(species);
         //서버에 전송하면 UI를 생성한다.
-        await fetch("http://localhost:8080/boards", {
+        await fetch(`${apiUrl()}/boards`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -206,12 +207,12 @@
         reader.readAsDataURL(file.files[0]);
         createBoard(file);
         alert("작성이 완료되었습니다.");
-        window.location.href = `http://localhost:5500/board/board.html`;
+        window.location.href = `${frontUrl()}/board/board.html`;
       } else {
         //파일이 없을 때
         createBoard();
         alert("작성이 완료되었습니다.");
-        window.location.href = `http://localhost:5500/board/board.html`;
+        window.location.href = `${frontUrl()}/board/board.html`;
       }
     }
   });

@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="login.css" />
   </head>
   <body>
-    <form
-      action="https://d1a39zs71kjyn9.cloudfront.net/api/auth/signin"
-      method="post"
-    >
+    <form method="post">
       <h1><a href="../index.html">Special pet</a></h1>
       <video width="500px" height="250px" autoplay muted loop>
         <source src="../video/AdobeStock_246919757.mov" />
@@ -28,16 +25,16 @@
       </div>
     </form>
     <script>
-      document.forms[0].action = isLocalhost();
+      const url = ["localhost", "127.0.0.1"].includes(location.hostname)
+        ? "http://localhost:8080/api/auth/signin"
+        : "https://d1a39zs71kjyn9.cloudfront.net/api/auth/signin";
+      console.log(url);
+      document.forms[0].action = url;
       const params = new URLSearchParams(window.location.search);
       if (params.get("err")) {
         console.log(params.get("err"));
         alert(params.get("err"));
-        history.replaceState(
-          null,
-          null,
-          "https://d1a39zs71kjyn9.cloudfront.net/auth/login.html"
-        );
+        history.replaceState(null, null, `${frontUrl}/auth/login.html`);
       }
     </script>
     <script>
@@ -80,9 +77,10 @@
       //회원가입
       signup.addEventListener("click", (e) => {
         e.preventDefault();
-        window.location.replace(
-          "https://d1a39zs71kjyn9.cloudfront.net/auth/signup.html"
-        );
+        const url = ["localhost", "127.0.0.1"].includes(location.hostname)
+          ? "http://localhost:5500"
+          : "https://d1a39zs71kjyn9.cloudfront.net";
+        window.location.replace(`${url}/auth/signup.html`);
       });
     </script>
   </body>

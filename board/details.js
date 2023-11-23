@@ -6,7 +6,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
   const token = getCookie("token");
   console.log(token);
   if (!token) {
-    window.location.href = "http://localhost:5500/auth/login.html";
+    window.location.href = `${frontUrl()}/auth/login.html`;
   }
   hiddenButton();
   loginLogout();
@@ -15,7 +15,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
 //해당 페이지 조회
 (() => {
   window.addEventListener("DOMContentLoaded", async () => {
-    const response = await fetch(`http://localhost:8080/boards/${boardNo}`, {
+    const response = await fetch(`${apiUrl()}/boards/${boardNo}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getCookie("token")}`,
@@ -67,7 +67,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
     e.preventDefault();
     const boardNo = section.dataset.no;
 
-    window.location.href = `http://localhost:5500/board/modify-write.html?boardNo=${boardNo}`;
+    window.location.href = `${frontUrl()}/board/modify-write.html?boardNo=${boardNo}`;
   });
 })();
 
@@ -80,22 +80,19 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
     const removeNumber = section.dataset.no;
 
     //서버연결
-    const response = await fetch(
-      `http://localhost:8080/boards/${removeNumber}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${getCookie("token")}`,
-        },
-      }
-    );
+    const response = await fetch(`${apiUrl()}/boards/${removeNumber}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${getCookie("token")}`,
+      },
+    });
     if ([403].includes(response.status)) {
       alert("해당 포스트의 작성자가 아닙니다.");
     } else if ([404].includes(response.status)) {
       alert("해당 포스트를 찾을 수 없습니다.");
     } else {
       section.remove();
-      window.location.replace("http://localhost:5500/board/board.html");
+      window.location.replace(`${frontUrl()}/board/board.html`);
     }
   });
 })();
@@ -104,21 +101,18 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
 (() => {
   window.addEventListener("DOMContentLoaded", async () => {
     const section = document.querySelectorAll("section")[1];
-    const response = await fetch(
-      `http://localhost:8080/boards/${boardNo}/comments`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${getCookie("token")}`,
-        },
-      }
-    );
+    const response = await fetch(`${apiUrl()}/boards/${boardNo}/comments`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getCookie("token")}`,
+      },
+    });
 
     const result = await response.json();
     //내가 만든 원댓글 만들기
     result.findedComment.forEach(async (item) => {
       const reply = await fetch(
-        `http://localhost:8080/boards/${boardNo}/comments/${item.id}/reply`,
+        `${apiUrl()}/boards/${boardNo}/comments/${item.id}/reply`,
         {
           method: "GET",
           headers: {
@@ -148,8 +142,9 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
     });
     //남의 원댓글
     result.otherComment.forEach(async (item) => {
+      const fetchAddress = apiUrl();
       const reply = await fetch(
-        `http://localhost:8080/boards/${boardNo}/comments/${item.id}/reply`,
+        `${fetchAddress}/boards/${boardNo}/comments/${item.id}/reply`,
         {
           method: "GET",
           headers: {
@@ -212,20 +207,17 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
       alert("댓글을 입력해주세요.");
       return;
     }
-    const response = await fetch(
-      `http://localhost:8080/boards/${boardNo}/comments`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${getCookie("token")}`,
-        },
-        body: JSON.stringify({
-          content: content.value,
-          createdTime: time.getTime(),
-        }),
-      }
-    );
+    const response = await fetch(`${apiUrl()}/boards/${boardNo}/comments`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${getCookie("token")}`,
+      },
+      body: JSON.stringify({
+        content: content.value,
+        createdTime: time.getTime(),
+      }),
+    });
     const result = await response.json();
     const section = document.querySelectorAll("section")[1];
     const article = document.createElement("article");
@@ -251,7 +243,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
     ) {
       //서버연결
       const response = await fetch(
-        `http://localhost:8080/boards/${boardNo}/comments/${id}`,
+        `${apiUrl()}/boards/${boardNo}/comments/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -297,7 +289,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
           alert("댓글을 입력해주세요.");
           return;
         }
-        await fetch(`http://localhost:8080/boards/${boardNo}/comments/${id}`, {
+        await fetch(`${apiUrl}/boards/${boardNo}/comments/${id}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json",
@@ -352,7 +344,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
           return;
         }
         const response = await fetch(
-          `http://localhost:8080/boards/${boardNo}/comments/${id}/reply`,
+          `${apiUrl()}/boards/${boardNo}/comments/${id}/reply`,
           {
             method: "POST",
             headers: {
@@ -397,7 +389,7 @@ const boardNo = urlParams.get("boardNo"); // 쿼리 파라미터에서 boardNo �
     ) {
       //서버연결
       const response = await fetch(
-        `http://localhost:8080/boards/${boardNo}/comments/${id}/reply/${replyId}`,
+        `${apiUrl()}/boards/${boardNo}/comments/${id}/reply/${replyId}`,
         {
           method: "DELETE",
           headers: {

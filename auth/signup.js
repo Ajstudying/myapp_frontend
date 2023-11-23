@@ -43,7 +43,7 @@
       });
     }
     console.log(profile);
-    fetch(`${apiUrl}/auth/signup`, {
+    fetch(`${apiUrl()}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -57,9 +57,10 @@
     });
 
     alert("회원가입이 완료되었습니다.");
-    window.location.replace(
-      "https://d1a39zs71kjyn9.cloudfront.net/auth/login.html"
-    );
+    const url = ["localhost", "127.0.0.1"].includes(location.hostname)
+      ? "http://localhost:5500"
+      : "https://d1a39zs71kjyn9.cloudfront.net";
+    window.location.replace(`${url}/auth/login.html`);
   });
 })();
 

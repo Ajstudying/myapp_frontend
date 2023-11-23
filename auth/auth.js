@@ -28,21 +28,24 @@ function loginLogout() {
 
   buttons[0].addEventListener("click", (e) => {
     e.preventDefault();
-    window.location.replace(
-      "https://d1a39zs71kjyn9.cloudfront.net/auth/login.html"
-    );
+    window.location.replace(`${frontUrl()}/auth/login.html`);
   });
   buttons[1].addEventListener("click", async (e) => {
     e.preventDefault();
-    if ("api".includes(apiUrl())) {
-      document.cookie =
-        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=d1a39zs71kjyn9.cloudfront.net;";
-      window.location.replace("https://d1a39zs71kjyn9.cloudfront.net");
-    } else {
-      document.cookie =
-        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;";
-      window.location.replace("http://localhost:5500");
-    }
+
+    // 도메인을 동적으로 선택
+    const domain = isLocalhost()
+      ? "localhost"
+      : "d1a39zs71kjyn9.cloudfront.net";
+
+    document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
+
+    // 페이지를 리로드하는 대신 로그인 페이지로 이동
+    window.location.replace(
+      isLocalhost()
+        ? "http://localhost:5500"
+        : "https://d1a39zs71kjyn9.cloudfront.net"
+    );
 
     // try {
     //   // 서버로 로그아웃 요청 보내기
@@ -74,5 +77,10 @@ function isLocalhost() {
 function apiUrl() {
   return `${isLocalhost() ? "http" : "https"}://${
     isLocalhost() ? `${location.hostname}:8080/api` : `${location.hostname}/api`
+  }`;
+}
+function frontUrl() {
+  return `${isLocalhost() ? "http" : "https"}://${
+    isLocalhost() ? `${location.hostname}:5500` : `${location.hostname}`
   }`;
 }

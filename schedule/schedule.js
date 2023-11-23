@@ -6,8 +6,7 @@ let today = new Date();
   const token = getCookie("token");
   console.log(token);
   if (!token) {
-    window.location.href =
-      "https://d1a39zs71kjyn9.cloudfront.net/auth/login.html";
+    window.location.href = `${frontUrl()}/auth/login.html`;
   }
   hiddenButton();
   loginLogout();
