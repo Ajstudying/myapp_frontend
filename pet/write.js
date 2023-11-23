@@ -2,7 +2,7 @@
   const token = getCookie("token");
   console.log(token);
   if (!token) {
-    window.location.href = "http://localhost:5500/auth/login.html";
+    window.location.href = `${apiUrl}/auth/login.html`;
   }
   hiddenButton();
   loginLogout();
@@ -17,7 +17,7 @@ function createOption(item) {
 (async () => {
   const select = document.forms[0].querySelector("select");
 
-  const url = "http://localhost:8080/profile";
+  const url = `${apiUrl}/profile`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
@@ -62,7 +62,7 @@ function createOption(item) {
     //데이터를 서버에 전송하고, UI 요소 생성
     async function createPost(image) {
       //서버에 전송하면 UI를 생성한다.
-      const response = await fetch("http://localhost:8080/posts", {
+      const response = await fetch(`${apiUrl}/posts`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -90,7 +90,7 @@ function createOption(item) {
       });
       reader.readAsDataURL(file.files[0]);
       alert("작성이 완료되었습니다.");
-      window.location.href = `http://localhost:5500/pet/pet-index.html`;
+      window.location.href = `${apiUrl}/pet/pet-index.html`;
     }
     // else {
     //   //파일이 없을 때

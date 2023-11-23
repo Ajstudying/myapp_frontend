@@ -2,7 +2,7 @@
   const token = getCookie("token");
   console.log(token);
   if (!token) {
-    window.location.href = "http://localhost:5500/auth/login.html";
+    window.location.href = `${apiUrl()}/auth/login.html`;
   }
   hiddenButton();
   loginLogout();
@@ -28,7 +28,7 @@ function mytable(item) {
 
 //프로필 조회
 (async () => {
-  const url = "http://localhost:8080/profile";
+  const url = `${apiUrl()}/profile`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
@@ -75,20 +75,20 @@ function mytable(item) {
     e.preventDefault();
     if (e.target.tagName.toLowerCase() === "ins") {
       const nickname = posts.querySelector("ins").dataset.nick;
-      window.location.href = `http://localhost:5500/pet/pet-index.html?nickname=${nickname}`;
+      window.location.href = `${apiUrl()}/pet/pet-index.html?nickname=${nickname}`;
     }
   });
   boards.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.target.tagName.toLowerCase() === "ins") {
       const nickname = posts.querySelector("ins").dataset.nick;
-      window.location.href = `http://localhost:5500/board/board.html?nickname=${nickname}`;
+      window.location.href = `${apiUrl()}/board/board.html?nickname=${nickname}`;
     }
   });
   schedule.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.target.tagName.toLowerCase() === "ins") {
-      window.location.href = `http://localhost:5500/schedule/schedule.html`;
+      window.location.href = `${apiUrl()}/schedule/schedule.html`;
     }
   });
 })();
@@ -126,7 +126,7 @@ function mytable(item) {
         alert("반려동물의 종류를 입력해주세요.");
         return;
       }
-      await fetch("http://localhost:8080/profile", {
+      await fetch(`${apiUrl()}/profile`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -168,15 +168,12 @@ function cleanLayer() {
       const removeNum = tr.dataset.no;
 
       //서버연결
-      const response = await fetch(
-        `http://localhost:8080/profile/${removeNum}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${getCookie("token")}`,
-          },
-        }
-      );
+      const response = await fetch(`${apiUrl()}/profile/${removeNum}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+      });
       if ([404].includes(response.status)) {
         alert("해당 프로필이 존재하지 않습니다.");
       }
@@ -223,7 +220,7 @@ function cleanLayer() {
         const modifyPetName = inputs[0].value;
         const modifySpecies = inputs[1].value;
 
-        await fetch(`http://localhost:8080/profile/${no}`, {
+        await fetch(`${apiUrl()}/profile/${no}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json",

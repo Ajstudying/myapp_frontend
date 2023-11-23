@@ -6,7 +6,8 @@ let today = new Date();
   const token = getCookie("token");
   console.log(token);
   if (!token) {
-    window.location.href = "http://localhost:5500/auth/login.html";
+    window.location.href =
+      "https://d1a39zs71kjyn9.cloudfront.net/auth/login.html";
   }
   hiddenButton();
   loginLogout();
@@ -22,7 +23,7 @@ let today = new Date();
 //유저에게 등록된 총 일정 조회
 (async () => {
   const sections = document.querySelectorAll("section");
-  const response = await fetch(`http://localhost:8080/schedule`, {
+  const response = await fetch(`${apiUrl()}/schedule`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
@@ -74,17 +75,14 @@ let today = new Date();
     if (e.target == removeButton) {
       const removeNumber = article.dataset.no;
       //서버연결
-      const response = await fetch(
-        `http://localhost:8080/schedule/${removeNumber}`,
-        {
-          method: "DELETE",
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${getCookie("token")}`,
-          },
-          body: JSON.stringify({}),
-        }
-      );
+      const response = await fetch(`${apiUrl()}/schedule/${removeNumber}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+        body: JSON.stringify({}),
+      });
       if ([404].includes(response.status)) {
         alert("해당 일정을 찾을 수 없습니다.");
       }
@@ -120,21 +118,18 @@ let today = new Date();
         const modifyContent = inputs[1].value;
         const modifyNum = article.dataset.no;
         //서버연결
-        const response = await fetch(
-          `http://localhost:8080/schedule/${modifyNum}`,
-          {
-            method: "PUT",
-            headers: {
-              "content-type": "application/json",
-              Authorization: `Bearer ${getCookie("token")}`,
-            },
-            body: JSON.stringify({
-              petname: modifyPet,
-              content: modifyContent,
-              reservationTime: modifyReserve.getTime(),
-            }),
-          }
-        );
+        const response = await fetch(`${apiUrl()}/schedule/${modifyNum}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+          body: JSON.stringify({
+            petname: modifyPet,
+            content: modifyContent,
+            reservationTime: modifyReserve.getTime(),
+          }),
+        });
         if ([404].includes(response.status)) {
           alert("해당 일정을 찾을 수 없습니다.");
         }
@@ -260,7 +255,7 @@ function buildCalendar(now) {
       return;
     }
 
-    const response = await fetch("http://localhost:8080/schedule", {
+    const response = await fetch(`${apiUrl()}/schedule`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -315,7 +310,7 @@ function createOption(item) {
   const select = document.forms[0].querySelector("select");
   const layer = document.querySelector("footer");
   const modifySelect = layer.querySelector("select");
-  const url = "http://localhost:8080/profile";
+  const url = `${apiUrl()}/profile`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,

@@ -35,28 +35,31 @@
     const nickname = inputs[3].value;
 
     const profileInputs = forms[1].querySelectorAll("Input");
-    const pets = [];
+    const profile = [];
     for (let i = 0; i < profileInputs.length; i += 2) {
-      pets.push({
+      profile.push({
         petname: profileInputs[i].value,
         species: profileInputs[i + 1].value,
       });
     }
-    fetch("http://localhost:8080/auth/signup", {
+    console.log(profile);
+    fetch(`${apiUrl}/auth/signup`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json; charset=UTF-8",
+        "Content-Type": "application/json;charset=UTF-8",
       },
       body: JSON.stringify({
         userId,
         password,
         nickname,
-        profilelist: pets,
+        profileList: profile,
       }),
     });
 
     alert("회원가입이 완료되었습니다.");
-    window.location.replace("http://localhost:5500/auth/login.html");
+    window.location.replace(
+      "https://d1a39zs71kjyn9.cloudfront.net/auth/login.html"
+    );
   });
 })();
 

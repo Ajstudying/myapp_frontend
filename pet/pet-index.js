@@ -4,7 +4,7 @@ const MAX_MEMO = 4; // 고정된 메모 갯수
 let currentQuery = ""; // 현재 검색 키워드
 
 async function getUserNickname() {
-  let url = `http://localhost:8080/auth/userinfo`;
+  let url = `${apiUrl()}/auth/userinfo`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
@@ -13,38 +13,6 @@ async function getUserNickname() {
   const result = await response.text();
   return result;
 }
-
-//화면을 처음 켰을 때 첫번째 페이지 조회
-(async () => {
-  hiddenButton();
-  loginLogout();
-  window.addEventListener("DOMContentLoaded", async () => {
-    // 마이페이지에서 넘어왔을 때 쿼리 받기
-    const urlParams = new URLSearchParams(window.location.search);
-    const nickname = urlParams.get("nickname"); // 쿼리 파라미터에서 nickname 값을 가져옴
-    if (nickname) {
-      const response = await fetch(
-        `http://localhost:8080/posts/${nickname}?page=0&size=4`,
-        {
-          headers: {
-            Authorization: `Bearer ${getCookie("token")}`,
-          },
-        }
-      );
-      const results = await response.json();
-      const section = document.querySelector("section");
-      section.innerHTML = "";
-      results.content.forEach((item) => {
-        section.insertAdjacentHTML("beforeend", cardTemplate(item));
-      });
-      currentPage = results.number;
-      isLastPage = results.last;
-      setBtnActive();
-    } else {
-      getPagedMemo(0);
-    }
-  });
-})();
 
 //메모 형태
 function cardTemplate(item, token, nickname) {
@@ -64,9 +32,9 @@ function cardTemplate(item, token, nickname) {
   `;
   }
   if (item.likes === true) {
-    like = `<span class="material-icons-outlined heart">favorite<span>`;
+    like = `<span class="material-icons-outlined heart">favorite</span>`;
   } else {
-    like = `<span class="material-icons-outlined">favorite_border<span>`;
+    like = `<span class="material-icons-outlined">favorite_border</span>`;
   }
   const template =
     /*html*/
@@ -99,9 +67,9 @@ async function getPagedMemo(page, query) {
   const section = document.querySelector("section");
   let url = "";
   if (query) {
-    url = `http://localhost:8080/posts/paging/search?page=${page}&size=${MAX_MEMO}&query=${query}`;
+    url = `${apiUrl()}/posts/paging/search?page=${page}&size=${MAX_MEMO}&query=${query}`;
   } else {
-    url = `http://localhost:8080/posts/paging?page=${page}&size=${MAX_MEMO}`;
+    url = `${apiUrl()}/posts/paging?page=${page}&size=${MAX_MEMO}`;
   }
   const response = await fetch(url);
 
@@ -128,6 +96,38 @@ async function getPagedMemo(page, query) {
   //페이징 버튼
   setBtnActive();
 }
+
+//화면을 처음 켰을 때 첫번째 페이지 조회
+(async () => {
+  hiddenButton();
+  loginLogout();
+  window.addEventListener("DOMContentLoaded", async () => {
+    // 마이페이지에서 넘어왔을 때 쿼리 받기
+    const urlParams = new URLSearchParams(window.location.search);
+    const nickname = urlParams.get("nickname"); // 쿼리 파라미터에서 nickname 값을 가져옴
+    if (nickname) {
+      const response = await fetch(
+        `${apiUrl()}/posts/${nickname}?page=0&size=4`,
+        {
+          headers: {
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        }
+      );
+      const results = await response.json();
+      const section = document.querySelector("section");
+      section.innerHTML = "";
+      results.content.forEach((item) => {
+        section.insertAdjacentHTML("beforeend", cardTemplate(item));
+      });
+      currentPage = results.number;
+      isLastPage = results.last;
+      setBtnActive();
+    } else {
+      getPagedMemo(0);
+    }
+  });
+})();
 
 //검색 기능
 (() => {
@@ -221,7 +221,7 @@ function setBtnActive() {
       previousValue = currentValue;
       if (currentValue === "delete") {
         //서버연결
-        const response = await fetch(`http://localhost:8080/posts/${number}`, {
+        const response = await fetch(`${apiUrl()}/posts/${number}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${getCookie("token")}`,
@@ -284,21 +284,18 @@ function setBtnActive() {
           const file = inputs[1];
 
           async function modifyPost(image) {
-            const response = await fetch(
-              `http://localhost:8080/posts/${number}`,
-              {
-                method: "PUT",
-                headers: {
-                  "content-type": "application/json",
-                  Authorization: `Bearer ${getCookie("token")}`,
-                },
-                body: JSON.stringify({
-                  title: modifyTitle,
-                  content: modifyTextbox ? modifyTextbox : null,
-                  image: image,
-                }),
-              }
-            );
+            const response = await fetch(`${apiUrl()}/posts/${number}`, {
+              method: "PUT",
+              headers: {
+                "content-type": "application/json",
+                Authorization: `Bearer ${getCookie("token")}`,
+              },
+              body: JSON.stringify({
+                title: modifyTitle,
+                content: modifyTextbox ? modifyTextbox : null,
+                image: image,
+              }),
+            });
             if ([401, 403].includes(response.status)) {
               hasChanged = false;
               alert("해당 포스트의 작성자가 아닙니다.");
@@ -359,7 +356,7 @@ function setBtnActive() {
 
 //좋아요 표시
 async function likeSign() {
-  const response = await fetch(`http://localhost:8080/posts/like`, {
+  const response = await fetch(`${apiUrl()}/posts/like`, {
     headers: {
       Authorization: `Bearer ${getCookie("token")}`,
     },
@@ -399,7 +396,7 @@ async function likeSign() {
       const no = article.dataset.no;
       if (e.target.classList.contains("heart")) {
         e.target.innerHTML = "favorite";
-        const response = await fetch(`http://localhost:8080/posts/${no}/true`, {
+        const response = await fetch(`${apiUrl()}/posts/${no}/true`, {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${getCookie("token")}`,
@@ -409,7 +406,7 @@ async function likeSign() {
         window.location.reload();
       } else {
         e.target.innerHTML = "favorite_border";
-        const res = await fetch(`http://localhost:8080/posts/${no}/false`, {
+        const res = await fetch(`${apiUrl()}/posts/${no}/false`, {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${getCookie("token")}`,
