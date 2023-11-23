@@ -34,9 +34,16 @@ function loginLogout() {
   });
   buttons[1].addEventListener("click", async (e) => {
     e.preventDefault();
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    if ("api".includes(apiUrl())) {
+      document.cookie =
+        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=d1a39zs71kjyn9.cloudfront.net;";
+      window.location.replace("https://d1a39zs71kjyn9.cloudfront.net");
+    } else {
+      document.cookie =
+        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;";
+      window.location.replace("http://localhost:5500");
+    }
 
-    window.location.replace("https://d1a39zs71kjyn9.cloudfront.net");
     // try {
     //   // 서버로 로그아웃 요청 보내기
     //   const response = await fetch("http://localhost:8080/auth/logout", {
