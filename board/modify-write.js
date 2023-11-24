@@ -1,5 +1,4 @@
 (() => {
-  i;
   const token = getCookie("token");
   console.log(token);
   if (!token) {
