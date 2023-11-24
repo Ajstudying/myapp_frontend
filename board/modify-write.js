@@ -142,7 +142,7 @@
   const inputs = document.forms[0].querySelectorAll("input");
   const textbox = document.forms[0].querySelector("textarea");
   const petname = document.forms[0].querySelectorAll("select")[1];
-  // const select = document.forms[0].querySelectorAll("select")[0];
+  const select = document.forms[0].querySelectorAll("select")[0];
 
   const title = inputs[0];
   const content = textbox;
@@ -152,10 +152,10 @@
   add.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.target.classList.contains("add")) {
-      // if (select.value == "선택") {
-      //   alert("게시글의 종류를 선택해주세요.");
-      //   return;
-      // }
+      if (select.value == "선택") {
+        alert("게시글의 종류를 선택해주세요.");
+        return;
+      }
 
       if (title.value === "") {
         alert("제목을 입력해주세요.");
@@ -181,13 +181,13 @@
           method: "POST",
           headers: {
             "content-type": "application/json",
-            // Authorization: `Bearer ${getCookie("token")}`,
+            Authorization: `Bearer ${getCookie("token")}`,
           },
           body: JSON.stringify({
             title: title.value,
             content: content.value,
             image: image ? image : null,
-            // request: select.value,
+            request: select.value,
             species: species,
             petname: petname.value,
           }),
