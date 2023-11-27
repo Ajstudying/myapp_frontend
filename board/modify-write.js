@@ -177,7 +177,7 @@
         const species = petname[petname.selectedIndex].dataset.pet;
         console.log(species);
         //서버에 전송하면 UI를 생성한다.
-        await fetch(`${apiUrl()}/boards`, {
+        const response = await fetch(`${apiUrl()}/boards`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -192,6 +192,12 @@
             petname: petname.value,
           }),
         });
+        if (response.status === 201) {
+          alert("작성이 완료되었습니다.");
+          window.location.href = `${frontUrl()}/board/board.html`;
+        } else {
+          alert("작성에 실패했습니다. 다시 시도해주세요.");
+        }
       }
 
       if (file.files[0]) {
@@ -204,14 +210,9 @@
           createBoard(image);
         });
         reader.readAsDataURL(file.files[0]);
-        createBoard(file);
-        alert("작성이 완료되었습니다.");
-        window.location.href = `${frontUrl()}/board/board.html`;
       } else {
         //파일이 없을 때
         createBoard();
-        alert("작성이 완료되었습니다.");
-        window.location.href = `${frontUrl()}/board/board.html`;
       }
     }
   });

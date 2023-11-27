@@ -76,7 +76,12 @@ function createOption(item) {
           petname: petname.value,
         }),
       });
-      console.log(response);
+      if (response.status === 201) {
+        alert("작성이 완료되었습니다.");
+        window.location.href = `${frontUrl()}/pet/pet-index.html`;
+      } else {
+        alert("작성에 실패했습니다. 다시 시도해주세요.");
+      }
     }
 
     if (file.files[0]) {
@@ -90,8 +95,6 @@ function createOption(item) {
         createPost(image);
       });
       reader.readAsDataURL(file.files[0]);
-      alert("작성이 완료되었습니다.");
-      window.location.href = `${frontUrl()}/pet/pet-index.html`;
     }
     // else {
     //   //파일이 없을 때

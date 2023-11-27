@@ -28,7 +28,7 @@
   });
 
   //회원 가입 버튼
-  buttons[1].addEventListener("click", (e) => {
+  buttons[1].addEventListener("click", async (e) => {
     const inputs = forms[0].querySelectorAll("input");
     const userId = inputs[0].value;
     const password = inputs[1].value;
@@ -43,7 +43,7 @@
       });
     }
     console.log(profile);
-    fetch(`${apiUrl()}/auth/signup`, {
+    const response = await fetch(`${apiUrl()}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -55,12 +55,15 @@
         profileList: profile,
       }),
     });
-
-    alert("회원가입이 완료되었습니다.");
-    const url = ["localhost", "127.0.0.1"].includes(location.hostname)
-      ? "http://localhost:5500"
-      : "https://d1a39zs71kjyn9.cloudfront.net";
-    window.location.replace(`${url}/auth/login.html`);
+    if (response.status === 201) {
+      alert("회원가입이 완료되었습니다.");
+      const url = ["localhost", "127.0.0.1"].includes(location.hostname)
+        ? "http://localhost:5500"
+        : "https://d1a39zs71kjyn9.cloudfront.net";
+      window.location.replace(`${url}/auth/login.html`);
+    } else {
+      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+    }
   });
 })();
 
