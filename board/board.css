@@ -14,13 +14,13 @@ section > ul > li {
 #board-write > button {
   border: 0.5px solid rgba(23, 94, 9, 0.2);
   background-color: #458871;
-  color: black;
+  color: #fff;
   border-radius: 5px;
   box-shadow: 2px 2px 1px hsl(80, 20%, 30%);
 }
 #board-write > button > a {
   text-decoration: none;
-  color: black;
+  color: #fff;
 }
 #board-write > button > a:visited {
   color: #fff;
