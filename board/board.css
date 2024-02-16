@@ -7,11 +7,11 @@ section > ul > li {
   gap: 10px;
   font-size: 14px;
 }
-body > div {
+#board-write {
   display: flex;
   justify-content: flex-end;
 }
-body > div > button {
+#board-write > button {
   border: 0.5px solid rgba(23, 94, 9, 0.2);
   background-color: #458871;
   color: black;
@@ -124,14 +124,15 @@ form > div > div > input {
   border-radius: 5px;
 }
 @media (min-width: 55rem) {
-  body > div {
+  #board-write {
     width: 78%;
     margin: auto;
+    margin-top: 1.5rem;
   }
   sub {
     font-size: 14px;
   }
-  body > div > button > a {
+  #board-write > button > a {
     font-size: 16px;
   }
   ul > li > div > span > p {
