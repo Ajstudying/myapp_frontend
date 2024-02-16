@@ -5,7 +5,7 @@ main {
   width: 400px;
   padding: 20px;
   margin: 0 auto;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   border-radius: 5px;
   box-shadow: 0px 40px 30px -20px rgba(0, 0, 0, 0.3);
 }
@@ -203,5 +203,8 @@ hr {
   }
   .bar {
     width: 40%;
+  }
+  main {
+    margin-top: 2.5rem;
   }
 }
