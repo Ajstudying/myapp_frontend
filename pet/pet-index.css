@@ -2,8 +2,8 @@
 h1 {
   margin: 0;
 }
-header {
-  margin-top: 1.5rem;
+#search-form {
+  margin-top: 2rem;
 }
 section {
   display: flex;
@@ -316,5 +316,15 @@ header > div > form > span > button {
     font-size: 16px;
     line-height: 16px;
     padding: 10px 32px;
+  }
+  #search-form {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+  }
+  #search-form > div {
+    width: 50%;
+    margin-top: -4rem;
   }
 }
