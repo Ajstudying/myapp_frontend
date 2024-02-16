@@ -9,7 +9,7 @@ section > ul > li {
 }
 #board-write {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 #board-write > button {
   border: 0.5px solid rgba(23, 94, 9, 0.2);
@@ -18,13 +18,36 @@ section > ul > li {
   border-radius: 5px;
   box-shadow: 2px 2px 1px hsl(80, 20%, 30%);
 }
-body > div > button > a {
+#board-write > button > a {
   text-decoration: none;
   color: black;
 }
-body > div > button > a:visited {
+#board-write > button > a:visited {
   color: #fff;
 }
+#board-write > form > div:nth-of-type(1) {
+  display: flex;
+  gap: 10px;
+}
+#board-write > form > div > select {
+  border-radius: 5px;
+}
+#board-write > form > div > div {
+  display: flex;
+  gap: 15px;
+}
+#board-write > form > div > div > button {
+  background-color: #a5c29f;
+  font-weight: bold;
+  color: black;
+  border-radius: 5px;
+  height: 30px;
+}
+#board-write > form > div > div > input {
+  height: 30px;
+  border-radius: 5px;
+}
+
 section:nth-of-type(1) > ul {
   padding: 0;
 }
@@ -97,32 +120,7 @@ section:nth-of-type(2) > div > button {
   color: #fff;
   box-shadow: 0 2px 8px -1px rgb(96, 108, 56);
 }
-form {
-  display: flex;
-  margin: auto;
-}
-form > div:nth-of-type(1) {
-  display: flex;
-  gap: 10px;
-}
-form > div > select {
-  border-radius: 5px;
-}
-form > div > div {
-  display: flex;
-  gap: 15px;
-}
-form > div > div > button {
-  background-color: #a5c29f;
-  font-weight: bold;
-  color: black;
-  border-radius: 5px;
-  height: 30px;
-}
-form > div > div > input {
-  height: 30px;
-  border-radius: 5px;
-}
+
 @media (min-width: 55rem) {
   #board-write {
     width: 78%;
